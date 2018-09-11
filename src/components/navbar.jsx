@@ -6,7 +6,8 @@ class Link extends React.Component {
         return (<RouterLink style={{
                 padding: '1em 2em',
                 display: 'inline-block',
-                textDecoration: 'none'
+                textDecoration: 'none',
+                color: 'white',
             }} {...this.props}>
             {this.props.children}
         </RouterLink>);
@@ -18,15 +19,21 @@ export default class Navbar extends React.Component {
         return (<div style={{
                 display: 'flex',
                 backgroundColor: 'orange',
-                position: 'sticky',
-                top: 0
+                justifyContent: 'space-between'
+                // position: 'sticky',
+                // top: 0
             }}>
             <Link to="/">
-                Home
+                LOGO
             </Link>
-            <Link to="/listings">
-                Listings
-            </Link>
+            <div>
+                <Link to="/">
+                    Home
+                </Link>
+                <Link to="/listings">
+                    Listings
+                </Link>
+            </div>
         </div>);
     }
 }
