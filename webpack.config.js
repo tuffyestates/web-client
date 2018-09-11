@@ -1,62 +1,54 @@
-
 const path = require('path');
-const webpack = require('webpack')
+const Package = require('./package.json');
 
-const VENDOR_LIBS = [
-  'redux', 'react-redux', 'react-dom'
-]
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-module.exports = {
-  entry: {
-    realEstate: './assets/js/realEstate/realEstate.js',
-    // regularJS: './assets/js/regularJS.js',
-    vendor: VENDOR_LIBS
-  },
-  output: { filename: '[name].js',
-            path: path.resolve(__dirname, 'public/js/components') },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: {
-          presets: [
-            [ 'es2015', { modules: false } ],
-            'stage-0', 'react'
-          ]
+module.exports = (env, argv) => {
+    return {
+        entry: ['normalize.css',
+            // 'babel-polyfill',
+            path.resolve(__dirname, Package.main)
+        ],
+        module: {
+            rules: [{
+                    test: /\.jsx?$/,
+                    exclude: /node_modules/,
+                    loader: "babel-loader"
+                },
+
+                // Needed to load normalize.css
+                {
+                    test: /\.css$/,
+                    use: [{
+                        loader: 'style-loader'
+                    }, {
+                        loader: 'css-loader'
+                    }]
+                }
+            ]
+        },
+        output: {
+            path: path.resolve(__dirname, 'build'),
+            publicPath: '/',
+            filename: '[name].[hash].js',
+            chunkFilename: "[hash].js"
+        },
+        resolve: {
+            extensions: ['.js', '.jsx', '.json'],
+        },
+        plugins: [
+            new HtmlWebpackPlugin(),
+            new webpack.EnvironmentPlugin({
+                DOMAIN_BASE: "https://gitlab.com/tuffyestates/user-client/raw/new/test"
+            })
+        ].concat(argv.mode === 'production' ? [new BundleAnalyzerPlugin({
+            analyzerMode: 'static'
+        })] : []),
+        devtool: 'cheap-module-eval-source-map',
+        devServer: {
+            historyApiFallback: true
         }
-      },
-      {
-            test: /\.scss$/,
-            use: [{
-                loader: "style-loader"
-            }, {
-                loader: "css-loader", options: {
-                    sourceMap: true
-                }
-            }, {
-                loader: "sass-loader", options: {
-                    sourceMap: true
-                }
-            }]
-        }
-    ]
-  },
-  plugins: [
-            new webpack.optimize.CommonsChunkPlugin({
-                name: 'vendor',
-                minChunks: function (module) {
-                   // this assumes your vendor imports exist in the node_modules directory
-                   return module.context && module.context.indexOf('node_modules') !== -1;
-                }
-            }),
-    //         new webpack.optimize.UglifyJsPlugin({
-    //   sourceMap: options.devtool && (options.devtool.indexOf("sourcemap") >= 0 || options.devtool.indexOf("source-map") >= 0)
-    // }),
-    // new webpack.Define
-            // new webpack.optimize.CommonsChunkPlugin({
-            //     name: 'manifest' //But since there are no more common modules between them we end up with just the runtime code included in the manifest file
-            // })
-        ]
+    }
 };
