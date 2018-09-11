@@ -1,0 +1,35 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true
+    },
+    "globals": {
+        "process": true,
+        "__dirname": true
+    },
+    "parser": "babel-eslint",
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true,
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "settings": {
+        "react": {
+            "version": "16.0"
+        }
+    },
+    "rules": {
+        "no-console": "off",
+        "no-unused-vars": "warn",
+        "no-class-assign": "off",
+        "no-useless-escape": "warn",
+        "react/prop-types": "off"
+    }
+}
