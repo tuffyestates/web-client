@@ -1,3 +1,2 @@
-# user-client
-
-User Client 
+# react-real-estate
+React & Redux real estate project
