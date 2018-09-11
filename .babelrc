@@ -1,7 +1,10 @@
 {
-  "presets": [
-    "es2015",
-    "react",
-    "stage-0"
-  ],
+    "presets": [
+        ["@babel/preset-env", {
+            "targets": {
+                "browsers": ["last 2 versions", "safari >= 7"]
+            }
+        }], "@babel/preset-react"
+    ],
+    "plugins": ["react-hot-loader/babel", "@babel/plugin-proposal-class-properties"]
 }
