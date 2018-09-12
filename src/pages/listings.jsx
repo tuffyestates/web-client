@@ -50,7 +50,9 @@ class Home extends React.Component {
             <div style={{
                     position: 'relative'
                 }}>
-                <img src={`${process.env.DOMAIN_BASE}/listing/image/${this.props.id}.jpg`} style={{
+                <img src={process.env.NODE_ENV === 'production'
+                        ? `/api/listing/image/${this.props.id}.jpg`
+                        : require(`../../test/api/listing/image/${this.props.id}.jpg`)} style={{
                         objectFit: 'cover',
                         width: '100%',
                         height: 250,
@@ -95,7 +97,9 @@ class Paging extends React.Component {
                     color: 'white'
                 }} key={i} onClick={this.props.onPageChange.bind(this, i)}>{i}</span>);
         }
-        return (<div style={{textAlign: 'center'}}>
+        return (<div style={{
+                textAlign: 'center'
+            }}>
             {pageNumbers}
         </div>);
     }
@@ -148,7 +152,9 @@ export default class Container extends React.Component {
                     }} onChange={e => this.setState({
                         [e.target.name]: e.target.value
                     })}/>
-                <Listings style={{flex: 1}} listings={this.page(filteredData, this.state.page, this.state.listingsPerPage)}/>
+                <Listings style={{
+                        flex: 1
+                    }} listings={this.page(filteredData, this.state.page, this.state.listingsPerPage)}/>
                 <Paging page={this.state.page} numPages={Math.ceil(filteredData.length / this.state.listingsPerPage)} onPageChange={page => this.setState({page})}/>
             </div>
         </div>);
