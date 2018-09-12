@@ -2,7 +2,7 @@ const path = require('path');
 const Package = require('./package.json');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = (env, argv) => {
@@ -26,7 +26,17 @@ module.exports = (env, argv) => {
                     }, {
                         loader: 'css-loader'
                     }]
-                }
+                },
+
+                {
+                    test: /\.(jpg|png)$/,
+                    use: {
+                        loader: "file-loader",
+                        options: {
+                            name: "[path][name].[hash].[ext]",
+                        },
+                    },
+                },
             ]
         },
         output: {
@@ -40,12 +50,12 @@ module.exports = (env, argv) => {
         },
         plugins: [
             new HtmlWebpackPlugin(),
-            new webpack.EnvironmentPlugin({
-                DOMAIN_BASE: "https://gitlab.com/tuffyestates/user-client/raw/new/test"
-            })
         ].concat(argv.mode === 'production' ? [new BundleAnalyzerPlugin({
-            analyzerMode: 'static'
-        })] : []),
+                analyzerMode: 'static',
+                openAnalyzer: false
+            }),
+            new CopyWebpackPlugin(['test'])
+        ] : []),
         devtool: 'cheap-module-eval-source-map',
         devServer: {
             historyApiFallback: true
