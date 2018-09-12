@@ -1,8 +1,8 @@
 # Tuffy Estates Web Client
 
 ## Live Builds (Demos)
-[Stable](https://tuffyestates.netlify.com/listings)
-[Nightly](https://dev--tuffyestates.netlify.com/listings)
+[Stable](https://tuffyestates.netlify.com)
+[Nightly](https://dev--tuffyestates.netlify.com)
 
 ## Developing
 This will clone the [dev](https://gitlab.com/tuffyestates/user-client/tree/dev) branch.
