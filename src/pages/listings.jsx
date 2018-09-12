@@ -20,7 +20,7 @@ class Listings extends React.Component {
         </div>);
     }
 }
-class HomeDetails extends React.Component {
+class HomeDetails extends React.PureComponent {
     priceFormatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
@@ -34,7 +34,7 @@ class HomeDetails extends React.Component {
         </div>);
     }
 }
-class Home extends React.Component {
+class Home extends React.PureComponent {
     render() {
         return (<div style={{
                 boxShadow: '0 3px 5px -1px rgba(0,0,0,.2),0 6px 10px 0 rgba(0,0,0,.14),0 1px 18px 0 rgba(0,0,0,.12)',
@@ -71,7 +71,7 @@ class Home extends React.Component {
         </div>);
     }
 }
-class Filter extends React.Component {
+class Filter extends React.PureComponent {
     render() {
         return (<div style={{
                 backgroundColor: Colors.blue,
@@ -83,7 +83,7 @@ class Filter extends React.Component {
 }
 
 // TODO: This should be replaced by infinite scrolling
-class Paging extends React.Component {
+class Paging extends React.PureComponent {
     render() {
         let pageNumbers = [];
         const start = Math.max(1, this.props.page - 5);
@@ -105,7 +105,7 @@ class Paging extends React.Component {
     }
 }
 
-class ControlBar extends React.Component {
+class ControlBar extends React.PureComponent {
     render() {
         return (<div>
             <label>
@@ -120,7 +120,7 @@ class ControlBar extends React.Component {
     }
 }
 
-export default class Container extends React.Component {
+export default class Container extends React.PureComponent {
     state = {
         page: 1,
         listingsPerPage: 10,

@@ -1,7 +1,10 @@
 import React from 'react';
 import {Link as RouterLink} from 'react-router-dom';
+import {Subscribe} from 'react-contextual';
+import Colors from '../colors';
+import {Account} from '../contexts';
 
-class Link extends React.Component {
+class Link extends React.PureComponent {
     render() {
         return (<RouterLink style={{
                 padding: '1em 2em',
@@ -14,11 +17,11 @@ class Link extends React.Component {
     }
 }
 
-export default class Navbar extends React.Component {
+export default class Navbar extends React.PureComponent {
     render() {
         return (<div style={{
                 display: 'flex',
-                backgroundColor: 'orange',
+                backgroundColor: Colors.orange,
                 justifyContent: 'space-between'
                 // position: 'sticky',
                 // top: 0
@@ -33,6 +36,12 @@ export default class Navbar extends React.Component {
                 <Link to="/listings">
                     Listings
                 </Link>
+                <Link to="/register">
+                    Register
+                </Link>
+                <Subscribe to={Account}>
+                    {store => <span>{store.username}</span>}
+                </Subscribe>
             </div>
         </div>);
     }

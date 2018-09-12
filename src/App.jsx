@@ -4,21 +4,33 @@ import {Helmet} from "react-helmet";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import * as Pages from './pages';
 import {Navbar, Footer} from './components';
+import {Account} from './contexts';
+import {Provider} from 'react-contextual';
 
-const App = () => (<Router>
-    <div id="app" style={{display: 'flex', minHeight: '100%', flexDirection: 'column'}}>
-        <Helmet>
-            <title>Tuffy Estates</title>
-            {/*<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"/></Helmet>*/}
-        </Helmet>
-        {/*<Route component={Pages.FourOFour}/>*/}
-        <Navbar/>
-        <div style={{flex: 1, backgroundColor: '#FAFAFA'}}>
-            <Route exact path="/" component={Pages.Home}/>
-            <Route path="/listings" component={Pages.Listings}/>
+const App = () => (<Provider store={Account}>
+    <Router>
+        <div id="app" style={{
+                display: 'flex',
+                minHeight: '100%',
+                flexDirection: 'column'
+            }}>
+            <Helmet>
+                <title>Tuffy Estates</title>
+                {/*<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"/></Helmet>*/}
+            </Helmet>
+            {/* <Route component={Pages.FourOFour}/> */}
+            <Navbar/>
+            <div style={{
+                    flex: 1,
+                    backgroundColor: '#FAFAFA'
+                }}>
+                <Route exact={true} path="/" component={Pages.Home}/>
+                <Route path="/listings" component={Pages.Listings}/>
+                <Route path="/register" component={Pages.Register}/>
+            </div>
+            <Footer/>
         </div>
-        <Footer/>
-    </div>
-</Router>);
+    </Router>
+</Provider>);
 
 export default hot(module)(App);

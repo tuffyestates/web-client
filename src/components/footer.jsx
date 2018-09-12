@@ -1,7 +1,7 @@
 import React from 'react';
 import Colors from '../colors';
 
-export default class Footer extends React.Component {
+export default class Footer extends React.PureComponent {
     render() {
         return (<div style={{
                 display: 'flex',
