@@ -9,6 +9,7 @@ This will clone the [dev](https://gitlab.com/tuffyestates/user-client/tree/dev) 
 ```
 git clone git@gitlab.com:tuffyestates/user-client.git -b dev
 cd user-client
+npm install
 npm start
 ```
 Then the development environment should be accessible at [localhost:8080](http://localhost:8080).
@@ -18,6 +19,7 @@ This will clone the [master](https://gitlab.com/tuffyestates/user-client) branch
 ```
 git clone git@gitlab.com:tuffyestates/user-client.git
 cd user-client
+npm install
 npm build
 cd build
 ```
