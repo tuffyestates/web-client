@@ -4,6 +4,7 @@ const Package = require('./package.json');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const webpack = require('webpack');
 
 module.exports = (env, argv) => {
     return {
@@ -54,8 +55,15 @@ module.exports = (env, argv) => {
                 analyzerMode: 'static',
                 openAnalyzer: false
             }),
-            new CopyWebpackPlugin(['test'])
-        ] : []),
+            new CopyWebpackPlugin(['test']),
+            new webpack.EnvironmentPlugin({
+                API_PATH: `http://direct.sparling.us:1163${this.process.env.BRANCH === 'dev' ? '7': '8'}/api`
+            })
+        ] : [
+            new webpack.EnvironmentPlugin({
+                API_PATH: `http://localhost:11638/api`
+            })
+        ]),
         devtool: 'cheap-module-eval-source-map',
         devServer: {
             historyApiFallback: true
