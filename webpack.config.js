@@ -57,7 +57,7 @@ module.exports = (env, argv) => {
             }),
             new CopyWebpackPlugin(['test']),
             new webpack.EnvironmentPlugin({
-                API_PATH: `http://direct.sparling.us:1163${process.env.BRANCH === 'dev' ? '7': '8'}/api`
+                API_PATH: `https://tuffyestates.sparling.us:1163${process.env.BRANCH === 'dev' ? '7': '8'}/api`
             })
         ] : [
             new webpack.EnvironmentPlugin({
