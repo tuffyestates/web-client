@@ -1,6 +1,6 @@
 import React from 'react';
 import SwaggerUI from 'swagger-ui';
-require('./theme-flattop.css');
+require('./theme/main.scss');
 
 export default class API extends React.PureComponent {
     componentDidMount() {

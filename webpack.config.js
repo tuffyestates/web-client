@@ -9,7 +9,6 @@ const webpack = require('webpack');
 module.exports = (env, argv) => {
     return {
         entry: ['normalize.css',
-            // 'babel-polyfill',
             path.resolve(__dirname, Package.main)
         ],
         module: {
@@ -26,6 +25,18 @@ module.exports = (env, argv) => {
                         loader: 'style-loader'
                     }, {
                         loader: 'css-loader'
+                    }]
+                },
+
+                // Needed to load api theme
+                {
+                    test: /\.scss$/,
+                    use: [{
+                        loader: 'style-loader'
+                    }, {
+                        loader: 'css-loader'
+                    }, {
+                        loader: 'sass-loader'
                     }]
                 },
 
