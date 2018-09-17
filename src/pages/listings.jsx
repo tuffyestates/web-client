@@ -1,5 +1,7 @@
 import React from 'react';
 import Colors from '../colors';
+import {Link} from 'react-router-dom';
+import {css} from 'emotion';
 
 const HOME_DETAILS_PADDING = '0.5em';
 
@@ -15,7 +17,7 @@ class Listings extends React.Component {
                 flex: 1,
                 alignContent: 'flex-start',
                 justifyContent: 'center'
-            }}>
+            }} to={`/listing/123456789`}>
             {homes}
         </div>);
     }
@@ -36,7 +38,7 @@ class HomeDetails extends React.PureComponent {
 }
 class Home extends React.PureComponent {
     render() {
-        return (<div style={{
+        return (<Link className={css({
                 boxShadow: '0 3px 5px -1px rgba(0,0,0,.2),0 6px 10px 0 rgba(0,0,0,.14),0 1px 18px 0 rgba(0,0,0,.12)',
                 margin: '1em',
                 flex: 1,
@@ -44,7 +46,7 @@ class Home extends React.PureComponent {
                 maxWidth: 500,
                 borderRadius: 2,
                 overflow: 'hidden'
-            }} {...this.props}>
+            })} to={`/listing/123456789`} {...this.props}>
 
             {/* Image Container */}
             <div style={{
@@ -68,7 +70,7 @@ class Home extends React.PureComponent {
             </div>
 
             <HomeDetails price={this.props.price}/>
-        </div>);
+        </Link>);
     }
 }
 class Filter extends React.PureComponent {

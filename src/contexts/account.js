@@ -9,21 +9,22 @@ export default createStore({
 
     login: async (formdata) => {
         // Ask the server to register user
-        const response = await fetch(`${process.env.API_PATH}/register`, {
+        const response = await fetch(`${process.env.API_PATH}/user`, {
             method: 'post',
             body: formdata
         });
-        const body = await response.json();
 
         // Handle server response
         if (!response.ok)
-            throw new Error(body.error);
+            throw new Error((await response.json()).error);
+
+        // const body = await response.json();
 
         // Set a cookie for 2 reasons:
         // 1) cookies are sent with all http requests so all future fetches will have authentication
         // 2) users will not have to login again if they leave the site and return within the same browser session
         // *) you can also set an expires so that the cookie persists through sessions (Ex. [x] remember me)
-        Cookies.set('apiKey', body.key);
+        //Cookies.set('apiKey', body.key);
 
         // Now we return what the updated information to the global store
         return {

@@ -39,6 +39,9 @@ export default class Navbar extends React.PureComponent {
                 <Link to="/register">
                     Register
                 </Link>
+                <Link to="/api">
+                    API Spec
+                </Link>
                 <Subscribe to={Account}>
                     {store => <span>{store.username}</span>}
                 </Subscribe>

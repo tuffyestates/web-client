@@ -37,13 +37,15 @@
     },
     "dependencies": {
         "@babel/runtime": "^7.0.0",
+        "emotion": "^9.2.8",
         "js-cookie": "^2.2.0",
         "normalize.css": "^8.0.0",
         "react": "^16.4.2",
         "react-contextual": "git://github.com/FallingSnow/react-contextual.git",
         "react-dom": "^16.4.2",
         "react-helmet": "^5.2.0",
-        "react-router-dom": "^4.3.1"
+        "react-router-dom": "^4.3.1",
+        "swagger-ui": "^3.19.0"
     },
     "license": "UNLICENSED",
     "bugs": {

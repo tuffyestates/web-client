@@ -26,7 +26,9 @@ const App = () => (<Provider store={Account}>
                 }}>
                 <Route exact={true} path="/" component={Pages.Home}/>
                 <Route path="/listings" component={Pages.Listings}/>
+                <Route path="/listing/:id" component={Pages.Listing}/>
                 <Route path="/register" component={Pages.Register}/>
+                <Route path="/api" component={Pages.API}/>
             </div>
             <Footer/>
         </div>
