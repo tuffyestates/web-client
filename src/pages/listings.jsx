@@ -45,7 +45,12 @@ class Home extends React.PureComponent {
                 minWidth: 400,
                 maxWidth: 500,
                 borderRadius: 2,
-                overflow: 'hidden'
+                overflow: 'hidden',
+                transition: 'all 0.3s',
+                '&:hover': {
+                    transform: 'translateY(-5px)',
+                    boxShadow: '0 6px 7px -4px rgba(0,0,0,.2),0 11px 15px 1px rgba(0,0,0,.14),0 4px 20px 3px rgba(0,0,0,.12)'
+                }
             })} to={`/listing/123456789`} {...this.props}>
 
             {/* Image Container */}
