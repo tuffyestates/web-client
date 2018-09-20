@@ -3,7 +3,7 @@ import {
 } from 'react-contextual';
 import Cookies from 'js-cookie';
 import { registerUser } from '../api/userAPI'
-import { dataClient } from '../api/dataClient'
+// import { apiClient } from '../api/apiClient'
 
 // This is the global account store's default state
 export default createStore({
@@ -20,7 +20,14 @@ export default createStore({
              * then you can either set the withCredentials config option here or
              * set it in the dataClient.js file directly. Either one should work.
              * 
-             * dataClient.defaults.withCredentials = true;
+             * apiClient.defaults.withCredentials = true;
+             */
+
+            /**
+             * Same goes for sending a JWT in the Authentication Header
+             * on every request. Just simply edit the axios instance!
+             * 
+             * apiClient.defaults.headers.common['Authorization'] = `Bearer ${JWT_access_token}` 
              */
 
             // Set a cookie for 2 reasons:
