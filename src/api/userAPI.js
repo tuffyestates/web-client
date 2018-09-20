@@ -1,5 +1,5 @@
-import { dataClient } from 'dataClient';
+import apiClient from './apiClient';
 
 export function registerUser(userData) {
-    return dataClient.post('/user', userData);
+    return apiClient.post('/user', userData);
 }
