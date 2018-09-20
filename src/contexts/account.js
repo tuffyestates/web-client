@@ -1,9 +1,9 @@
 import {
     createStore
 } from 'react-contextual';
-import { registerUser } from '../axios/userAPI'
 import Cookies from 'js-cookie';
-import { dataClient } from '../axios/dataClient'
+import { registerUser } from '../api/userAPI'
+import { dataClient } from '../api/dataClient'
 
 // This is the global account store's default state
 export default createStore({
