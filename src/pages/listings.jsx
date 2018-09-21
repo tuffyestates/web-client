@@ -43,7 +43,6 @@ class Home extends React.PureComponent {
                 margin: '1em',
                 flex: 1,
                 minWidth: 400,
-                maxWidth: 500,
                 borderRadius: 2,
                 overflow: 'hidden',
                 transition: 'all 0.3s',
@@ -57,9 +56,7 @@ class Home extends React.PureComponent {
             <div style={{
                     position: 'relative'
                 }}>
-                <img src={process.env.NODE_ENV === 'production'
-                        ? `/api/listing/image/${this.props.id}.jpg`
-                        : require(`../../test/api/listing/image/${this.props.id}.jpg`)} style={{
+                <img src={`${process.env.STATIC_PATH}/property/image/${this.props.id}.jpg`} style={{
                         objectFit: 'cover',
                         width: '100%',
                         height: 250,

@@ -40,15 +40,16 @@ module.exports = (env, argv) => {
                     }]
                 },
 
-                {
-                    test: /\.(jpg|png)$/,
-                    use: {
-                        loader: "file-loader",
-                        options: {
-                            name: "[path][name].[hash].[ext]",
-                        },
-                    },
-                },
+                // Needed to load images
+                // {
+                //     test: /\.(jpg|png)$/,
+                //     use: {
+                //         loader: "file-loader",
+                //         options: {
+                //             name: "[path][name].[hash].[ext]",
+                //         },
+                //     },
+                // },
             ]
         },
         output: {
@@ -68,10 +69,12 @@ module.exports = (env, argv) => {
             }),
             new CopyWebpackPlugin(['test']),
             new webpack.EnvironmentPlugin({
+                STATIC_PATH: `https://tuffyestates.sparling.us:1163${process.env.BRANCH === 'dev' ? '7': '8'}/static`,
                 API_PATH: `https://tuffyestates.sparling.us:1163${process.env.BRANCH === 'dev' ? '7': '8'}/api`
             })
         ] : [
             new webpack.EnvironmentPlugin({
+                STATIC_PATH: `http://localhost:11638/static`,
                 API_PATH: `http://localhost:11638/api`
             })
         ]),

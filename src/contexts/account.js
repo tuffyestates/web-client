@@ -1,7 +1,6 @@
 import {
     createStore
 } from 'react-contextual';
-import Cookies from 'js-cookie';
 import { registerUser } from '../api/userAPI'
 // import { apiClient } from '../api/apiClient'
 
@@ -19,22 +18,16 @@ export default createStore({
              * If you want to set an option to include cookies on every request sent with axios,
              * then you can either set the withCredentials config option here or
              * set it in the dataClient.js file directly. Either one should work.
-             * 
+             *
              * apiClient.defaults.withCredentials = true;
              */
 
             /**
              * Same goes for sending a JWT in the Authentication Header
              * on every request. Just simply edit the axios instance!
-             * 
-             * apiClient.defaults.headers.common['Authorization'] = `Bearer ${JWT_access_token}` 
+             *
+             * apiClient.defaults.headers.common['Authorization'] = `Bearer ${JWT_access_token}`
              */
-
-            // Set a cookie for 2 reasons:
-            // 1) cookies are sent with all http requests so all future fetches will have authentication
-            // 2) users will not have to login again if they leave the site and return within the same browser session
-            // *) you can also set an expires so that the cookie persists through sessions (Ex. [x] remember me)
-            //Cookies.set('apiKey', body.key);
 
             // Now we return what the updated information to the global store
             return {
@@ -50,7 +43,7 @@ export default createStore({
              */
             throw new Error(error.response.data);
             /**
-             * this will print the generic error that the 
+             * this will print the generic error that the
              * browser will use upon a failed network request
              */
             // throw new Error(error.message);
