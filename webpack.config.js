@@ -2,7 +2,6 @@ const path = require('path');
 const Package = require('./package.json');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const webpack = require('webpack');
 
@@ -67,7 +66,6 @@ module.exports = (env, argv) => {
                 analyzerMode: 'static',
                 openAnalyzer: false
             }),
-            new CopyWebpackPlugin(['test']),
             new webpack.EnvironmentPlugin({
                 STATIC_PATH: `https://tuffyestates.sparling.us:1163${process.env.BRANCH === 'dev' ? '7': '8'}/static`,
                 API_PATH: `https://tuffyestates.sparling.us:1163${process.env.BRANCH === 'dev' ? '7': '8'}/api`
