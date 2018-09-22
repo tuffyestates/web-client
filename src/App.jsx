@@ -11,7 +11,8 @@ const App = () => (<Provider store={Account}>
     <Router>
         <div id="app" style={{
                 display: 'flex',
-                minHeight: '100%',
+                height: '100%',
+                overflow: 'hidden',
                 flexDirection: 'column'
             }}>
             <Helmet>
@@ -22,7 +23,8 @@ const App = () => (<Provider store={Account}>
             <Navbar/>
             <div style={{
                     flex: 1,
-                    backgroundColor: '#FAFAFA'
+                    backgroundColor: '#FAFAFA',
+                    overflow: 'auto'
                 }}>
                 <Route exact={true} path="/" component={Pages.Home}/>
                 <Route path="/listings" component={Pages.Listings}/>

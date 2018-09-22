@@ -41,7 +41,7 @@ export default createStore({
              * server in the response body. It could be empty
              * depending on what was sent back.
              */
-            throw new Error(error.response.data);
+            throw new Error(error.response.data.error);
             /**
              * this will print the generic error that the
              * browser will use upon a failed network request

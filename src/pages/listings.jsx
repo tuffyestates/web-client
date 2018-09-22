@@ -5,7 +5,7 @@ import {css} from 'emotion';
 
 const HOME_DETAILS_PADDING = '0.5em';
 
-class Listings extends React.Component {
+class Listings extends React.PureComponent {
     render() {
         const homes = this.props.listings.reduce((arr, house, idx) => {
             arr.push(<Home key={idx} street={house.address} price={house.price} id={house.id}/>)
@@ -16,7 +16,8 @@ class Listings extends React.Component {
                 flexWrap: 'wrap',
                 flex: 1,
                 alignContent: 'flex-start',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                height: '100%'
             }} to={`/listing/123456789`}>
             {homes}
         </div>);
@@ -149,7 +150,8 @@ export default class Container extends React.PureComponent {
                     flex: 1,
                     display: 'flex',
                     flexDirection: 'column',
-                    padding: '1em'
+                    padding: '1em',
+                    overflow: 'auto'
                 }}>
                 <ControlBar controls={{
                         listingsPerPage: this.state.listingsPerPage
@@ -157,7 +159,7 @@ export default class Container extends React.PureComponent {
                         [e.target.name]: e.target.value
                     })}/>
                 <Listings style={{
-                        flex: 1
+                        flex: 1,
                     }} listings={this.page(filteredData, this.state.page, this.state.listingsPerPage)}/>
                 <Paging page={this.state.page} numPages={Math.ceil(filteredData.length / this.state.listingsPerPage)} onPageChange={page => this.setState({page})}/>
             </div>
