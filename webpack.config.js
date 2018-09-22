@@ -7,9 +7,11 @@ const webpack = require('webpack');
 
 module.exports = (env, argv) => {
     return {
-        entry: ['normalize.css',
-            path.resolve(__dirname, Package.main)
-        ],
+        entry: {
+            main: ['normalize.css',
+                path.resolve(__dirname, Package.main)
+            ]
+        },
         module: {
             rules: [{
                     test: /\.jsx?$/,
@@ -55,7 +57,7 @@ module.exports = (env, argv) => {
             path: path.resolve(__dirname, 'build'),
             publicPath: '/',
             filename: '[name].[hash].js',
-            chunkFilename: "[hash].js"
+            chunkFilename: "[name].[hash].js"
         },
         resolve: {
             extensions: ['.js', '.jsx', '.json'],
