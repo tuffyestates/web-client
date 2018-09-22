@@ -4,6 +4,7 @@ const Package = require('./package.json');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const webpack = require('webpack');
+const GoogleFontsPlugin = require('google-fonts-plugin');
 
 module.exports = (env, argv) => {
     return {
@@ -41,16 +42,10 @@ module.exports = (env, argv) => {
                     }]
                 },
 
-                // Needed to load images
-                // {
-                //     test: /\.(jpg|png)$/,
-                //     use: {
-                //         loader: "file-loader",
-                //         options: {
-                //             name: "[path][name].[hash].[ext]",
-                //         },
-                //     },
-                // },
+                {
+                    test: /\.(jpe?g|png)$/i,
+                    loader: 'responsive-loader'
+                }
             ]
         },
         output: {
@@ -64,6 +59,14 @@ module.exports = (env, argv) => {
         },
         plugins: [
             new HtmlWebpackPlugin(),
+            new GoogleFontsPlugin({
+                outputDir: path.resolve(__dirname, 'build/fonts'),
+                fonts: [{
+                    family: 'Cabin',
+                    variants: ['400', '500', '700'],
+                    subsets: ['latin']
+                }]
+            })
         ].concat(argv.mode === 'production' ? [new BundleAnalyzerPlugin({
                 analyzerMode: 'static',
                 openAnalyzer: false
