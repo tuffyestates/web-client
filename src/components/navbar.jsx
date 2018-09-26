@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link as RouterLink} from 'react-router-dom';
+import {NavLink as RouterLink} from 'react-router-dom';
 import {Subscribe} from 'react-contextual';
 import Colors from '../colors';
 import {Account} from '../contexts';
@@ -11,6 +11,9 @@ class Link extends React.PureComponent {
                 display: 'inline-block',
                 textDecoration: 'none',
                 color: 'white',
+            }} activeStyle={{
+                backgroundColor: '#fafafa',
+                color: Colors.orange
             }} {...this.props}>
             {this.props.children}
         </RouterLink>);
@@ -26,11 +29,14 @@ export default class Navbar extends React.PureComponent {
                 // position: 'sticky',
                 // top: 0
             }}>
-            <Link to="/">
+            <RouterLink exact={true} to="/" style={{
+                    padding: '1em 2em',
+                    display: 'inline-block'
+                }}>
                 LOGO
-            </Link>
+            </RouterLink>
             <div>
-                <Link to="/">
+                <Link exact={true} to="/">
                     Home
                 </Link>
                 <Link to="/listings">

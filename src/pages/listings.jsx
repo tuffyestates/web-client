@@ -2,6 +2,7 @@ import React from 'react';
 import Colors from '../colors';
 import {Link} from 'react-router-dom';
 import {css} from 'emotion';
+import {FallbackImage} from '../components';
 
 const HOME_DETAILS_PADDING = '0.5em';
 
@@ -57,7 +58,7 @@ class Home extends React.PureComponent {
             <div style={{
                     position: 'relative'
                 }}>
-                <img src={`${process.env.STATIC_PATH}/property/image/${this.props.id}.jpg`} style={{
+                <FallbackImage src={`${process.env.STATIC_PATH}/property/image/${this.props.id}.jpg`} style={{
                         objectFit: 'cover',
                         width: '100%',
                         height: 250,
@@ -139,7 +140,7 @@ export default class Container extends React.PureComponent {
         return data.slice((page - 1) * perPage, page * perPage);
     }
     render() {
-        const filteredData = this.filter(DATA);
+        const filteredData = this.filter(DATA.concat(DATA));
         return (<div style={{
                 display: 'flex',
                 justifyContent: 'flex-stretch',

@@ -42,9 +42,21 @@ module.exports = (env, argv) => {
                     }]
                 },
 
+                // Load images & make them responsive
                 {
                     test: /\.(jpe?g|png)$/i,
                     loader: 'responsive-loader'
+                },
+
+                // Load SVG placeholder image
+                {
+                    test: /\.(svg|gif)$/i,
+                    use: [{
+                        loader: 'url-loader',
+                        options: {
+                            limit: 8192
+                        }
+                    }]
                 }
             ]
         },
