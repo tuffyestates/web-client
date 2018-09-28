@@ -45,6 +45,9 @@ export default class Navbar extends React.PureComponent {
                 <Link to="/register">
                     Register
                 </Link>
+                <Link to="/login">
+                    Login
+                </Link>
                 <Link to="/api">
                     API Spec
                 </Link>

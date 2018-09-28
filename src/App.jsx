@@ -6,6 +6,7 @@ import * as Pages from './pages';
 import {Navbar, Footer} from './components';
 import {Account} from './contexts';
 import {Provider} from 'react-contextual';
+import Login from './pages/login';
 
 const App = () => (<Provider store={Account}>
     <Router>
@@ -30,6 +31,8 @@ const App = () => (<Provider store={Account}>
                 <Route path="/listings" component={Pages.Listings}/>
                 <Route path="/listing/:id" component={Pages.Listing}/>
                 <Route path="/register" component={Pages.Register}/>
+                {/* <Route path="/login" component={Pages.Login}/> */}
+                <Route path="/login" component={Login}/>
                 <Route path="/api" component={Pages.API}/>
             </div>
             <Footer/>
