@@ -5,10 +5,6 @@ import App from './App';
 let root = document.createElement("div");
 root.id = 'root';
 
-// Make sure everything reloads when something changes in development
-if (process.env.NODE_ENV === 'development')
-    React.PureComponent = React.Component;
-
 // Fill the whole page
 root.style.height = '100%';
 document.body.style.height = '100%';
