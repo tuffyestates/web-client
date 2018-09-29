@@ -4,7 +4,7 @@ import {Subscribe} from 'react-contextual';
 import Colors from '../colors';
 import {Account} from '../contexts';
 
-class Link extends React.PureComponent {
+class Link extends React.Component {
     render() {
         return (<RouterLink style={{
                 padding: '1em 2em',
