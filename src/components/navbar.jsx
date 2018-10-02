@@ -20,7 +20,7 @@ class Link extends React.Component {
     }
 }
 
-export default class Navbar extends React.PureComponent {
+export default class Navbar extends React.Component {
     render() {
         return (<div style={{
                 display: 'flex',
