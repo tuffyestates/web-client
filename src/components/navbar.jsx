@@ -31,7 +31,10 @@ export default class Navbar extends React.Component {
             }}>
             <RouterLink exact={true} to="/" style={{
                     padding: '1em 2em',
-                    display: 'inline-block'
+                    display: 'inline-block',
+                    fontFamily: 'Roboto',
+                    fontWeight: '300',
+                    color: 'white'
                 }}>
                 LOGO
             </RouterLink>

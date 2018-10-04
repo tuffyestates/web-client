@@ -73,11 +73,14 @@ module.exports = (env, argv) => {
             new HtmlWebpackPlugin(),
             new GoogleFontsPlugin({
                 outputDir: path.resolve(__dirname, 'build/fonts'),
-                fonts: [{
-                    family: 'Cabin',
+                fonts: [
+                  {family: 'Cabin',
                     variants: ['400', '500', '700'],
-                    subsets: ['latin']
-                }]
+                    subsets: ['latin']},
+                  {family: 'Roboto',
+                    variants: ['300','400','500', '700'],
+                    subsets: ['latin']}
+                ]
             })
         ].concat(argv.mode === 'production' ? [new BundleAnalyzerPlugin({
                 analyzerMode: 'static',
