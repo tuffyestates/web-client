@@ -29,16 +29,30 @@ export default class Navbar extends React.Component {
                 // position: 'sticky',
                 // top: 0
             }}>
-            <RouterLink exact={true} to="/" style={{
+            <RouterLink exact={true} to="/"
+                  style={{
                     padding: '1em 2em',
                     display: 'inline-block',
                     fontFamily: 'Roboto',
-                    fontWeight: '300',
-                    color: 'white'
+                    fontWeight: '700',
+                    color: 'white',
+                    textDecoration: 'none',
+                    transition: 'color 0.5s ease-in-out',
+
+                    '&:hover': {
+                      color: 'blue',
+                      fontWeight: '100',
+                      fontSize: '50px'
+                    }
+
+
                 }}>
-                LOGO
+                Tuffy Estates
             </RouterLink>
-            <div>
+            <div
+              style={{
+                    textDecoration: 'none',
+                }}>
                 <Link exact={true} to="/">
                     Home
                 </Link>
