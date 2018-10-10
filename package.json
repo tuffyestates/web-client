@@ -29,7 +29,7 @@
         "html-webpack-plugin": "^3.2.0",
         "jimp": "^0.5.0",
         "node-sass": "^4.9.3",
-        "react-hot-loader": "^4.3.4",
+        "react-hot-loader": "^4.3.11",
         "responsive-loader": "^1.1.0",
         "sass-loader": "^7.1.0",
         "style-loader": "^0.23.0",
@@ -45,12 +45,12 @@
         "axios": "^0.18.0",
         "emotion": "^9.2.8",
         "normalize.css": "^8.0.0",
-        "react": "^16.4.2",
+        "react": "^16.5.2",
         "react-contextual": "git://github.com/FallingSnow/react-contextual.git",
-        "react-dom": "^16.4.2",
+        "react-dom": "^16.5.2",
         "react-helmet": "^5.2.0",
         "react-router-dom": "^4.3.1",
-        "swagger-ui": "^3.19.0"
+        "swagger-ui": "^3.19.3"
     },
     "license": "UNLICENSED",
     "bugs": {
