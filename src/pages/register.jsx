@@ -25,10 +25,10 @@ export default class Register extends React.PureComponent {
 
                                 try {
                                     // Call login action on global account state
-                                    await account.login(formdata);
+                                    await account.register(formdata);
 
                                     // If we got this far then the login was a success, lets inform the user
-                                    this.setState({message: "Login success"});
+                                    this.setState({message: "Register success"});
                                 } catch (error) {
                                     // The account.login action failed for some reason, lets inform the user
                                     this.setState({error: error.toString()});
