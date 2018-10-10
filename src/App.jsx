@@ -1,12 +1,11 @@
 import React from 'react';
 import {hot} from 'react-hot-loader';
 import {Helmet} from "react-helmet";
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import * as Pages from './pages';
 import {Navbar, Footer} from './components';
 import {Account} from './contexts';
-import {Provider} from 'react-contextual';
-import Login from './pages/login';
+import {Subscribe, Provider} from 'react-contextual';
 
 const App = () => (<Provider store={Account}>
     <Router>
@@ -27,13 +26,22 @@ const App = () => (<Provider store={Account}>
                     backgroundColor: '#FAFAFA',
                     overflow: 'auto'
                 }}>
-                <Route exact={true} path="/" component={Pages.Home}/>
-                <Route path="/listings" component={Pages.Listings}/>
-                <Route path="/listing/:id" component={Pages.Listing}/>
-                <Route path="/register" component={Pages.Register}/>
-                {/* <Route path="/login" component={Pages.Login}/> */}
-                <Route path="/login" component={Login}/>
-                <Route path="/api" component={Pages.API}/>
+                <Switch>
+                    <Route exact={true} path="/" component={Pages.Home}/>
+                    <Route path="/listings" component={Pages.Listings}/>
+                    <Route path="/listing/:id" component={Pages.Listing}/>
+                    <Route path="/register">
+                        <Subscribe to={Account}>
+                            {account => <Pages.Register account={account}/>}
+                        </Subscribe>
+                    </Route>
+                    <Route path="/login">
+                        <Subscribe to={Account}>
+                            {account => <Pages.Login account={account}/>}
+                        </Subscribe>
+                    </Route>
+                    <Route path="/api" component={Pages.API}/>
+                </Switch>
             </div>
             <Footer/>
         </div>
