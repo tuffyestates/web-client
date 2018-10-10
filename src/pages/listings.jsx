@@ -6,22 +6,76 @@ import {FallbackImage} from '../components';
 
 const HOME_DETAILS_PADDING = '0.5em';
 
-class Listings extends React.PureComponent {
+class InfiniteScroll extends React.PureComponent {
+    state = {
+        content: [],
+        done: false
+    };
+    constructor(props) {
+        super(props);
+        this.container = React.createRef();
+    }
+    async componentDidMount() {
+        const content = this.state.content.concat(await this.props.onLoad(this.state.content.length));
+        this.setState({content});
+
+        // Listen for scroll events
+        this.container.current.addEventListener('scroll', this.handleScroll.bind(this), {passive: true});
+    }
+    componentWillUnmount() {
+        this.container.current.removeEventListener('scroll', this.handleScroll.bind(this), {passive: true});
+    }
+    async handleScroll(e) {
+        // If we have already loaded everything that exists
+        if (this.state.done)
+            return;
+
+        const container = e.currentTarget;
+        if (container.scrollTop + container.clientHeight > container.scrollHeight - this.props.offset) {
+            let done = false;
+
+            const newContent = await this.props.onLoad(this.state.content.length);
+
+            // No new content, don't try to load more content again
+            if (newContent.length === 0)
+                done = true;
+
+            const content = this.state.content.concat(newContent);
+            this.setState({content, done}, () => {
+                if (done && this.props.onFinish) {
+                    this.props.onFinish();
+                }
+            });
+        }
+    }
     render() {
-        const homes = this.props.listings.reduce((arr, house, idx) => {
-            arr.push(<Home key={idx} street={house.address} price={house.price} id={house.id}/>)
+        // onWheel={this.handleScroll.bind(this)}
+        return (<div {...this.props} ref={this.container}>
+            {this.state.content}
+            {this.props.children}
+        </div>);
+    }
+}
+
+class Listings extends React.PureComponent {
+    async loadHomes(offset) {
+        const limit = 10;
+        const listings = this.props.listings.slice(offset, offset + limit);
+        return listings.reduce((arr, house, idx) => {
+            arr.push(<Home key={offset + idx} street={house.address} price={house.price} id={house.id}/>)
             return arr;
         }, []);
-        return (<div style={{
+    }
+    render() {
+        return (<InfiniteScroll offset={300} style={{
                 display: 'flex',
                 flexWrap: 'wrap',
                 flex: 1,
                 alignContent: 'flex-start',
                 justifyContent: 'center',
-                height: '100%'
-            }} to={`/listing/123456789`}>
-            {homes}
-        </div>);
+                padding: '1em',
+                overflowY: 'auto'
+            }} onLoad={this.loadHomes.bind(this)}/>);
     }
 }
 class HomeDetails extends React.PureComponent {
@@ -88,59 +142,16 @@ class Filter extends React.PureComponent {
     }
 }
 
-// TODO: This should be replaced by infinite scrolling
-class Paging extends React.PureComponent {
-    render() {
-        let pageNumbers = [];
-        const start = Math.max(1, this.props.page - 5);
-        const end = Math.min(start + 5 + (this.props.page - start), this.props.numPages)
-        for (let i = start; i <= end; i++) {
-            pageNumbers.push(<span style={{
-                    display: 'inline-block',
-                    cursor: 'pointer',
-                    padding: '1em',
-                    backgroundColor: Colors.blue,
-                    color: 'white'
-                }} key={i} onClick={this.props.onPageChange.bind(this, i)}>{i}</span>);
-        }
-        return (<div style={{
-                textAlign: 'center'
-            }}>
-            {pageNumbers}
-        </div>);
-    }
-}
-
-class ControlBar extends React.PureComponent {
-    render() {
-        return (<div>
-            <label>
-                Listings Per Page:
-                <select name="listingsPerPage" value={this.props.controls.listingsPerPage} onChange={this.props.onChange}>
-                    <option>5</option>
-                    <option>10</option>
-                    <option>15</option>
-                </select>
-            </label>
-        </div>);
-    }
-}
-
 export default class Container extends React.PureComponent {
     state = {
-        page: 1,
-        listingsPerPage: 10,
         filters: {}
     }
     filter(data) {
         // TODO: use this.state.filters to filter data
         return data;
     }
-    page(data, page = 1, perPage = 10) {
-        return data.slice((page - 1) * perPage, page * perPage);
-    }
     render() {
-        const filteredData = this.filter(DATA.concat(DATA));
+        const filteredData = this.filter(DATA.concat(DATA).concat(DATA).concat(DATA));
         return (<div style={{
                 display: 'flex',
                 justifyContent: 'flex-stretch',
@@ -150,19 +161,11 @@ export default class Container extends React.PureComponent {
             <div style={{
                     flex: 1,
                     display: 'flex',
-                    flexDirection: 'column',
-                    padding: '1em',
-                    overflow: 'auto'
+                    flexDirection: 'column'
                 }}>
-                <ControlBar controls={{
-                        listingsPerPage: this.state.listingsPerPage
-                    }} onChange={e => this.setState({
-                        [e.target.name]: e.target.value
-                    })}/>
                 <Listings style={{
-                        flex: 1,
-                    }} listings={this.page(filteredData, this.state.page, this.state.listingsPerPage)}/>
-                <Paging page={this.state.page} numPages={Math.ceil(filteredData.length / this.state.listingsPerPage)} onPageChange={page => this.setState({page})}/>
+                        flex: 1
+                    }} listings={filteredData}/>
             </div>
         </div>);
     }
