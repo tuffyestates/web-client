@@ -19,7 +19,6 @@ const App = () => (<Provider store={Account}>
                 <title>Tuffy Estates</title>
                 {/*<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"/></Helmet>*/}
             </Helmet>
-            {/* <Route component={Pages.FourOFour}/> */}
             <Navbar/>
             <div style={{
                     flex: 1,
@@ -41,11 +40,13 @@ const App = () => (<Provider store={Account}>
                         </Subscribe>
                     </Route>
                     <Route path="/api" component={Pages.API}/>
+                    <Route component={Pages.FourOFour}/>
                 </Switch>
             </div>
             <Footer/>
         </div>
     </Router>
 </Provider>);
+
 
 export default hot(module)(App);
