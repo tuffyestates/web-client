@@ -48,5 +48,4 @@ const App = () => (<Provider store={Account}>
     </Router>
 </Provider>);
 
-
 export default hot(module)(App);

@@ -1,6 +1,13 @@
 import React from 'react';
+import {Input} from '../components';
 import {Subscribe} from 'react-contextual';
 import {Account} from '../contexts';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {faLock, faUser} from '@fortawesome/free-solid-svg-icons';
+
+library.add(faLock, faUser);
 
 export default class Register extends React.PureComponent {
     state = {};
@@ -35,8 +42,8 @@ export default class Register extends React.PureComponent {
             <Subscribe to={Account}>
                 {
                     account => <form onSubmit={this.register}>
-                            <input placeholder="Username" name="username"/>
-                            <input placeholder="Password" type="password" name="password"/>
+                            <Input prefix={(<FontAwesomeIcon icon="user"/>)} placeholder="Username" name="username" message={'hello'}/>
+                            <Input prefix={(<FontAwesomeIcon icon="lock"/>)} placeholder="Password" type="password" name="password"/>
                             <button type="submit">Submit</button>
                             <div>
                                 {this.state.error}
