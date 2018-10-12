@@ -6,6 +6,10 @@ import * as Pages from './pages';
 import {Navbar, Footer} from './components';
 import {Account} from './contexts';
 import {Subscribe, Provider} from 'react-contextual';
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {faLock, faUser} from '@fortawesome/free-solid-svg-icons';
+
+library.add(faLock, faUser);
 
 const App = () => (<Provider store={Account}>
     <Router>
@@ -17,7 +21,6 @@ const App = () => (<Provider store={Account}>
             }}>
             <Helmet>
                 <title>Tuffy Estates</title>
-                {/*<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"/></Helmet>*/}
             </Helmet>
             <Navbar/>
             <div style={{

@@ -4,11 +4,6 @@ import {Subscribe} from 'react-contextual';
 import {Account} from '../contexts';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
-import {library} from '@fortawesome/fontawesome-svg-core';
-import {faLock, faUser} from '@fortawesome/free-solid-svg-icons';
-
-library.add(faLock, faUser);
-
 export default class Register extends React.PureComponent {
     state = {};
     register = async (e) => {
