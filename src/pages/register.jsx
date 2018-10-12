@@ -1,7 +1,5 @@
 import React from 'react';
 import {Input} from '../components';
-import {Subscribe} from 'react-contextual';
-import {Account} from '../contexts';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 export default class Register extends React.PureComponent {
@@ -33,20 +31,15 @@ export default class Register extends React.PureComponent {
                 alignItems: 'center'
             }}>
             <h1>Register</h1>
-            {/* The Subscribe componenet provides access to the global account store */}
-            <Subscribe to={Account}>
-                {
-                    account => <form onSubmit={this.register}>
-                            <Input prefix={(<FontAwesomeIcon icon="user"/>)} placeholder="Username" name="username" message={'hello'}/>
-                            <Input prefix={(<FontAwesomeIcon icon="lock"/>)} placeholder="Password" type="password" name="password"/>
-                            <button type="submit">Submit</button>
-                            <div>
-                                {this.state.error}
-                                {this.state.message}
-                            </div>
-                        </form>
-                }
-            </Subscribe>
+            <form onSubmit={this.register}>
+                <Input prefix={(<FontAwesomeIcon icon="user"/>)} placeholder="Username" name="username" message={'hello'}/>
+                <Input prefix={(<FontAwesomeIcon icon="lock"/>)} placeholder="Password" type="password" name="password"/>
+                <button type="submit">Submit</button>
+                <div>
+                    {this.state.error}
+                    {this.state.message}
+                </div>
+            </form>
         </div>);
     }
 }
