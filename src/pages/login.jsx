@@ -1,4 +1,6 @@
 import React from 'react';
+import {Input} from '../components';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 export default class Login extends React.PureComponent {
     state = {};
@@ -30,8 +32,8 @@ export default class Login extends React.PureComponent {
             }}>
             <h1>Login</h1>
             <form onSubmit={this.login}>
-                <input placeholder="Username" name="username"/>
-                <input placeholder="Password" type="password" name="password"/>
+                <Input prefix={(<FontAwesomeIcon icon="user"/>)} placeholder="Username" name="username" message={'hello'}/>
+                <Input prefix={(<FontAwesomeIcon icon="lock"/>)} placeholder="Password" type="password" name="password"/>
                 <button type="submit">Submit</button>
                 <div>
                     {this.state.error}
