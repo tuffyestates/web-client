@@ -3,6 +3,7 @@ import {NavLink as RouterLink} from 'react-router-dom';
 import {Subscribe} from 'react-contextual';
 import Colors from '../colors';
 import {Account} from '../contexts';
+import {css} from 'emotion';
 
 class Link extends React.Component {
     render() {
@@ -30,23 +31,20 @@ export default class Navbar extends React.Component {
                 // top: 0
             }}>
             <RouterLink exact={true} to="/"
-                  style={{
+                  className={css({
                     padding: '1em 2em',
                     display: 'inline-block',
-                    fontFamily: 'Roboto',
-                    fontWeight: '700',
+                    fontWeight: '300',
                     color: 'white',
                     textDecoration: 'none',
                     transition: 'color 0.5s ease-in-out',
 
                     '&:hover': {
-                      color: 'blue',
-                      fontWeight: '100',
-                      fontSize: '50px'
+                      color: 'blue'
                     }
 
 
-                }}>
+                })}>
                 Tuffy Estates
             </RouterLink>
             <div
