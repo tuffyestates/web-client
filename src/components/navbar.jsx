@@ -7,14 +7,68 @@ import {css} from 'emotion';
 
 class Link extends React.Component {
     render() {
-        return (<RouterLink style={{
+        return (<RouterLink
+
+
+
+
+
+
+
+
+
+
+          className={css({
                 padding: '1em 2em',
                 display: 'inline-block',
                 textDecoration: 'none',
-                color: 'white',
-            }} activeStyle={{
-                backgroundColor: '#fafafa',
-                color: Colors.orange
+                color: Colors.orange,
+                transition: 'all .4s ease-in-out',
+
+                '&:hover': {
+                      // color: 'blue',
+
+                      // backgroundColor: '#fafafa',
+                backgroundColor: Colors.blue,
+                // color: Colors.orange,
+                color: '#fafafa',
+
+                // borderRadius: '25px',
+
+                webkitBorderRadius: '200px',
+                webkitBorderTopRightRadius: '20px',
+                webkitBorderBottomLeftRadius: '25px',
+                mozBorderRadius: '200px',
+                mozBorderRadiusTopRight: '20px',
+                mozBorderRadiusBottomLeft: '25px',
+                borderRadius: '200px',
+                borderTopRightRadius: '20px',
+                borderBottomLeftRadius: '25px',
+
+                opacity: '0.7'
+
+
+                    }
+
+            })} activeStyle={{
+                // backgroundColor: '#fafafa',
+                backgroundColor: Colors.orange,
+                // color: Colors.orange,
+                color: '#fafafa',
+
+                // borderRadius: '25px',
+
+                webkitBorderRadius: '200px',
+                webkitBorderTopRightRadius: '20px',
+                webkitBorderBottomLeftRadius: '25px',
+                mozBorderRadius: '200px',
+                mozBorderRadiusTopRight: '20px',
+                mozBorderRadiusBottomLeft: '25px',
+                borderRadius: '200px',
+                borderTopRightRadius: '20px',
+                borderBottomLeftRadius: '25px',
+
+                opacity: '0.7'
             }} {...this.props}>
             {this.props.children}
         </RouterLink>);
@@ -24,23 +78,43 @@ class Link extends React.Component {
 export default class Navbar extends React.Component {
     render() {
         return (<div style={{
+                margin: '12px 10px 0 10px',
+
                 display: 'flex',
-                backgroundColor: Colors.orange,
+                // backgroundColor: Colors.orange,
+                // backgroundColor: '#fafafa',
                 justifyContent: 'space-between'
                 // position: 'sticky',
                 // top: 0
             }}>
             <RouterLink exact={true} to="/"
                   className={css({
-                    padding: '1em 2em',
+
+
+                    padding: '1em 1em',
                     display: 'inline-block',
                     fontWeight: '300',
                     color: 'white',
+                    // color: Colors.orange,
                     textDecoration: 'none',
-                    transition: 'color 0.5s ease-in-out',
+                    transition: 'all .4s ease-in-out',
+
+                    backgroundColor: Colors.orange,
+                    // borderRadius: '25px',
+                    opacity: '0.7',
+
+                    webkitBorderRadius: '25px',
+                    webkitBorderTopRightRadius: '200px',
+                    webkitBorderBottomLeftRadius: '200px',
+                    mozBorderRadius: '25px',
+                    mozBorderRadiusTopRight: '200px',
+                    mozBorderRadiusBottomLeft: '200px',
+                    borderRadius: '25px',
+                    borderTopRightRadius: '200px',
+                    borderBottomLeftRadius: '200px',
 
                     '&:hover': {
-                      color: 'blue'
+                      backgroundColor: Colors.blue
                     }
 
 
