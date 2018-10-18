@@ -23,7 +23,10 @@ class Link extends React.Component {
                 display: 'inline-block',
                 textDecoration: 'none',
                 color: Colors.orange,
-                transition: 'all .4s ease-in-out',
+
+                clipPath: 'polygon(25% 0, 100% 0%, 75% 100%, 0 100%)',
+
+                transition: 'backgroundColor .4s ease-in-out',
 
                 '&:hover': {
                       // color: 'blue',
@@ -35,17 +38,22 @@ class Link extends React.Component {
 
                 // borderRadius: '25px',
 
-                webkitBorderRadius: '200px',
-                webkitBorderTopRightRadius: '20px',
-                webkitBorderBottomLeftRadius: '25px',
-                mozBorderRadius: '200px',
-                mozBorderRadiusTopRight: '20px',
-                mozBorderRadiusBottomLeft: '25px',
-                borderRadius: '200px',
-                borderTopRightRadius: '20px',
-                borderBottomLeftRadius: '25px',
 
-                opacity: '0.7'
+                clipPath: 'polygon(25% 0, 100% 0%, 75% 100%, 0 100%)',
+
+
+
+                // webkitBorderRadius: '200px',
+                // webkitBorderTopRightRadius: '0px',
+                // webkitBorderBottomLeftRadius: '25px',
+                // mozBorderRadius: '200px',
+                // mozBorderRadiusTopRight: '0px',
+                // mozBorderRadiusBottomLeft: '25px',
+                // borderRadius: '200px',
+                // borderTopRightRadius: '0px',
+                // borderBottomLeftRadius: '0px',
+
+                opacity: '0.8',
 
 
                     }
@@ -58,17 +66,25 @@ class Link extends React.Component {
 
                 // borderRadius: '25px',
 
-                webkitBorderRadius: '200px',
-                webkitBorderTopRightRadius: '20px',
-                webkitBorderBottomLeftRadius: '25px',
-                mozBorderRadius: '200px',
-                mozBorderRadiusTopRight: '20px',
-                mozBorderRadiusBottomLeft: '25px',
-                borderRadius: '200px',
-                borderTopRightRadius: '20px',
-                borderBottomLeftRadius: '25px',
 
-                opacity: '0.7'
+
+                clipPath: 'polygon(25% 0, 100% 0%, 75% 100%, 0 100%)',
+
+
+
+                // webkitBorderRadius: '200px',
+                // webkitBorderTopRightRadius: '20px',
+                // webkitBorderBottomLeftRadius: '25px',
+                // mozBorderRadius: '200px',
+                // mozBorderRadiusTopRight: '20px',
+                // mozBorderRadiusBottomLeft: '25px',
+                // borderRadius: '200px',
+                // borderTopRightRadius: '20px',
+                // borderBottomLeftRadius: '25px',
+
+
+
+                opacity: '0.8'
             }} {...this.props}>
             {this.props.children}
         </RouterLink>);
@@ -91,7 +107,7 @@ export default class Navbar extends React.Component {
                   className={css({
 
 
-                    padding: '1em 1em',
+                    padding: '1em 2em',
                     display: 'inline-block',
                     fontWeight: '300',
                     color: 'white',
@@ -99,22 +115,28 @@ export default class Navbar extends React.Component {
                     textDecoration: 'none',
                     transition: 'all .4s ease-in-out',
 
-                    backgroundColor: Colors.orange,
+                    backgroundColor: Colors.blue,
                     // borderRadius: '25px',
-                    opacity: '0.7',
+                    opacity: '0.8',
 
-                    webkitBorderRadius: '25px',
-                    webkitBorderTopRightRadius: '200px',
-                    webkitBorderBottomLeftRadius: '200px',
-                    mozBorderRadius: '25px',
-                    mozBorderRadiusTopRight: '200px',
-                    mozBorderRadiusBottomLeft: '200px',
-                    borderRadius: '25px',
-                    borderTopRightRadius: '200px',
-                    borderBottomLeftRadius: '200px',
+
+                    clipPath: 'polygon(25% 0, 100% 0%, 75% 100%, 0 100%)',
+
+
+
+
+                    // webkitBorderRadius: '25px',
+                    // webkitBorderTopRightRadius: '200px',
+                    // webkitBorderBottomLeftRadius: '200px',
+                    // mozBorderRadius: '25px',
+                    // mozBorderRadiusTopRight: '200px',
+                    // mozBorderRadiusBottomLeft: '200px',
+                    // borderRadius: '25px',
+                    // borderTopRightRadius: '200px',
+                    // borderBottomLeftRadius: '200px',
 
                     '&:hover': {
-                      backgroundColor: Colors.blue
+                      backgroundColor: Colors.orange
                     }
 
 
