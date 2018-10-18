@@ -56,6 +56,8 @@ class Link extends React.Component {
                 opacity: '0.8',
 
 
+
+
                     }
 
             })} activeStyle={{
@@ -85,6 +87,7 @@ class Link extends React.Component {
 
 
                 opacity: '0.8'
+
             }} {...this.props}>
             {this.props.children}
         </RouterLink>);
@@ -136,7 +139,9 @@ export default class Navbar extends React.Component {
                     // borderBottomLeftRadius: '200px',
 
                     '&:hover': {
-                      backgroundColor: Colors.orange
+                      backgroundColor: Colors.orange,
+
+                      transform: 'translateX(20px)',
                     }
 
 
