@@ -61,6 +61,7 @@ class Link extends React.Component {
                     }
 
             })} activeStyle={{
+
                 // backgroundColor: '#fafafa',
                 backgroundColor: Colors.orange,
                 // color: Colors.orange,
@@ -86,7 +87,10 @@ class Link extends React.Component {
 
 
 
-                opacity: '0.8'
+                opacity: '0.8',
+
+
+
 
             }} {...this.props}>
             {this.props.children}

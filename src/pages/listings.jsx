@@ -134,6 +134,14 @@ class Home extends React.PureComponent {
 class Filter extends React.PureComponent {
     render() {
         return (<div style={{
+
+                margin: '20px 0 0 0',
+                opacity: '0.9',
+                // borderRadius: '5px',
+
+
+
+
                 backgroundColor: Colors.blue,
                 width: 400,
                 color: 'white',
@@ -141,59 +149,108 @@ class Filter extends React.PureComponent {
             }} {...this.props}>This is the filter sidebar
 
             <h4>Filter</h4>
-            <select name="city" className="filters city" onChange={this.props.change}>
-              <option value="all">All Cities</option>
-            </select>
-            <select name="homeType" className="filters homeType" onChange={this.props.change}>
-              <option value="all">All Home Types</option>
 
-            </select>
-            <select name="bedroom" className="filters bedroom" onChange={this.props.change}>
-              <option value="0">0+ Bedrooms</option>
+          <div style={{
 
-            </select>
-            <select name="bathroom" className="filters bathroom" onChange={this.props.change}>
-              <option value="0">0+ Bathrooms</option>
+            height: '25px',
+            background: 'trasparent',
+            padding: '10px',
+            fontSize: '12px',
+            fontWeight: '300',
+            color: '#1B1B1B',
+            display: 'block',
+            marginBottom: '25px',
+            width: '100%'
 
-            </select>
-            <div className="filters price">
-              <span className="title">Price</span>
+            }} {...this.props}>
 
-              {/* alternate input type to confirm numeric input */}
-              {/* type="number" pattern="[0-9]*" inputmode="numeric" */}
 
-              <input type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="1000000" step="100000" name="min_price" className="min-price" />
-              <input type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="1000000" step="100000" name="max_price" className="max-price" />
+              <select
+
+                style={{
+
+            height: '25px',
+            background: 'trasparent',
+            padding: '10px',
+            fontSize: '12px',
+            fontWeight: '300',
+            color: '#1B1B1B',
+            display: 'block',
+            marginBottom: '25px',
+            width: '95%'
+
+            }} {...this.props}
+
+                name="city" className="filters city" onChange={this.props.change}>
+                <option value="all">All Cities</option>
+              </select>
+              <select name="homeType" className="filters homeType" onChange={this.props.change}>
+                <option value="all">All Home Types</option>
+
+              </select>
+              <select name="bedroom" className="filters bedroom" onChange={this.props.change}>
+                <option value="0">0+ Bedrooms</option>
+
+              </select>
+              <select name="bathroom" className="filters bathroom" onChange={this.props.change}>
+                <option value="0">0+ Bathrooms</option>
+
+              </select>
+
             </div>
 
-            <div className="filters squareFeet">
-              <span className="title">Square Feet</span>
-              <input type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="10000" step="100" name="min_squareFeet" className="min-squareFeet" />
-              <input type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="10000" step="100" name="max_squareFeet" className="max-squareFeet" />
-            </div>
-            <div className="filters lotSize">
-              <span className="title">Lot Size</span>
-              <input type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="50000" step="1000" name="min_lotSize" className="min-lotSize" />
-              <input type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="50000" step="1000" name="max_lotSize" className="max-lotSize" />
-            </div>
-            <div className="filters features">
-              <span className="title">Features</span>
-              <label htmlFor="features">
-                <span>Garage</span>
-                <input name="Garage" value="Garage" type="checkbox" />
-              </label>
-              <label htmlFor="features">
-                <span>Swimming Pool</span>
-                <input name="Swimming_Pool" value="Swimming_Pool" type="checkbox" />
-              </label>
-              <label htmlFor="features">
-                <span>Fireplace</span>
-                <input name="Fireplace" value="Fireplace" type="checkbox" />
-              </label>
-              <label htmlFor="features">
-                <span>Guest House</span>
-                <input name="Guest_House" value="Guest_House" type="checkbox" />
-              </label>
+            <div style={{
+
+            borderRadius: '5px',
+            fontSize: '14px',
+            padding: '5px',
+            width: '45%',
+            display: 'inline-block',
+            marginRight: '2.5%',
+            marginBottom: '16px',
+
+            }} {...this.props}>
+
+              <div className="filters price">
+                <span className="title">Price</span>
+
+                {/* alternate input type to confirm numeric input */}
+                {/* type="number" pattern="[0-9]*" inputmode="numeric" */}
+
+                <input type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="1000000" step="100000" name="min_price" className="min-price" />
+                <input type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="1000000" step="100000" name="max_price" className="max-price" />
+              </div>
+
+              <div className="filters squareFeet">
+                <span className="title">Square Feet</span>
+                <input type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="10000" step="100" name="min_squareFeet" className="min-squareFeet" />
+                <input type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="10000" step="100" name="max_squareFeet" className="max-squareFeet" />
+              </div>
+              <div className="filters lotSize">
+                <span className="title">Lot Size</span>
+                <input type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="50000" step="1000" name="min_lotSize" className="min-lotSize" />
+                <input type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="50000" step="1000" name="max_lotSize" className="max-lotSize" />
+              </div>
+              <div className="filters features">
+                <span className="title">Features</span>
+                <label htmlFor="features">
+                  <span>Garage</span>
+                  <input name="Garage" value="Garage" type="checkbox" />
+                </label>
+                <label htmlFor="features">
+                  <span>Swimming Pool</span>
+                  <input name="Swimming_Pool" value="Swimming_Pool" type="checkbox" />
+                </label>
+                <label htmlFor="features">
+                  <span>Fireplace</span>
+                  <input name="Fireplace" value="Fireplace" type="checkbox" />
+                </label>
+                <label htmlFor="features">
+                  <span>Guest House</span>
+                  <input name="Guest_House" value="Guest_House" type="checkbox" />
+                </label>
+              </div>
+
             </div>
 
 
