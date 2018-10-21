@@ -42,7 +42,7 @@ class Jumbotron extends React.PureComponent {
             }}>
             <Link to='/listings' css={{
                     ...this.style.container,
-                    left: 0,
+                    left: -5,
                     transform: 'translateX(-20px)',
                     clipPath: 'polygon(0 0, 100% 0%, 75% 100%, 0% 100%)',
                     background: `linear-gradient(rgba(0, 55, 107, 0.8), rgba(0, 55, 107, 0.8)), url(${require('../images/jesse-roberts-146556-unsplash.jpg?size=2000')})`,
@@ -57,7 +57,7 @@ class Jumbotron extends React.PureComponent {
             </Link>
             <Link to='/listings' css={{
                     ...this.style.container,
-                    right: 0,
+                    right: -5,
                     transform: 'translateX(20px)',
                     clipPath: 'polygon(25% 0, 100% 0%, 100% 100%, 0 100%)',
                     background: `linear-gradient(rgba(255, 104, 0, 0.8), rgba(255, 104, 0, 0.8)), url(${require('../images/rowan-heuvel-51244-unsplash.jpg?size=2000')})`,
@@ -79,7 +79,7 @@ export default class Home extends React.Component {
     render() {
         return (<Jumbotron css={{
                 margin: '1em 0',
-                height: 500
+                height: '95%'
             }}/>);
     }
 }

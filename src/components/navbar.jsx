@@ -12,10 +12,59 @@ class Link extends React.Component {
                 padding: '1em 2em',
                 display: 'inline-block',
                 textDecoration: 'none',
-                color: 'white',
+                color: Colors.orange,
+
+                clipPath: 'polygon(25% 0, 100% 0%, 75% 100%, 0 100%)',
+
+                transition: 'backgroundColor .4s ease-in-out',
+
+                '&:hover' : {
+                    // color: 'blue',
+
+                    // backgroundColor: '#fafafa',
+                    backgroundColor: Colors.blue,
+                    // color: Colors.orange,
+                    color: '#fafafa',
+
+                    // borderRadius: '25px',
+
+                    clipPath: 'polygon(25% 0, 100% 0%, 75% 100%, 0 100%)',
+
+                    // webkitBorderRadius: '200px',
+                    // webkitBorderTopRightRadius: '0px',
+                    // webkitBorderBottomLeftRadius: '25px',
+                    // mozBorderRadius: '200px',
+                    // mozBorderRadiusTopRight: '0px',
+                    // mozBorderRadiusBottomLeft: '25px',
+                    // borderRadius: '200px',
+                    // borderTopRightRadius: '0px',
+                    // borderBottomLeftRadius: '0px',
+
+                    opacity: '0.8'
+                }
+
             }} activeStyle={{
-                backgroundColor: '#fafafa',
-                color: Colors.orange
+
+                // backgroundColor: '#fafafa',
+                backgroundColor: Colors.orange,
+                // color: Colors.orange,
+                color: '#fafafa',
+
+                // borderRadius: '25px',
+
+                clipPath: 'polygon(25% 0, 100% 0%, 75% 100%, 0 100%)',
+
+                // webkitBorderRadius: '200px',
+                // webkitBorderTopRightRadius: '20px',
+                // webkitBorderBottomLeftRadius: '25px',
+                // mozBorderRadius: '200px',
+                // mozBorderRadiusTopRight: '20px',
+                // mozBorderRadiusBottomLeft: '25px',
+                // borderRadius: '200px',
+                // borderTopRightRadius: '20px',
+                // borderBottomLeftRadius: '25px',
+
+                opacity: '0.8'
             }} {...this.props}>
             {this.props.children}
         </RouterLink>);
@@ -25,35 +74,50 @@ class Link extends React.Component {
 export default class Navbar extends React.Component {
     render() {
         return (<div css={{
+                margin: '12px 10px 0 10px',
                 display: 'flex',
-                backgroundColor: Colors.orange,
+                // backgroundColor: Colors.orange,
+                // backgroundColor: '#fafafa',
                 justifyContent: 'space-between'
                 // position: 'sticky',
                 // top: 0
             }}>
-            <RouterLink exact={true} to="/"
-                  css={{
+            <RouterLink exact={true} to="/" css={{
                     padding: '1em 2em',
                     display: 'inline-block',
-                    fontFamily: 'Roboto',
-                    fontWeight: '700',
+                    fontWeight: '300',
                     color: 'white',
+                    // color: Colors.orange,
                     textDecoration: 'none',
-                    transition: 'color 0.5s ease-in-out',
+                    transition: 'all .4s ease-in-out',
 
-                    '&:hover': {
-                      color: 'blue',
-                      fontWeight: '100',
-                      fontSize: '50px'
+                    backgroundColor: Colors.blue,
+                    // borderRadius: '25px',
+                    opacity: '0.8',
+
+                    clipPath: 'polygon(25% 0, 100% 0%, 75% 100%, 0 100%)',
+
+                    // webkitBorderRadius: '25px',
+                    // webkitBorderTopRightRadius: '200px',
+                    // webkitBorderBottomLeftRadius: '200px',
+                    // mozBorderRadius: '25px',
+                    // mozBorderRadiusTopRight: '200px',
+                    // mozBorderRadiusBottomLeft: '200px',
+                    // borderRadius: '25px',
+                    // borderTopRightRadius: '200px',
+                    // borderBottomLeftRadius: '200px',
+
+                    '&:hover' : {
+                        backgroundColor: Colors.orange,
+
+                        transform: 'translateX(20px)'
                     }
-
 
                 }}>
                 Tuffy Estates
             </RouterLink>
-            <div
-              css={{
-                    textDecoration: 'none',
+            <div css={{
+                    textDecoration: 'none'
                 }}>
                 <Link exact={true} to="/">
                     Home

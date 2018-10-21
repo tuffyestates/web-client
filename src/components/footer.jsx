@@ -7,7 +7,9 @@ export default class Footer extends React.PureComponent {
     render() {
         return (<div css={{
                 display: 'flex',
-                backgroundColor: Colors.darkblue,
+                backgroundColor: Colors.blue,
+                opacity: '0.9',
+
                 color: 'white',
                 padding: '0.5em',
                 justifyContent: 'space-between',
