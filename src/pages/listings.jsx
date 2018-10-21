@@ -1,8 +1,9 @@
 import React from 'react';
 import Colors from '../colors';
 import {Link} from 'react-router-dom';
-import {css} from 'emotion';
 import {FallbackImage} from '../components';
+/** @jsx jsx */
+import {jsx} from '@emotion/core';
 
 const HOME_DETAILS_PADDING = '0.5em';
 
@@ -67,7 +68,7 @@ class Listings extends React.PureComponent {
         }, []);
     }
     render() {
-        return (<InfiniteScroll offset={300} style={{
+        return (<InfiniteScroll offset={300} css={{
                 display: 'flex',
                 flexWrap: 'wrap',
                 flex: 1,
@@ -85,7 +86,7 @@ class HomeDetails extends React.PureComponent {
         minimumFractionDigits: 0
     });
     render() {
-        return (<div style={{
+        return (<div css={{
                 padding: HOME_DETAILS_PADDING
             }} {...this.props}>
             <span>{this.priceFormatter.format(this.props.price)}</span>
@@ -94,7 +95,7 @@ class HomeDetails extends React.PureComponent {
 }
 class Home extends React.PureComponent {
     render() {
-        return (<Link className={css({
+        return (<Link css={{
                 boxShadow: '0 3px 5px -1px rgba(0,0,0,.2),0 6px 10px 0 rgba(0,0,0,.14),0 1px 18px 0 rgba(0,0,0,.12)',
                 margin: '1em',
                 flex: 1,
@@ -106,19 +107,19 @@ class Home extends React.PureComponent {
                     transform: 'translateY(-5px)',
                     boxShadow: '0 6px 7px -4px rgba(0,0,0,.2),0 11px 15px 1px rgba(0,0,0,.14),0 4px 20px 3px rgba(0,0,0,.12)'
                 }
-            })} to={`/listing/123456789`} {...this.props}>
+            }} to={`/listing/123456789`} {...this.props}>
 
             {/* Image Container */}
-            <div style={{
+            <div css={{
                     position: 'relative'
                 }}>
-                <FallbackImage src={`${process.env.STATIC_PATH}/property/image/${this.props.id}.jpg`} style={{
+                <FallbackImage src={`${process.env.STATIC_PATH}/property/image/${this.props.id}.jpg`} css={{
                         objectFit: 'cover',
                         width: '100%',
                         height: 250,
                         display: 'block'
                     }}/> {/* Street Address */}
-                <div style={{
+                <div css={{
                         position: 'absolute',
                         bottom: 0,
                         padding: `0.6em ${HOME_DETAILS_PADDING}`,
@@ -133,7 +134,7 @@ class Home extends React.PureComponent {
 }
 class Filter extends React.PureComponent {
     render() {
-        return (<div style={{
+        return (<div css={{
                 backgroundColor: Colors.blue,
                 width: 400,
                 color: 'white',
@@ -152,18 +153,18 @@ export default class Container extends React.PureComponent {
     }
     render() {
         const filteredData = this.filter(DATA.concat(DATA).concat(DATA).concat(DATA));
-        return (<div style={{
+        return (<div css={{
                 display: 'flex',
                 justifyContent: 'flex-stretch',
                 height: '100%'
             }}>
             <Filter filters={this.state.filters}/>
-            <div style={{
+            <div css={{
                     flex: 1,
                     display: 'flex',
                     flexDirection: 'column'
                 }}>
-                <Listings style={{
+                <Listings css={{
                         flex: 1
                     }} listings={filteredData}/>
             </div>

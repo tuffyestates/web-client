@@ -1,9 +1,11 @@
 import React from 'react';
 import Colors from '../colors';
+/** @jsx jsx */
+import {jsx} from '@emotion/core';
 
 export default class Footer extends React.PureComponent {
     render() {
-        return (<div style={{
+        return (<div css={{
                 display: 'flex',
                 backgroundColor: Colors.darkblue,
                 color: 'white',

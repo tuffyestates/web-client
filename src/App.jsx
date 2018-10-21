@@ -8,12 +8,14 @@ import {Account} from './contexts';
 import {Subscribe, Provider} from 'react-contextual';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {faLock, faUser} from '@fortawesome/free-solid-svg-icons';
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
 
 library.add(faLock, faUser);
 
 const App = () => (<Provider store={Account}>
     <Router>
-        <div id="app" style={{
+        <div id="app" css={{
                 display: 'flex',
                 height: '100%',
                 overflow: 'hidden',
@@ -23,7 +25,7 @@ const App = () => (<Provider store={Account}>
                 <title>Tuffy Estates</title>
             </Helmet>
             <Navbar/>
-            <div style={{
+            <div css={{
                     flex: 1,
                     backgroundColor: '#FAFAFA',
                     overflow: 'auto'

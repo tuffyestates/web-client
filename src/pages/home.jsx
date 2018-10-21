@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {css} from 'emotion';
+/** @jsx jsx */
+import {jsx} from '@emotion/core';
 
 class Jumbotron extends React.PureComponent {
     style = {
@@ -17,7 +18,10 @@ class Jumbotron extends React.PureComponent {
             fontFamily: 'Cabin',
             color: 'white',
             textDecoration: 'none',
-            transition: 'all 0.3s'
+            transition: 'all 0.3s',
+            '&:hover' : {
+                transform: 'translateX(0) !important'
+            },
         },
         headerBig: {
             fontSize: '5em',
@@ -32,27 +36,26 @@ class Jumbotron extends React.PureComponent {
         }
     };
     render() {
-        return (<div style={{
+        return (<div className={this.props.className} css={{
                 position: 'relative',
-                overflow: 'hidden',
-                ...this.props.style
+                overflow: 'hidden'
             }}>
-            <Link to='/listings' className={css(`&:hover {transform: translateX(0) !important}`)} style={{
+            <Link to='/listings' css={{
                     ...this.style.container,
                     left: 0,
                     transform: 'translateX(-20px)',
                     clipPath: 'polygon(0 0, 100% 0%, 75% 100%, 0% 100%)',
                     background: `linear-gradient(rgba(0, 55, 107, 0.8), rgba(0, 55, 107, 0.8)), url(${require('../images/jesse-roberts-146556-unsplash.jpg?size=2000')})`,
                     backgroundSize: 'cover',
-                    backgroundPosition: 'center',
+                    backgroundPosition: 'center'
                 }}>
-                <h1 style={{
+                <h1 css={{
                         ...this.style.headerBig,
                         marginLeft: '0.1em'
                     }}>Sell</h1>
-                <h4 style={this.style.headerSmall}>Your Home</h4>
+                <h4 css={this.style.headerSmall}>Your Home</h4>
             </Link>
-            <Link to='/listings' className={css(`&:hover {transform: translateX(0) !important}`)} style={{
+            <Link to='/listings' css={{
                     ...this.style.container,
                     right: 0,
                     transform: 'translateX(20px)',
@@ -61,11 +64,11 @@ class Jumbotron extends React.PureComponent {
                     backgroundSize: 'cover',
                     backgroundPosition: 'center'
                 }}>
-                <h1 style={{
+                <h1 css={{
                         ...this.style.headerBig,
                         marginLeft: '0.1em'
                     }}>Buy</h1>
-                <h4 style={this.style.headerSmall}>Your Home</h4>
+                <h4 css={this.style.headerSmall}>Your Home</h4>
             </Link>
         </div>);
     }
@@ -74,7 +77,7 @@ class Jumbotron extends React.PureComponent {
 export default class Home extends React.Component {
 
     render() {
-        return (<Jumbotron style={{
+        return (<Jumbotron css={{
                 margin: '1em 0',
                 height: 500
             }}/>);

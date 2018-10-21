@@ -4,7 +4,7 @@ const Package = require('./package.json');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const webpack = require('webpack');
-const GoogleFontsPlugin = require('google-fonts-plugin');
+const GoogleFontsPlugin = require('@beyonk/google-fonts-webpack-plugin');
 
 module.exports = (env, argv) => {
     return {
@@ -72,14 +72,16 @@ module.exports = (env, argv) => {
         plugins: [
             new HtmlWebpackPlugin(),
             new GoogleFontsPlugin({
-                outputDir: path.resolve(__dirname, 'build/fonts'),
-                fonts: [
-                  {family: 'Cabin',
-                    variants: ['400', '500', '700'],
-                    subsets: ['latin']},
-                  {family: 'Roboto',
-                    variants: ['300','400','500', '700'],
-                    subsets: ['latin']}
+                fonts: [{
+                        family: 'Cabin',
+                        variants: ['400', '500', '700'],
+                        subsets: ['latin']
+                    },
+                    {
+                        family: 'Roboto',
+                        variants: ['300', '400', '500', '700'],
+                        subsets: ['latin']
+                    }
                 ]
             })
         ].concat(argv.mode === 'production' ? [new BundleAnalyzerPlugin({
@@ -96,7 +98,7 @@ module.exports = (env, argv) => {
                 API_PATH: `http://localhost:11638/api`
             })
         ]),
-        devtool: 'cheap-module-eval-source-map',
+        devtool: argv.mode === 'production' ? false : 'cheap-module-eval-source-map',
         devServer: {
             historyApiFallback: true
         }

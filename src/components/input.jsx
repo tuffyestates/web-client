@@ -1,5 +1,7 @@
 import React from 'react';
 import Colors from '../colors';
+/** @jsx jsx */
+import {jsx} from '@emotion/core';
 
 export default class Input extends React.PureComponent {
     render() {
@@ -7,7 +9,7 @@ export default class Input extends React.PureComponent {
             prefix = null,
             suffix = null;
         if (this.props.message) {
-            message = (<div style={{
+            message = (<div css={{
                     border: '1px solid #CB3837',
                     backgroundColor: '#FEF2F2',
                     padding: '0.3em 1.2em',
@@ -17,7 +19,7 @@ export default class Input extends React.PureComponent {
                 }}>{this.props.message}</div>);
         }
         if (this.props.prefix) {
-            prefix = <span style={{
+            prefix = <span css={{
                     color: 'white',
                     backgroundColor: '#F2F2F2',
                     display: 'flex',
@@ -29,7 +31,7 @@ export default class Input extends React.PureComponent {
             </span>;
         }
         if (this.props.suffix) {
-            suffix = <span style={{
+            suffix = <span css={{
                     color: 'white',
                     backgroundColor: '#F2F2F2',
                     display: 'flex',
@@ -40,17 +42,16 @@ export default class Input extends React.PureComponent {
                 {this.props.suffix}
             </span>;
         }
-        return (<div style={{
+        return (<div className={this.props.className} css={{
                 marginBottom: '1em',
-                ...this.props.style
             }}>
-            <div style={{
+            <div css={{
                     display: 'flex',
                     border: '1px solid #C1C1C1',
                     borderBottom: message ? 'none' : '1px solid #C1C1C1'
                 }}>
                 {prefix}
-                <input name={this.props.name} type={this.props.type} placeholder={this.props.placeholder} value={this.props.value} onChange={this.props.onChange} style={{
+                <input name={this.props.name} type={this.props.type} placeholder={this.props.placeholder} value={this.props.value} onChange={this.props.onChange} css={{
                         flex: 1,
                         padding: '0.5em 0.8em',
                         color: '#A8A8A8',

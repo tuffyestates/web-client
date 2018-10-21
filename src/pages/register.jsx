@@ -1,6 +1,8 @@
 import React from 'react';
 import {Input} from '../components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+/** @jsx jsx */
+import {jsx} from '@emotion/core';
 
 export default class Register extends React.PureComponent {
     state = {};
@@ -24,7 +26,7 @@ export default class Register extends React.PureComponent {
         }
     };
     render() {
-        return (<div style={{
+        return (<div css={{
                 display: 'flex',
                 justifyContent: 'center',
                 flexDirection: 'column',

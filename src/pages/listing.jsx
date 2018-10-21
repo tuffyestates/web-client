@@ -1,5 +1,7 @@
 import React from 'react';
 import Colors from '../colors';
+/** @jsx jsx */
+import {jsx} from '@emotion/core';
 
 export default class Listing extends React.PureComponent {
     constructor(...args) {
