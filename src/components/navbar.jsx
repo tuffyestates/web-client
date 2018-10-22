@@ -9,6 +9,9 @@ import {jsx} from '@emotion/core';
 class Link extends React.Component {
     render() {
         return (<RouterLink css={{
+
+              fontFamily: 'cabin',
+
                 padding: '1em 2em',
                 display: 'inline-block',
                 textDecoration: 'none',
@@ -74,6 +77,9 @@ class Link extends React.Component {
 export default class Navbar extends React.Component {
     render() {
         return (<div css={{
+
+                fontFamily: 'cabin',
+
                 margin: '12px 10px 0 10px',
                 display: 'flex',
                 // backgroundColor: Colors.orange,
