@@ -138,6 +138,10 @@ class Home extends React.PureComponent {
 class Filter extends React.PureComponent {
     render() {
         return (<div css={{
+
+                fontFamily: 'cabin',
+                fontWeight: '200',
+
                 margin: '20px 0 0 0',
                 opacity: '0.9',
                 // borderRadius: '5px',
@@ -178,15 +182,63 @@ class Filter extends React.PureComponent {
                     }} {...this.props} name="city" className="filters city" onChange={this.props.change}>
                     <option value="all">All Cities</option>
                 </select>
-                <select name="homeType" className="filters homeType" onChange={this.props.change}>
+                <select
+
+                  style={{
+
+                        height: '25px',
+                        background: 'trasparent',
+                        padding: '10px',
+                        fontSize: '12px',
+                        fontWeight: '300',
+                        color: '#1B1B1B',
+                        display: 'block',
+                        marginBottom: '25px',
+                        width: '95%'
+
+                    }} {...this.props}
+
+                   name="homeType" className="filters homeType" onChange={this.props.change}>
                     <option value="all">All Home Types</option>
 
                 </select>
-                <select name="bedroom" className="filters bedroom" onChange={this.props.change}>
+                <select
+
+                  style={{
+
+                        height: '25px',
+                        background: 'trasparent',
+                        padding: '10px',
+                        fontSize: '12px',
+                        fontWeight: '300',
+                        color: '#1B1B1B',
+                        display: 'block',
+                        marginBottom: '25px',
+                        width: '95%'
+
+                    }} {...this.props}
+
+                  name="bedroom" className="filters bedroom" onChange={this.props.change}>
                     <option value="0">0+ Bedrooms</option>
 
                 </select>
-                <select name="bathroom" className="filters bathroom" onChange={this.props.change}>
+                <select
+
+                  style={{
+
+                        height: '25px',
+                        background: 'trasparent',
+                        padding: '10px',
+                        fontSize: '12px',
+                        fontWeight: '300',
+                        color: '#1B1B1B',
+                        display: 'block',
+                        marginBottom: '25px',
+                        width: '95%'
+
+                    }} {...this.props}
+
+                  name="bathroom" className="filters bathroom" onChange={this.props.change}>
                     <option value="0">0+ Bathrooms</option>
 
                 </select>
@@ -199,13 +251,26 @@ class Filter extends React.PureComponent {
                     fontSize: '14px',
                     padding: '5px',
                     width: '45%',
-                    display: 'inline-block',
+                    display: 'block',
                     marginRight: '2.5%',
-                    marginBottom: '16px'
+                    marginBottom: '16px',
+
+                    marginTop: '150px',
                 }} {...this.props}>
 
                 <div className="filters price">
-                    <span className="title">Price</span>
+                    <span
+
+                      style={{
+
+                        fontSize: '13.5px',
+                        fontWeight: '400',
+                        display: 'block',
+                        marginBottom: '16px',
+
+                    }} {...this.props}
+
+                       className="title">Price</span>
 
                     {/* alternate input type to confirm numeric input */}
                     {/* type="number" pattern="[0-9]*" inputmode="numeric" */}

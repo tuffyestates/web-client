@@ -21,6 +21,7 @@ class Link extends React.Component {
 
                 transition: 'backgroundColor .4s ease-in-out',
 
+
                 '&:hover' : {
                     // color: 'blue',
 
