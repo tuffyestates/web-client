@@ -3,8 +3,11 @@ import {Input} from '../components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
+import {Subscribe} from 'react-contextual';
 
-export default class Register extends React.PureComponent {
+import {Account} from '../contexts';
+
+class Register extends React.PureComponent {
     state = {};
     register = async (e) => {
         e.preventDefault();
@@ -43,5 +46,13 @@ export default class Register extends React.PureComponent {
                 </div>
             </form>
         </div>);
+    }
+}
+
+export default class Wrapper extends React.PureComponent {
+    render() {
+        return (<Subscribe to={Account}>
+        {account => <Register account={account}/>}
+    </Subscribe>);
     }
 }

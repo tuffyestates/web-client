@@ -3,7 +3,7 @@ import Colors from '../colors';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 
-export default class Listing extends React.PureComponent {
+export default class Property extends React.PureComponent {
     constructor(...args) {
         super(...args);
 

@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import * as Pages from './pages';
 import {Navbar, Footer} from './components';
 import {Account} from './contexts';
-import {Subscribe, Provider} from 'react-contextual';
+import {Provider} from 'react-contextual';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {faLock, faUser} from '@fortawesome/free-solid-svg-icons';
 /** @jsx jsx */
@@ -32,18 +32,10 @@ const App = () => (<Provider store={Account}>
                 }}>
                 <Switch>
                     <Route exact={true} path="/" component={Pages.Home}/>
-                    <Route path="/listings" component={Pages.Listings}/>
-                    <Route path="/listing/:id" component={Pages.Listing}/>
-                    <Route path="/register">
-                        <Subscribe to={Account}>
-                            {account => <Pages.Register account={account}/>}
-                        </Subscribe>
-                    </Route>
-                    <Route path="/login">
-                        <Subscribe to={Account}>
-                            {account => <Pages.Login account={account}/>}
-                        </Subscribe>
-                    </Route>
+                    <Route path="/properties/:id" component={Pages.Property}/>
+                    <Route path="/properties" component={Pages.Properties}/>
+                    <Route path="/register" component={Pages.Register}/>
+                    <Route path="/login" component={Pages.Login}/>
                     <Route path="/api" component={Pages.API}/>
                     <Route component={Pages.FourOFour}/>
                 </Switch>
