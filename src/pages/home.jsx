@@ -79,7 +79,8 @@ export default class Home extends React.Component {
     render() {
         return (<Jumbotron css={{
                 margin: '1em 0',
-                height: '95%'
+                height: 500,
+                maxHeight: '80vh'
             }}/>);
     }
 }
