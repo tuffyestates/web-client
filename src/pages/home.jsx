@@ -2,6 +2,9 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+
+import Colors from '../colors';
 
 class Jumbotron extends React.PureComponent {
     style = {
@@ -40,7 +43,7 @@ class Jumbotron extends React.PureComponent {
                 position: 'relative',
                 overflow: 'hidden'
             }}>
-            <Link to='/listings' css={{
+            <Link to='/properties' css={{
                     ...this.style.container,
                     left: -5,
                     transform: 'translateX(-20px)',
@@ -55,7 +58,7 @@ class Jumbotron extends React.PureComponent {
                     }}>Sell</h1>
                 <h4 css={this.style.headerSmall}>Your Home</h4>
             </Link>
-            <Link to='/listings' css={{
+            <Link to='/properties' css={{
                     ...this.style.container,
                     right: -5,
                     transform: 'translateX(20px)',
@@ -74,13 +77,28 @@ class Jumbotron extends React.PureComponent {
     }
 }
 
+class InfoCircle extends React.PureComponent {
+    render() {
+        return (<div className={this.props.className} css={{width: '25%'}}>
+            <div css={{textAlign: 'center'}}><FontAwesomeIcon css={{fontSize: '5em', padding: 40, borderRadius: '100%', backgroundColor: Colors.orange, color: 'white'}} icon={this.props.icon}/></div>
+            <div css={{textAlign: 'center', fontSize: '0.9em', marginTop: '2em'}}>{this.props.text}</div>
+        </div>);
+    }
+}
+
 export default class Home extends React.Component {
 
     render() {
-        return (<Jumbotron css={{
+        return (<React.Fragment><Jumbotron css={{
                 margin: '1em 0',
                 height: 500,
                 maxHeight: '80vh'
-            }}/>);
+            }}/>
+        <div css={{display: 'flex', justifyContent: 'space-around', margin: '5em auto', maxWidth: 1080}}>
+            <InfoCircle icon="user" text="Search through over 25 different properties" />
+            <InfoCircle icon="user" text="Define your budget, along with 22 other parameters" />
+            <InfoCircle icon="user" text="Find the perfect home for you and your family" />
+        </div>
+        </React.Fragment>);
     }
 }

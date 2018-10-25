@@ -70,7 +70,7 @@ module.exports = (env, argv) => {
             extensions: ['.js', '.jsx', '.json'],
         },
         plugins: [
-            new HtmlWebpackPlugin(),
+            new HtmlWebpackPlugin({title: "Tuffy Estates"}),
             new GoogleFontsPlugin({
                 fonts: [{
                         family: 'Cabin',
