@@ -151,16 +151,6 @@ class Filter extends React.PureComponent {
                 padding: '1em'
             }} {...this.props}>
 
-            <h4
-
-              style={{
-
-                        marginTop: '0',
-
-                    }} {...this.props}
-
-              >Filter</h4>
-
             <div style={{
 
                     height: '25px',
@@ -190,9 +180,7 @@ class Filter extends React.PureComponent {
                     }} {...this.props} name="city" className="filters city" onChange={this.props.change}>
                     <option value="all">All Cities</option>
                 </select>
-                <select
-
-                  style={{
+                <select style={{
 
                         height: '25px',
                         background: 'trasparent',
@@ -204,15 +192,11 @@ class Filter extends React.PureComponent {
                         marginBottom: '25px',
                         width: '95%'
 
-                    }} {...this.props}
-
-                   name="homeType" className="filters homeType" onChange={this.props.change}>
+                    }} {...this.props} name="homeType" className="filters homeType" onChange={this.props.change}>
                     <option value="all">All Home Types</option>
 
                 </select>
-                <select
-
-                  style={{
+                <select style={{
 
                         height: '25px',
                         background: 'trasparent',
@@ -224,15 +208,11 @@ class Filter extends React.PureComponent {
                         marginBottom: '25px',
                         width: '95%'
 
-                    }} {...this.props}
-
-                  name="bedroom" className="filters bedroom" onChange={this.props.change}>
+                    }} {...this.props} name="bedroom" className="filters bedroom" onChange={this.props.change}>
                     <option value="0">0+ Bedrooms</option>
 
                 </select>
-                <select
-
-                  style={{
+                <select style={{
 
                         height: '25px',
                         background: 'trasparent',
@@ -244,9 +224,7 @@ class Filter extends React.PureComponent {
                         marginBottom: '25px',
                         width: '95%'
 
-                    }} {...this.props}
-
-                  name="bathroom" className="filters bathroom" onChange={this.props.change}>
+                    }} {...this.props} name="bathroom" className="filters bathroom" onChange={this.props.change}>
                     <option value="0">0+ Bathrooms</option>
 
                 </select>
@@ -263,196 +241,134 @@ class Filter extends React.PureComponent {
                     marginRight: '2.5%',
                     marginBottom: '16px',
 
-                    marginTop: '150px',
+                    marginTop: '150px'
                 }} {...this.props}>
 
                 <div className="filters price">
-                    <span
+                    <span style={{
 
-                      style={{
-
-                        fontSize: '13.5px',
-                        fontWeight: '400',
-                        display: 'block',
-                        marginBottom: '16px',
-
-                    }} {...this.props}
-
-                       className="title">Price</span>
+                            fontSize: '13.5px',
+                            fontWeight: '400',
+                            display: 'block',
+                            marginBottom: '16px'
+                        }} {...this.props} className="title">Price</span>
 
                     {/* alternate input type to confirm numeric input */}
                     {/* type="number" pattern="[0-9]*" inputmode="numeric" */}
 
-                    <input
+                    <input style={{
 
-                      style={{
+                            borderRadius: '5px',
+                            fontSize: '14px',
+                            padding: '5px',
+                            width: '40%',
+                            display: 'inline-block',
+                            marginRight: '2.5%',
+                            marginBottom: '16px'
+                        }} {...this.props} type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="1000000" step="100000" name="min_price" className="min-price"/>
+                    <input style={{
 
-                        borderRadius: '5px',
-                        fontSize: '14px',
-                        padding: '5px',
-                        width: '40%',
-                        display: 'inline-block',
-                        marginRight: '2.5%',
-                        marginBottom: '16px',
-
-                    }} {...this.props}
-
-
-                       type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="1000000" step="100000" name="min_price" className="min-price"/>
-                    <input
-
-                      style={{
-
-                        borderRadius: '5px',
-                        fontSize: '14px',
-                        padding: '5px',
-                        width: '40%',
-                        display: 'inline-block',
-                        marginRight: '2.5%',
-                        marginBottom: '16px',
-
-                    }} {...this.props}
-
-
-                      type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="1000000" step="100000" name="max_price" className="max-price"/>
+                            borderRadius: '5px',
+                            fontSize: '14px',
+                            padding: '5px',
+                            width: '40%',
+                            display: 'inline-block',
+                            marginRight: '2.5%',
+                            marginBottom: '16px'
+                        }} {...this.props} type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="1000000" step="100000" name="max_price" className="max-price"/>
                 </div>
 
                 <div className="filters squareFeet">
-                    <span
+                    <span style={{
 
-                      style={{
+                            fontSize: '13.5px',
+                            fontWeight: '400',
+                            display: 'block',
+                            marginBottom: '16px',
+                            marginTop: '10px'
+                        }} {...this.props} className="title">Square Feet</span>
+                    <input style={{
 
-                        fontSize: '13.5px',
-                        fontWeight: '400',
-                        display: 'block',
-                        marginBottom: '16px',
-                        marginTop: '10px',
+                            borderRadius: '5px',
+                            fontSize: '14px',
+                            padding: '5px',
+                            width: '40%',
+                            display: 'inline-block',
+                            marginRight: '2.5%',
+                            marginBottom: '16px'
+                        }} {...this.props} type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="10000" step="100" name="min_squareFeet" className="min-squareFeet"/>
+                    <input style={{
 
-                    }} {...this.props}
-
-                       className="title">Square Feet</span>
-                    <input
-
-                      style={{
-
-                        borderRadius: '5px',
-                        fontSize: '14px',
-                        padding: '5px',
-                        width: '40%',
-                        display: 'inline-block',
-                        marginRight: '2.5%',
-                        marginBottom: '16px',
-
-                    }} {...this.props}
-
-                       type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="10000" step="100" name="min_squareFeet" className="min-squareFeet"/>
-                    <input
-
-
-                      style={{
-
-                        borderRadius: '5px',
-                        fontSize: '14px',
-                        padding: '5px',
-                        width: '40%',
-                        display: 'inline-block',
-                        marginRight: '2.5%',
-                        marginBottom: '16px',
-
-                    }} {...this.props}
-
-                       type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="10000" step="100" name="max_squareFeet" className="max-squareFeet"/>
+                            borderRadius: '5px',
+                            fontSize: '14px',
+                            padding: '5px',
+                            width: '40%',
+                            display: 'inline-block',
+                            marginRight: '2.5%',
+                            marginBottom: '16px'
+                        }} {...this.props} type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="10000" step="100" name="max_squareFeet" className="max-squareFeet"/>
                 </div>
                 <div className="filters lotSize">
-                    <span
+                    <span style={{
 
-                      style={{
+                            fontSize: '13.5px',
+                            fontWeight: '400',
+                            display: 'block',
+                            marginBottom: '16px',
+                            marginTop: '10px'
+                        }} {...this.props} className="title">Lot Size</span>
 
-                        fontSize: '13.5px',
-                        fontWeight: '400',
-                        display: 'block',
-                        marginBottom: '16px',
-                        marginTop: '10px',
+                    <input style={{
+                            borderRadius: '5px',
+                            fontSize: '14px',
+                            padding: '5px',
+                            width: '40%',
+                            display: 'inline-block',
+                            marginRight: '2.5%',
+                            marginBottom: '16px'
+                        }} {...this.props} type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="50000" step="1000" name="min_lotSize" className="min-lotSize"/>
 
-                    }} {...this.props}
+                    <input style={{
+                            borderRadius: '5px',
+                            fontSize: '14px',
+                            padding: '5px',
+                            width: '40%',
+                            display: 'inline-block',
+                            marginRight: '2.5%',
+                            marginBottom: '16px'
+                        }} {...this.props} type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="50000" step="1000" name="max_lotSize" className="max-lotSize"/>
 
-                      className="title">Lot Size</span>
-                    <input
-
-
-                      style={{
-
-                        borderRadius: '5px',
-                        fontSize: '14px',
-                        padding: '5px',
-                        width: '40%',
-                        display: 'inline-block',
-                        marginRight: '2.5%',
-                        marginBottom: '16px',
-
-                    }} {...this.props}
-
-                       type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="50000" step="1000" name="min_lotSize" className="min-lotSize"/>
-                    <input
-
-
-                      style={{
-
-                        borderRadius: '5px',
-                        fontSize: '14px',
-                        padding: '5px',
-                        width: '40%',
-                        display: 'inline-block',
-                        marginRight: '2.5%',
-                        marginBottom: '16px',
-
-                    }} {...this.props}
-
-                       type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="50000" step="1000" name="max_lotSize" className="max-lotSize"/>
                 </div>
                 <div className="filters features">
-                    <span
+                    <span style={{
+                            fontSize: '13.5px',
+                            fontWeight: '400',
+                            display: 'block',
+                            marginBottom: '16px',
+                            marginTop: '10px'
+                        }} {...this.props} className="title">Features</span>
 
-                      style={{
-
-                        fontSize: '13.5px',
-                        fontWeight: '400',
-                        display: 'block',
-                        marginBottom: '16px',
-                        marginTop: '10px',
-
-                    }} {...this.props}
-
-                       className="title">Features</span>
                     <label htmlFor="features">
-                        <span
 
-                          style={{
+                        <span style={{
+                                fontSize: '13px',
+                                fontWeight: '200',
+                                display: 'block',
+                                width: '30%',
+                                padding: '10px 0'
+                            }} {...this.props}>Garage</span>
 
-                            fontSize: '13px',
-                            fontWeight: '200',
-                            display: 'block',
-                            width: '30%',
-                            padding: '10px 0',
+                        <input style={{
+                                fontSize: '13px',
+                                fontWeight: '200',
+                                display: 'block',
+                                width: '30%',
+                                padding: '10px 0',
+                                float: 'right'
+                            }} {...this.props} name="Garage" value="Garage" type="checkbox"/>
 
-                    }} {...this.props}
-
-                          >Garage</span>
-                        <input
-
-                          style={{
-
-                            fontSize: '13px',
-                            fontWeight: '200',
-                            display: 'block',
-                            width: '30%',
-                            padding: '10px 0',
-                            float: 'right',
-
-                    }} {...this.props}
-
-                          name="Garage" value="Garage" type="checkbox"/>
                     </label>
+
                     <label htmlFor="features">
                         <span>Swimming Pool</span>
                         <input name="Swimming_Pool" value="Swimming_Pool" type="checkbox"/>
