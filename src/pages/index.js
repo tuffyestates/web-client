@@ -4,4 +4,5 @@ export {default as Register} from "./register";
 export {default as Property} from "./property";
 export {default as Login} from "./login";
 export {default as API} from "./api";
+export {default as Docs} from "./docs";
 export {default as FourOFour} from "./404";

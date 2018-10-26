@@ -37,6 +37,7 @@ const App = () => (<Provider store={Account}>
                     <Route path="/register" component={Pages.Register}/>
                     <Route path="/login" component={Pages.Login}/>
                     <Route path="/api" component={Pages.API}/>
+                    <Route path="/docs" component={Pages.Docs}/>
                     <Route component={Pages.FourOFour}/>
                 </Switch>
             </div>

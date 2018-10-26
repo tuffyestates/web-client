@@ -154,7 +154,6 @@ class Filter extends React.PureComponent {
             <div style={{
 
                     height: '25px',
-                    background: 'trasparent',
                     padding: '10px',
                     fontSize: '12px',
                     fontWeight: '300',
@@ -255,7 +254,7 @@ class Filter extends React.PureComponent {
 
                     {/* alternate input type to confirm numeric input */}
                     {/* type="number" pattern="[0-9]*" inputmode="numeric" */}
-
+                    
                     <input style={{
 
                             borderRadius: '5px',

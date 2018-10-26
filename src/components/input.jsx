@@ -2,6 +2,7 @@ import React from 'react';
 import Colors from '../colors';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
+import PropTypes from 'prop-types';
 
 export default class Input extends React.PureComponent {
     render() {
@@ -20,35 +21,37 @@ export default class Input extends React.PureComponent {
         }
         if (this.props.prefix) {
             prefix = <span css={{
-                    color: 'white',
                     backgroundColor: '#F2F2F2',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    padding: '0 1em'
+                    padding: '0 1em',
+                    borderRight: '1px solid #C1C1C1'
                 }}>
                 {this.props.prefix}
             </span>;
         }
         if (this.props.suffix) {
             suffix = <span css={{
-                    color: 'white',
                     backgroundColor: '#F2F2F2',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    padding: '0 1em'
+                    padding: '0 1em',
+                    borderLeft: '1px solid #C1C1C1'
                 }}>
                 {this.props.suffix}
             </span>;
         }
-        return (<div className={this.props.className} css={{
-                marginBottom: '1em',
-            }}>
+        return (<div css={{
+                marginBottom: '1em'
+            }} className={this.props.className}>
             <div css={{
                     display: 'flex',
                     border: '1px solid #C1C1C1',
-                    borderBottom: message ? 'none' : '1px solid #C1C1C1'
+                    borderBottom: message
+                        ? 'none'
+                        : '1px solid #C1C1C1'
                 }}>
                 {prefix}
                 <input name={this.props.name} type={this.props.type} placeholder={this.props.placeholder} value={this.props.value} onChange={this.props.onChange} css={{
@@ -57,11 +60,29 @@ export default class Input extends React.PureComponent {
                         color: '#A8A8A8',
                         border: 'none',
                         ...this.props.inputStyle
-                    }}/>
-                {suffix}
+                    }}/> {suffix}
             </div>
             {message}
             {this.props.children}
         </div>);
     }
+    static propTypes = {
+        /**
+         * Styles to be applied to the inner input dom node
+         */
+        inputStyle: PropTypes.object,
+        /**
+         * A message displayed below the input
+         */
+        message: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+        /**
+         * Information displayed before the input
+         */
+        prefix: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+        /**
+         * Information displayed after the input
+         */
+        suffix: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+    };
+    static defaultProps = {};
 }
