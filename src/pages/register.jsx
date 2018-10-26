@@ -35,7 +35,13 @@ class Register extends React.PureComponent {
                 flexDirection: 'column',
                 alignItems: 'center'
             }}>
-            <h1>Register</h1>
+            <h1
+
+              css={{
+                fontFamily: 'cabin',
+            }}
+
+              >Register</h1>
             <form onSubmit={this.register}>
                 <Input prefix={(<FontAwesomeIcon icon="user"/>)} placeholder="Username" name="username" message={'hello'}/>
                 <Input prefix={(<FontAwesomeIcon icon="lock"/>)} placeholder="Password" type="password" name="password"/>

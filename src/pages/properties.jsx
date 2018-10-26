@@ -149,9 +149,17 @@ class Filter extends React.PureComponent {
                 width: 400,
                 color: 'white',
                 padding: '1em'
-            }} {...this.props}>This is the filter sidebar
+            }} {...this.props}>
 
-            <h4>Filter</h4>
+            <h4
+
+              style={{
+
+                        marginTop: '0',
+
+                    }} {...this.props}
+
+              >Filter</h4>
 
             <div style={{
 
@@ -250,7 +258,7 @@ class Filter extends React.PureComponent {
                     borderRadius: '5px',
                     fontSize: '14px',
                     padding: '5px',
-                    width: '45%',
+                    width: '100%',
                     display: 'block',
                     marginRight: '2.5%',
                     marginBottom: '16px',
@@ -275,25 +283,175 @@ class Filter extends React.PureComponent {
                     {/* alternate input type to confirm numeric input */}
                     {/* type="number" pattern="[0-9]*" inputmode="numeric" */}
 
-                    <input type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="1000000" step="100000" name="min_price" className="min-price"/>
-                    <input type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="1000000" step="100000" name="max_price" className="max-price"/>
+                    <input
+
+                      style={{
+
+                        borderRadius: '5px',
+                        fontSize: '14px',
+                        padding: '5px',
+                        width: '40%',
+                        display: 'inline-block',
+                        marginRight: '2.5%',
+                        marginBottom: '16px',
+
+                    }} {...this.props}
+
+
+                       type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="1000000" step="100000" name="min_price" className="min-price"/>
+                    <input
+
+                      style={{
+
+                        borderRadius: '5px',
+                        fontSize: '14px',
+                        padding: '5px',
+                        width: '40%',
+                        display: 'inline-block',
+                        marginRight: '2.5%',
+                        marginBottom: '16px',
+
+                    }} {...this.props}
+
+
+                      type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="1000000" step="100000" name="max_price" className="max-price"/>
                 </div>
 
                 <div className="filters squareFeet">
-                    <span className="title">Square Feet</span>
-                    <input type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="10000" step="100" name="min_squareFeet" className="min-squareFeet"/>
-                    <input type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="10000" step="100" name="max_squareFeet" className="max-squareFeet"/>
+                    <span
+
+                      style={{
+
+                        fontSize: '13.5px',
+                        fontWeight: '400',
+                        display: 'block',
+                        marginBottom: '16px',
+                        marginTop: '10px',
+
+                    }} {...this.props}
+
+                       className="title">Square Feet</span>
+                    <input
+
+                      style={{
+
+                        borderRadius: '5px',
+                        fontSize: '14px',
+                        padding: '5px',
+                        width: '40%',
+                        display: 'inline-block',
+                        marginRight: '2.5%',
+                        marginBottom: '16px',
+
+                    }} {...this.props}
+
+                       type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="10000" step="100" name="min_squareFeet" className="min-squareFeet"/>
+                    <input
+
+
+                      style={{
+
+                        borderRadius: '5px',
+                        fontSize: '14px',
+                        padding: '5px',
+                        width: '40%',
+                        display: 'inline-block',
+                        marginRight: '2.5%',
+                        marginBottom: '16px',
+
+                    }} {...this.props}
+
+                       type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="10000" step="100" name="max_squareFeet" className="max-squareFeet"/>
                 </div>
                 <div className="filters lotSize">
-                    <span className="title">Lot Size</span>
-                    <input type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="50000" step="1000" name="min_lotSize" className="min-lotSize"/>
-                    <input type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="50000" step="1000" name="max_lotSize" className="max-lotSize"/>
+                    <span
+
+                      style={{
+
+                        fontSize: '13.5px',
+                        fontWeight: '400',
+                        display: 'block',
+                        marginBottom: '16px',
+                        marginTop: '10px',
+
+                    }} {...this.props}
+
+                      className="title">Lot Size</span>
+                    <input
+
+
+                      style={{
+
+                        borderRadius: '5px',
+                        fontSize: '14px',
+                        padding: '5px',
+                        width: '40%',
+                        display: 'inline-block',
+                        marginRight: '2.5%',
+                        marginBottom: '16px',
+
+                    }} {...this.props}
+
+                       type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="50000" step="1000" name="min_lotSize" className="min-lotSize"/>
+                    <input
+
+
+                      style={{
+
+                        borderRadius: '5px',
+                        fontSize: '14px',
+                        padding: '5px',
+                        width: '40%',
+                        display: 'inline-block',
+                        marginRight: '2.5%',
+                        marginBottom: '16px',
+
+                    }} {...this.props}
+
+                       type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="50000" step="1000" name="max_lotSize" className="max-lotSize"/>
                 </div>
                 <div className="filters features">
-                    <span className="title">Features</span>
+                    <span
+
+                      style={{
+
+                        fontSize: '13.5px',
+                        fontWeight: '400',
+                        display: 'block',
+                        marginBottom: '16px',
+                        marginTop: '10px',
+
+                    }} {...this.props}
+
+                       className="title">Features</span>
                     <label htmlFor="features">
-                        <span>Garage</span>
-                        <input name="Garage" value="Garage" type="checkbox"/>
+                        <span
+
+                          style={{
+
+                            fontSize: '13px',
+                            fontWeight: '200',
+                            display: 'block',
+                            width: '30%',
+                            padding: '10px 0',
+
+                    }} {...this.props}
+
+                          >Garage</span>
+                        <input
+
+                          style={{
+
+                            fontSize: '13px',
+                            fontWeight: '200',
+                            display: 'block',
+                            width: '30%',
+                            padding: '10px 0',
+                            float: 'right',
+
+                    }} {...this.props}
+
+                          name="Garage" value="Garage" type="checkbox"/>
                     </label>
                     <label htmlFor="features">
                         <span>Swimming Pool</span>
