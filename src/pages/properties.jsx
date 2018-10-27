@@ -410,7 +410,9 @@ class Filter extends React.PureComponent {
 
                        type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="50000" step="1000" name="max_lotSize" className="max-lotSize"/>
                 </div>
-                <div className="filters features">
+
+
+                {/* <div className="filters features">
                     <span
 
                       style={{
@@ -465,7 +467,7 @@ class Filter extends React.PureComponent {
                         <span>Guest House</span>
                         <input name="Guest_House" value="Guest_House" type="checkbox"/>
                     </label>
-                </div>
+                </div> */}
 
             </div>
 

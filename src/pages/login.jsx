@@ -1,5 +1,6 @@
 import React from 'react';
 import {Input} from '../components';
+import Colors from '../colors';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
@@ -29,23 +30,82 @@ class Login extends React.PureComponent {
         }
     };
     render() {
-        return (<div css={{
+        return (
+
+        <div
+          css={{
                 display: 'flex',
+                position: 'relative',
                 justifyContent: 'center',
                 flexDirection: 'column',
-                alignItems: 'center'
+                alignItems: 'center',
+
             }}>
-            <h1>Login</h1>
-            <form onSubmit={this.login}>
+
+          <div css={{
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            alignItems: 'center',
+            backgroundColor: Colors.blue,
+            opacity: '0.9',
+            width: '350px',
+            height: '250px',
+            margin: '100px 0',
+            borderRadius: '5px',
+            position: 'relative',
+            padding: '30px',
+            }}>
+            <h1
+
+              css={{
+                color: 'white',
+                fontFamily: 'cabin',
+                fontWeight: '100',
+            }}
+
+              >Login</h1>
+            <form
+
+              css={{
+                display: 'flex',
+                position: 'relative',
+                justifyContent: 'center',
+                flexDirection: 'column',
+                alignItems: 'center',
+
+              }}
+
+              onSubmit={this.login}>
                 <Input prefix={(<FontAwesomeIcon icon="user"/>)} placeholder="Username" name="username" message={'hello'}/>
                 <Input prefix={(<FontAwesomeIcon icon="lock"/>)} placeholder="Password" type="password" name="password"/>
-                <button type="submit">Submit</button>
+                <button
+
+                  css={{
+                    backgroundColor: Colors.orange,
+                    color: 'white',
+                    fontFamily: 'cabin',
+                    fontSize: '20px',
+                    fontWeight: '100',
+                    justifyContent: 'center',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    position: 'relative',
+                    padding: '5px 30px',
+                    borderRadius: '5px',
+                    letterSpacing: '3px',
+                    margin: '15px',
+                  }}
+
+
+                   type="submit">Submit</button>
                 <div>
                     {this.state.error}
                     {this.state.message}
                 </div>
             </form>
-        </div>);
+        </div>
+      </div>);
     }
 }
 
