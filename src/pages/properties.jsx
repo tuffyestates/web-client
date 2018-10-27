@@ -254,7 +254,7 @@ class Filter extends React.PureComponent {
 
                     {/* alternate input type to confirm numeric input */}
                     {/* type="number" pattern="[0-9]*" inputmode="numeric" */}
-                    
+
                     <input style={{
 
                             borderRadius: '5px',
@@ -338,10 +338,29 @@ class Filter extends React.PureComponent {
                         }} {...this.props} type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="50000" step="1000" name="max_lotSize" className="max-lotSize"/>
 
                 </div>
-                <div className="filters features">
-                    <span style={{
-                            fontSize: '13.5px',
-                            fontWeight: '400',
+
+
+                {/* <div className="filters features">
+                    <span
+
+                      style={{
+
+                        fontSize: '13.5px',
+                        fontWeight: '400',
+                        display: 'block',
+                        marginBottom: '16px',
+                        marginTop: '10px',
+
+                    }} {...this.props}
+
+                       className="title">Features</span>
+                    <label htmlFor="features">
+                        <span
+
+                          style={{
+
+                            fontSize: '13px',
+                            fontWeight: '200',
                             display: 'block',
                             marginBottom: '16px',
                             marginTop: '10px'
@@ -380,7 +399,7 @@ class Filter extends React.PureComponent {
                         <span>Guest House</span>
                         <input name="Guest_House" value="Guest_House" type="checkbox"/>
                     </label>
-                </div>
+                </div> */}
 
             </div>
 
