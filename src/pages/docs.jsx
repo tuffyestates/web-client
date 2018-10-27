@@ -4,15 +4,19 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {jsx} from '@emotion/core';
 import Colors from '../colors';
 import * as Components from '../components';
-import SyntaxHighlighter, {registerLanguage} from "react-syntax-highlighter/prism-light";
-import jsxLangage from 'react-syntax-highlighter/languages/prism/jsx';
-import jsxTheme from 'react-syntax-highlighter/styles/prism/vs';
-
-registerLanguage('jsx', jsxLangage);
 
 class Comp extends React.PureComponent {
     state = {};
-    render() {
+    component = null;
+    async componentDidMount() {
+        const {default: SyntaxHighlighter, registerLanguage} = await import (/* webpackChunkName: "docs" */
+        "react-syntax-highlighter/prism-light");
+        const language = (await import (/* webpackChunkName: "docs" */
+        'react-syntax-highlighter/languages/prism/jsx')).default;
+        const theme = (await import (/* webpackChunkName: "docs" */
+        'react-syntax-highlighter/styles/prism/vs')).default;
+        registerLanguage('jsx', language);
+
         const componentProps = this.props.component.props || {};
         const description = this.props.component.description
             ? <h4>component.description</h4>
@@ -32,7 +36,8 @@ class Comp extends React.PureComponent {
             </React.Fragment>);
         });
         const Example = Components[this.props.component.displayName];
-        return (<div css={{
+
+        this.component = (<div css={{
                 marginBottom: '4em'
             }} {...this.props}>
             <h2 css={{
@@ -54,7 +59,7 @@ class Comp extends React.PureComponent {
                     }}>{props}</div>
 
                 <h3>Example:</h3>
-                <SyntaxHighlighter language='javascript' style={jsxTheme} css={{
+                <SyntaxHighlighter language='javascript' style={theme} css={{
                         marginBottom: '0 !important',
                         border: '1px solid lightgrey',
                         borderBottom: 'none'
@@ -67,6 +72,11 @@ class Comp extends React.PureComponent {
                     }}><Example {...this.state}/></div>
             </div>
         </div>);
+
+        this.forceUpdate();
+    }
+    render() {
+        return this.component;
     }
 }
 
@@ -98,7 +108,9 @@ export default class Docs extends React.PureComponent {
                 fontFamily: 'monospace',
                 padding: '1em'
             }}>
-            <h1 css={{textAlign: 'center'}}>Documentation</h1>
+            <h1 css={{
+                    textAlign: 'center'
+                }}>Documentation</h1>
             {docs}
         </div>);
     }
