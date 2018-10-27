@@ -1,7 +1,8 @@
 import React from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 /** @jsx jsx */
-import {jsx} from '@emotion/core';
+import { jsx } from '@emotion/core';
+
 import Colors from '../colors';
 import * as Components from '../components';
 

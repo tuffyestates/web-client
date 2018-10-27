@@ -9,18 +9,13 @@ import {jsx} from '@emotion/core';
 class Link extends React.Component {
     render() {
         return (<RouterLink css={{
-
-              fontFamily: 'cabin',
-
+                fontFamily: 'cabin',
                 padding: '1em 2em',
                 display: 'inline-block',
                 textDecoration: 'none',
                 color: Colors.orange,
-
                 clipPath: 'polygon(25% 0, 100% 0%, 75% 100%, 0 100%)',
-
                 transition: 'backgroundColor .4s ease-in-out',
-
 
                 '&:hover' : {
                     // color: 'blue',
@@ -43,8 +38,6 @@ class Link extends React.Component {
                     // borderRadius: '200px',
                     // borderTopRightRadius: '0px',
                     // borderBottomLeftRadius: '0px',
-
-                    opacity: '0.8'
                 }
 
             }} activeStyle={{
@@ -67,8 +60,6 @@ class Link extends React.Component {
                 // borderRadius: '200px',
                 // borderTopRightRadius: '20px',
                 // borderBottomLeftRadius: '25px',
-
-                opacity: '0.8'
             }} {...this.props}>
             {this.props.children}
         </RouterLink>);
@@ -100,7 +91,6 @@ export default class Navbar extends React.Component {
 
                     backgroundColor: Colors.blue,
                     // borderRadius: '25px',
-                    opacity: '0.8',
 
                     clipPath: 'polygon(25% 0, 100% 0%, 75% 100%, 0 100%)',
 
@@ -117,7 +107,7 @@ export default class Navbar extends React.Component {
                     '&:hover' : {
                         backgroundColor: Colors.orange,
 
-                        transform: 'translateX(20px)'
+                        transform: 'translateX(1em)'
                     }
 
                 }}>

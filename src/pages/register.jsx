@@ -1,5 +1,5 @@
 import React from 'react';
-import {Input} from '../components';
+import {Input, Button} from '../components';
 import Colors from '../colors';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 /** @jsx jsx */
@@ -30,91 +30,56 @@ class Register extends React.PureComponent {
         }
     };
     render() {
-        return (
-        <div
-          css={{
+        return (<div css={{
                 display: 'flex',
-                position: 'relative',
                 justifyContent: 'center',
                 flexDirection: 'column',
                 alignItems: 'center',
-
+                height: '100%',
+                backgroundImage: `url(${require('../images/shifaaz-shamoon-1113391-unsplash.jpg?size=2000')})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundBlendMode: 'overlay',
+                backgroundColor: '#0000004d'
             }}>
 
-
-
-          <div css={{
-                display: 'flex',
-                justifyContent: 'center',
-                flexDirection: 'column',
-                alignItems: 'center',
-                backgroundColor: Colors.blue,
-                opacity: '0.9',
-                width: '350px',
-                height: '250px',
-                margin: '100px 0',
-                borderRadius: '5px',
-                position: 'relative',
-                padding: '30px',
-            }}>
-            <h1
-
-              css={{
-                color: 'white',
-                fontFamily: 'cabin',
-                fontWeight: '100',
-            }}
-
-              >Register</h1>
-            <form
-
-              css={{
-                display: 'flex',
-                position: 'relative',
-                justifyContent: 'center',
-                flexDirection: 'column',
-                alignItems: 'center',
-
-            }}
-
-
-               onSubmit={this.register}>
-                <Input prefix={(<FontAwesomeIcon icon="user"/>)} placeholder="Username" name="username" message={'hello'}/>
-                <Input prefix={(<FontAwesomeIcon icon="lock"/>)} placeholder="Password" type="password" name="password"/>
-                <button
-
-                  css={{
-                    backgroundColor: Colors.orange,
-                    color: 'white',
-                    fontFamily: 'cabin',
-                    fontSize: '20px',
-                    fontWeight: '100',
+            <div css={{
+                    display: 'flex',
                     justifyContent: 'center',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    position: 'relative',
-                    padding: '5px 30px',
+                    backgroundColor: 'white',
+                    boxShadow: '0px 5px 10px 1px rgba(0, 0, 0, 0.1)',
                     borderRadius: '5px',
-                    letterSpacing: '3px',
-                    margin: '15px',
-                  }}
-
-
-                   type="submit">Submit</button>
-                <div>
-                    {this.state.error}
-                    {this.state.message}
-                </div>
-            </form>
-        </div>
-      </div>);
+                    padding: '4em'
+                }}>
+                <h1 css={{
+                        fontFamily: 'cabin',
+                        fontWeight: '100',
+                        marginTop: 0,
+                        width: '100%',
+                        borderBottom: '1px solid lightgrey',
+                        textAlign: 'center'
+                    }}>Register</h1>
+                <form css={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        flexDirection: 'column',
+                        alignItems: 'center'
+                    }} onSubmit={this.register}>
+                    <Input prefix={(<FontAwesomeIcon icon="user"/>)} placeholder="Username" name="username" message={this.state.error}/>
+                    <Input prefix={(<FontAwesomeIcon icon="lock"/>)} placeholder="Password" type="password" name="password" message={this.state.message}/>
+                    <Button>Register</Button>
+                </form>
+            </div>
+        </div>);
     }
 }
 
 export default class Wrapper extends React.PureComponent {
     render() {
         return (<Subscribe to={Account}>
-        {account => <Register account={account}/>}
-    </Subscribe>);
+            {account => <Register account={account}/>}
+        </Subscribe>);
     }
 }

@@ -1,10 +1,10 @@
 import React from 'react';
-import {Input} from '../components';
+import {Input, Button} from '../components';
 import Colors from '../colors';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {Subscribe} from 'react-contextual';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import {Subscribe} from 'react-contextual';
 
 import {Account} from '../contexts';
 
@@ -30,90 +30,48 @@ class Login extends React.PureComponent {
         }
     };
     render() {
-        return (
-
-        <div
-          css={{
+        return (<div css={{
                 display: 'flex',
-                position: 'relative',
                 justifyContent: 'center',
                 flexDirection: 'column',
-                alignItems: 'center',
-
+                alignItems: 'center'
             }}>
 
-          <div css={{
-            display: 'flex',
-            justifyContent: 'center',
-            flexDirection: 'column',
-            alignItems: 'center',
-            backgroundColor: Colors.blue,
-            opacity: '0.9',
-            width: '350px',
-            height: '250px',
-            margin: '100px 0',
-            borderRadius: '5px',
-            position: 'relative',
-            padding: '30px',
-            }}>
-            <h1
-
-              css={{
-                color: 'white',
-                fontFamily: 'cabin',
-                fontWeight: '100',
-            }}
-
-              >Login</h1>
-            <form
-
-              css={{
-                display: 'flex',
-                position: 'relative',
-                justifyContent: 'center',
-                flexDirection: 'column',
-                alignItems: 'center',
-
-              }}
-
-              onSubmit={this.login}>
-                <Input prefix={(<FontAwesomeIcon icon="user"/>)} placeholder="Username" name="username" message={'hello'}/>
-                <Input prefix={(<FontAwesomeIcon icon="lock"/>)} placeholder="Password" type="password" name="password"/>
-                <button
-
-                  css={{
-                    backgroundColor: Colors.orange,
-                    color: 'white',
-                    fontFamily: 'cabin',
-                    fontSize: '20px',
-                    fontWeight: '100',
+            <div css={{
+                    display: 'flex',
                     justifyContent: 'center',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    position: 'relative',
-                    padding: '5px 30px',
+                    backgroundColor: Colors.blue,
+                    marginTop: '5em',
                     borderRadius: '5px',
-                    letterSpacing: '3px',
-                    margin: '15px',
-                  }}
-
-
-                   type="submit">Submit</button>
-                <div>
-                    {this.state.error}
-                    {this.state.message}
-                </div>
-            </form>
-        </div>
-      </div>);
+                    padding: '4em'
+                }}>
+                <h1 css={{
+                        color: 'white',
+                        fontFamily: 'cabin',
+                        fontWeight: '100',
+                        marginTop: 0
+                    }}>Login</h1>
+                <form css={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        flexDirection: 'column',
+                        alignItems: 'center'
+                    }} onSubmit={this.login}>
+                    <Input prefix={(<FontAwesomeIcon icon="user"/>)} placeholder="Username" name="username" message={this.state.error}/>
+                    <Input prefix={(<FontAwesomeIcon icon="lock"/>)} placeholder="Password" type="password" name="password" message={this.state.message}/>
+                    <Button>Login</Button>
+                </form>
+            </div>
+        </div>);
     }
 }
-
 
 export default class Wrapper extends React.PureComponent {
     render() {
         return (<Subscribe to={Account}>
-        {account => <Login account={account}/>}
-    </Subscribe>);
+            {account => <Login account={account}/>}
+        </Subscribe>);
     }
 }

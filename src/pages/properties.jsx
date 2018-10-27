@@ -1,9 +1,10 @@
 import React from 'react';
 import Colors from '../colors';
 import {Link} from 'react-router-dom';
-import {FallbackImage} from '../components';
 /** @jsx jsx */
-import {jsx} from '@emotion/core';
+import { jsx } from '@emotion/core';
+
+import {FallbackImage, Input} from '../components';
 
 const HOME_DETAILS_PADDING = '0.5em';
 
@@ -135,7 +136,7 @@ class Home extends React.PureComponent {
         </Link>);
     }
 }
-class Filter extends React.PureComponent {
+class Filter extends React.Component {
     render() {
         return (<div css={{
 
@@ -143,13 +144,16 @@ class Filter extends React.PureComponent {
                 fontWeight: '200',
 
                 margin: '20px 0 0 0',
-                opacity: '0.9',
                 // borderRadius: '5px',
                 backgroundColor: Colors.blue,
                 width: 400,
-                color: 'white',
-                padding: '1em'
+                padding: '1em',
+                overflow: 'auto'
             }} {...this.props}>
+
+            /*<div css={{display: 'flex'}}>
+<Input placeholder="0" suffix="USD"/> - <Input placeholder="0" suffix="USD"/>
+            </div>*/
 
             <div style={{
 

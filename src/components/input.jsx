@@ -26,6 +26,7 @@ export default class Input extends React.PureComponent {
                     justifyContent: 'center',
                     alignItems: 'center',
                     padding: '0 1em',
+                    color: '#888',
                     borderRight: '1px solid #C1C1C1'
                 }}>
                 {this.props.prefix}
@@ -38,6 +39,7 @@ export default class Input extends React.PureComponent {
                     justifyContent: 'center',
                     alignItems: 'center',
                     padding: '0 1em',
+                    color: '#888',
                     borderLeft: '1px solid #C1C1C1'
                 }}>
                 {this.props.suffix}

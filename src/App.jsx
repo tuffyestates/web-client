@@ -19,7 +19,8 @@ const App = () => (<Provider store={Account}>
                 display: 'flex',
                 height: '100%',
                 overflow: 'hidden',
-                flexDirection: 'column'
+                flexDirection: 'column',
+                color: '#333'
             }}>
             <Helmet>
                 <title>Tuffy Estates</title>
