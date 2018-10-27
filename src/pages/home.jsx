@@ -1,9 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import house from '../assets/house.png';
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
 
 import Colors from '../colors';
 

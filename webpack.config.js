@@ -13,6 +13,17 @@ module.exports = (env, argv) => {
                 path.resolve(__dirname, Package.main)
             ]
         },
+        optimization: {
+            splitChunks: {
+                cacheGroups: {
+                    commons: {
+                        test: /[\\/]node_modules[\\/](react|react-dom|react-contextual|react-helmet|react-router-dom)[\\/]/,
+                        name: 'react',
+                        chunks: 'all'
+                    }
+                }
+            }
+        },
         module: {
             rules: [{
                     test: /\.jsx?$/,

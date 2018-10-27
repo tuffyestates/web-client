@@ -19,7 +19,8 @@ const App = () => (<Provider store={Account}>
                 display: 'flex',
                 height: '100%',
                 overflow: 'hidden',
-                flexDirection: 'column'
+                flexDirection: 'column',
+                color: '#333'
             }}>
             <Helmet>
                 <title>Tuffy Estates</title>
@@ -37,6 +38,7 @@ const App = () => (<Provider store={Account}>
                     <Route path="/register" component={Pages.Register}/>
                     <Route path="/login" component={Pages.Login}/>
                     <Route path="/api" component={Pages.API}/>
+                    <Route path="/docs" component={Pages.Docs}/>
                     <Route component={Pages.FourOFour}/>
                 </Switch>
             </div>
