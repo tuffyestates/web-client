@@ -340,6 +340,10 @@ class Filter extends React.PureComponent {
                 </div>
 
 
+                       type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="50000" step="1000" name="max_lotSize" className="max-lotSize"/>
+                </div>
+
+
                 {/* <div className="filters features">
                     <span
 
