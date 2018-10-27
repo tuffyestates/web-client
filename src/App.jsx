@@ -7,11 +7,11 @@ import {Navbar, Footer} from './components';
 import {Account} from './contexts';
 import {Provider} from 'react-contextual';
 import {library} from '@fortawesome/fontawesome-svg-core';
-import {faLock, faUser} from '@fortawesome/free-solid-svg-icons';
+import {faLock, faUser, faHome, faHandHoldingUsd, faSearch} from '@fortawesome/free-solid-svg-icons';
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 
-library.add(faLock, faUser);
+library.add(faLock, faUser, faHome, faHandHoldingUsd, faSearch);
 
 const App = () => (<Provider store={Account}>
     <Router>
