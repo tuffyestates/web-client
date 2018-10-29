@@ -2,65 +2,11 @@ import React from 'react';
 import Colors from '../colors';
 import {Link} from 'react-router-dom';
 /** @jsx jsx */
-import { jsx } from '@emotion/core';
+import {jsx} from '@emotion/core';
 
-import {FallbackImage, Input} from '../components';
+import {FallbackImage, Input, Range, SelectEnum, InfiniteScroll} from '../components';
 
 const HOME_DETAILS_PADDING = '0.5em';
-
-class InfiniteScroll extends React.PureComponent {
-    state = {
-        content: [],
-        done: false
-    };
-    constructor(props) {
-        super(props);
-        this.container = React.createRef();
-    }
-    async componentDidMount() {
-        const content = this.state.content.concat(await this.props.onLoad(this.state.content.length));
-        this.setState({content});
-
-        // Listen for scroll events
-        this.container.current.addEventListener('scroll', this.handleScroll.bind(this), {passive: true});
-    }
-    componentWillUnmount() {
-        this.container.current.removeEventListener('scroll', this.handleScroll.bind(this), {passive: true});
-    }
-    async handleScroll(e) {
-        // If we have already loaded everything that exists
-        if (this.state.done)
-            return;
-
-        const container = e.currentTarget;
-        if (container.scrollTop + container.clientHeight > container.scrollHeight - this.props.offset) {
-            let done = false;
-
-            const newContent = await this.props.onLoad(this.state.content.length);
-
-            // No new content, don't try to load more content again
-            if (newContent.length === 0)
-                done = true;
-
-            const content = this.state.content.concat(newContent);
-            this.setState({
-                content,
-                done
-            }, () => {
-                if (done && this.props.onFinish) {
-                    this.props.onFinish();
-                }
-            });
-        }
-    }
-    render() {
-        // onWheel={this.handleScroll.bind(this)}
-        return (<div {...this.props} ref={this.container}>
-            {this.state.content}
-            {this.props.children}
-        </div>);
-    }
-}
 
 class Listings extends React.PureComponent {
     async loadHomes(offset) {
@@ -72,7 +18,7 @@ class Listings extends React.PureComponent {
         }, []);
     }
     render() {
-        return (<InfiniteScroll offset={300} css={{
+        return (<InfiniteScroll css={{
                 display: 'flex',
                 flexWrap: 'wrap',
                 flex: 1,
@@ -146,203 +92,69 @@ class Filter extends React.Component {
                 margin: '20px 0 0 0',
                 // borderRadius: '5px',
                 backgroundColor: Colors.blue,
+                color: 'white',
                 width: 400,
-                padding: '1em',
+                padding: '1em 2em',
                 overflow: 'auto'
             }} {...this.props}>
+            <h3 style={{
+                    textAlign: 'center'
+                }}>Filters</h3>
 
-            /*<div css={{display: 'flex'}}>
-<Input placeholder="0" suffix="USD"/> - <Input placeholder="0" suffix="USD"/>
-            </div>*/
+            <Range min={0} max={100000000} suffix="$" css={{
+                    marginBottom: '1.5em'
+                }}/>
+            <Range min={0} max={10000} suffix="SqFt" css={{
+                    marginBottom: '1.5em'
+                }}/>
+            <Range min={0} max={1000} suffix="Acres" css={{
+                    marginBottom: '1.5em'
+                }}/>
 
-            <div style={{
+            <Input placeholder="Location" css={{
+                    width: '100%',
+                    marginBottom: '1.5em'
+                }}/>
 
-                    height: '25px',
-                    padding: '10px',
-                    fontSize: '12px',
-                    fontWeight: '300',
-                    color: '#1B1B1B',
-                    display: 'block',
-                    marginBottom: '25px',
-                    width: '100%'
-
-                }} {...this.props}>
-
-                <select style={{
-
-                        height: '25px',
-                        background: 'trasparent',
-                        padding: '10px',
-                        fontSize: '12px',
-                        fontWeight: '300',
-                        color: '#1B1B1B',
-                        display: 'block',
-                        marginBottom: '25px',
-                        width: '95%'
-
-                    }} {...this.props} name="city" className="filters city" onChange={this.props.change}>
-                    <option value="all">All Cities</option>
-                </select>
-                <select style={{
-
-                        height: '25px',
-                        background: 'trasparent',
-                        padding: '10px',
-                        fontSize: '12px',
-                        fontWeight: '300',
-                        color: '#1B1B1B',
-                        display: 'block',
-                        marginBottom: '25px',
-                        width: '95%'
-
-                    }} {...this.props} name="homeType" className="filters homeType" onChange={this.props.change}>
-                    <option value="all">All Home Types</option>
-
-                </select>
-                <select style={{
-
-                        height: '25px',
-                        background: 'trasparent',
-                        padding: '10px',
-                        fontSize: '12px',
-                        fontWeight: '300',
-                        color: '#1B1B1B',
-                        display: 'block',
-                        marginBottom: '25px',
-                        width: '95%'
-
-                    }} {...this.props} name="bedroom" className="filters bedroom" onChange={this.props.change}>
-                    <option value="0">0+ Bedrooms</option>
-
-                </select>
-                <select style={{
-
-                        height: '25px',
-                        background: 'trasparent',
-                        padding: '10px',
-                        fontSize: '12px',
-                        fontWeight: '300',
-                        color: '#1B1B1B',
-                        display: 'block',
-                        marginBottom: '25px',
-                        width: '95%'
-
-                    }} {...this.props} name="bathroom" className="filters bathroom" onChange={this.props.change}>
-                    <option value="0">0+ Bathrooms</option>
-
-                </select>
-
+            <div css={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: '1.5em'
+                }}>
+                <h4 css={{
+                        margin: '0 1.5em',
+                        flex: 1
+                    }}>Bedrooms</h4>
+                <SelectEnum name="bedrooms" select={'left'} css={{
+                        color: '#666'
+                    }}>
+                    <option value={1} defaultChecked={true}>1 +</option>
+                    <option value={2}>2 +</option>
+                    <option value={3}>3 +</option>
+                    <option value={4}>4 +</option>
+                </SelectEnum>
             </div>
 
-            <div style={{
-
-                    borderRadius: '5px',
-                    fontSize: '14px',
-                    padding: '5px',
-                    width: '100%',
-                    display: 'block',
-                    marginRight: '2.5%',
-                    marginBottom: '16px',
-
-                    marginTop: '150px'
-                }} {...this.props}>
-
-                <div className="filters price">
-                    <span style={{
-
-                            fontSize: '13.5px',
-                            fontWeight: '400',
-                            display: 'block',
-                            marginBottom: '16px'
-                        }} {...this.props} className="title">Price</span>
-
-                    {/* alternate input type to confirm numeric input */}
-                    {/* type="number" pattern="[0-9]*" inputmode="numeric" */}
-
-                    <input style={{
-
-                            borderRadius: '5px',
-                            fontSize: '14px',
-                            padding: '5px',
-                            width: '40%',
-                            display: 'inline-block',
-                            marginRight: '2.5%',
-                            marginBottom: '16px'
-                        }} {...this.props} type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="1000000" step="100000" name="min_price" className="min-price"/>
-                    <input style={{
-
-                            borderRadius: '5px',
-                            fontSize: '14px',
-                            padding: '5px',
-                            width: '40%',
-                            display: 'inline-block',
-                            marginRight: '2.5%',
-                            marginBottom: '16px'
-                        }} {...this.props} type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="1000000" step="100000" name="max_price" className="max-price"/>
-                </div>
-
-                <div className="filters squareFeet">
-                    <span style={{
-
-                            fontSize: '13.5px',
-                            fontWeight: '400',
-                            display: 'block',
-                            marginBottom: '16px',
-                            marginTop: '10px'
-                        }} {...this.props} className="title">Square Feet</span>
-                    <input style={{
-
-                            borderRadius: '5px',
-                            fontSize: '14px',
-                            padding: '5px',
-                            width: '40%',
-                            display: 'inline-block',
-                            marginRight: '2.5%',
-                            marginBottom: '16px'
-                        }} {...this.props} type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="10000" step="100" name="min_squareFeet" className="min-squareFeet"/>
-                    <input style={{
-
-                            borderRadius: '5px',
-                            fontSize: '14px',
-                            padding: '5px',
-                            width: '40%',
-                            display: 'inline-block',
-                            marginRight: '2.5%',
-                            marginBottom: '16px'
-                        }} {...this.props} type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="10000" step="100" name="max_squareFeet" className="max-squareFeet"/>
-                </div>
-                <div className="filters lotSize">
-                    <span style={{
-
-                            fontSize: '13.5px',
-                            fontWeight: '400',
-                            display: 'block',
-                            marginBottom: '16px',
-                            marginTop: '10px'
-                        }} {...this.props} className="title">Lot Size</span>
-
-                    <input style={{
-                            borderRadius: '5px',
-                            fontSize: '14px',
-                            padding: '5px',
-                            width: '40%',
-                            display: 'inline-block',
-                            marginRight: '2.5%',
-                            marginBottom: '16px'
-                        }} {...this.props} type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="50000" step="1000" name="min_lotSize" className="min-lotSize"/>
-
-                    <input style={{
-                            borderRadius: '5px',
-                            fontSize: '14px',
-                            padding: '5px',
-                            width: '40%',
-                            display: 'inline-block',
-                            marginRight: '2.5%',
-                            marginBottom: '16px'
-                        }} {...this.props} type="number" pattern="[0-9]*" inputMode="numeric" min="0" max="50000" step="1000" name="max_lotSize" className="max-lotSize"/>
-
-                </div>
-
+            <div css={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: '1.5em'
+                }}>
+                <h4 css={{
+                        margin: '0 1.5em',
+                        flex: 1
+                    }}>Bathrooms</h4>
+                <SelectEnum name="bathrooms" select={'left'} css={{
+                        color: '#666'
+                    }}>
+                    <option value={1} defaultChecked={true}>1 +</option>
+                    <option value={2}>2 +</option>
+                    <option value={3}>3 +</option>
+                    <option value={4}>4 +</option>
+                </SelectEnum>
+            </div>
 
                 {/* <div className="filters features">
                     <span
@@ -403,9 +215,8 @@ class Filter extends React.Component {
                         <span>Guest House</span>
                         <input name="Guest_House" value="Guest_House" type="checkbox"/>
                     </label>
-                </div> */}
-
-            </div>
+                </div> */
+                }
 
         </div>);
     }

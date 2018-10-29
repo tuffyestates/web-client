@@ -71,8 +71,10 @@ export default class Navbar extends React.Component {
         return (<div css={{
 
                 fontFamily: 'cabin',
-
-                margin: '12px 10px 0 10px',
+                borderTop: '1px solid lightgrey',
+                borderBottom: '1px solid lightgrey',
+                margin: '0.5em 0',
+                padding: '0 1em',
                 display: 'flex',
                 // backgroundColor: Colors.orange,
                 // backgroundColor: '#fafafa',
@@ -89,7 +91,7 @@ export default class Navbar extends React.Component {
                     textDecoration: 'none',
                     transition: 'all .4s ease-in-out',
 
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Colors.orange,
                     // borderRadius: '25px',
 
                     clipPath: 'polygon(25% 0, 100% 0%, 75% 100%, 0 100%)',
@@ -105,7 +107,7 @@ export default class Navbar extends React.Component {
                     // borderBottomLeftRadius: '200px',
 
                     '&:hover' : {
-                        backgroundColor: Colors.orange,
+                        backgroundColor: Colors.blue,
 
                         transform: 'translateX(1em)'
                     }

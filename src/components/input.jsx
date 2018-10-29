@@ -11,11 +11,10 @@ export default class Input extends React.PureComponent {
             suffix = null;
         if (this.props.message) {
             message = (<div css={{
-                    border: '1px solid #CB3837',
-                    backgroundColor: '#FEF2F2',
+                    border: '1px solid lightgrey',
+                    backgroundColor: '#efefef',
                     padding: '0.3em 1.2em',
                     fontSize: '0.9em',
-                    color: '#CB3837',
                     ...this.props.messageStyle
                 }}>{this.props.message}</div>);
         }
@@ -46,7 +45,7 @@ export default class Input extends React.PureComponent {
             </span>;
         }
         return (<div css={{
-                marginBottom: '1em'
+                minWidth: 0,
             }} className={this.props.className}>
             <div css={{
                     display: 'flex',
@@ -56,11 +55,14 @@ export default class Input extends React.PureComponent {
                         : '1px solid #C1C1C1'
                 }}>
                 {prefix}
-                <input name={this.props.name} type={this.props.type} placeholder={this.props.placeholder} value={this.props.value} onChange={this.props.onChange} css={{
+                <input {...this.props} className='' css={{
                         flex: 1,
                         padding: '0.5em 0.8em',
-                        color: '#A8A8A8',
                         border: 'none',
+                        minWidth: 0,
+                        '::placeholder': {
+                            color: '#A8A8A8',
+                        },
                         ...this.props.inputStyle
                     }}/> {suffix}
             </div>
@@ -68,6 +70,13 @@ export default class Input extends React.PureComponent {
             {this.props.children}
         </div>);
     }
+    static messageStyle = {
+        error: {
+            borderColor: '#CB3837',
+            backgroundColor: '#FEF2F2',
+            color: '#CB3837',
+        }
+    };
     static propTypes = {
         /**
          * Styles to be applied to the inner input dom node
@@ -87,4 +96,9 @@ export default class Input extends React.PureComponent {
         suffix: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     };
     static defaultProps = {};
+    static docProps = {
+        message: "You've been selected to become a unicorn!",
+        prefix: "Mr.",
+        suffix: "Jr."
+    };
 }

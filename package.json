@@ -36,6 +36,7 @@
         "react-syntax-highlighter": "^9.0.1",
         "responsive-loader": "^1.1.0",
         "sass-loader": "^7.1.0",
+        "shortid": "^2.2.13",
         "style-loader": "^0.23.0",
         "tachyons-sass": "^4.9.3",
         "url-loader": "^1.1.1",

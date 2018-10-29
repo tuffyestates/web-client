@@ -13,11 +13,20 @@ export default class Button extends React.PureComponent {
                 backgroundColor: Colors.orange,
                 color: 'white',
                 fontSize: '1.2em',
-                fontFamily: 'cabin'
+                fontFamily: 'cabin',
+                transition: 'all 0.2s',
+                cursor: 'pointer',
+                ':hover': {
+                    marginTop: -4,
+                    borderBottom: `5px solid ${Colors.blue}`
+                }
             }} {...this.props}>
             {this.props.children}
         </button>);
     }
     static propTypes = {};
     static defaultProps = {};
+    static docProps = {
+        children: "Hello!"
+    };
 }

@@ -1,9 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import house from '../assets/house.png';
 /** @jsx jsx */
-import { jsx } from '@emotion/core';
+import {jsx} from '@emotion/core';
 
 import Colors from '../colors';
 
@@ -23,9 +22,9 @@ class Jumbotron extends React.PureComponent {
             color: 'white',
             textDecoration: 'none',
             transition: 'all 0.3s',
-            '&:hover' : {
+            '&:hover': {
                 transform: 'translateX(0) !important'
-            },
+            }
         },
         headerBig: {
             fontSize: '5em',
@@ -81,9 +80,23 @@ class Jumbotron extends React.PureComponent {
 class InfoCircle extends React.PureComponent {
 
     render() {
-        return (<div className={this.props.className} css={{width: '25%'}}>
-            <div css={{textAlign: 'center'}}><FontAwesomeIcon css={{fontSize: '5em', padding: 40, borderRadius: '100%', backgroundColor: Colors.orange, color: 'white'}} icon={this.props.icon}/></div>
-            <div css={{textAlign: 'center', fontSize: '0.9em', marginTop: '2em'}}>{this.props.text}</div>
+        return (<div className={this.props.className} css={{
+                width: '25%'
+            }}>
+            <div css={{
+                    textAlign: 'center'
+                }}><FontAwesomeIcon css={{
+                fontSize: '5em',
+                padding: 40,
+                borderRadius: '100%',
+                backgroundColor: Colors.orange,
+                color: 'white'
+            }} icon={this.props.icon}/></div>
+            <div css={{
+                    textAlign: 'center',
+                    fontSize: '0.9em',
+                    marginTop: '2em'
+                }}>{this.props.text}</div>
         </div>);
 
     }
@@ -97,18 +110,19 @@ export default class Home extends React.Component {
                 height: 500,
                 maxHeight: '80vh'
             }}/>
-        <div css={{display: 'flex', justifyContent: 'space-around', margin: '5em auto', maxWidth: 1080}}>
-            <InfoCircle icon="home" text="Search through over 25 different properties" />
-            <InfoCircle icon="hand-holding-usd" text="Define your budget, along with 22 other parameters" />
-            <InfoCircle icon="search" text="Find the perfect home for you and your family" />
-
-
-        </div>
+            <div css={{
+                    display: 'flex',
+                    justifyContent: 'space-around',
+                    margin: '5em auto',
+                    maxWidth: 1080
+                }}>
+                <InfoCircle icon="home" text="Search through over 25 different properties"/>
+                <InfoCircle icon="hand-holding-usd" text="Define your budget, along with 22 other parameters"/>
+                <InfoCircle icon="search" text="Find the perfect home for you and your family"/>
+            </div>
         </React.Fragment>);
     }
 }
-
-
 
 /*   MIKEY TESTING SECTON
 class TestButton extends React.Component {

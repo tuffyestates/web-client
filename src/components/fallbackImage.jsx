@@ -10,8 +10,15 @@ export default class FallbackImage extends React.PureComponent {
          * Link to fallback image
          */
         fallback: PropTypes.string,
+        /**
+         * Link to image
+         */
+        src: PropTypes.string,
     };
     static defaultProps = {
-        fallback: require('../images/placeholder.svg')
+        fallback: require('../images/placeholder.svg'),
+    };
+    static docProps = {
+        src: 'abc',
     };
 }
