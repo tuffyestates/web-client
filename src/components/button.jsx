@@ -17,8 +17,8 @@ export default class Button extends React.PureComponent {
                 transition: 'all 0.2s',
                 cursor: 'pointer',
                 ':hover': {
-                    marginTop: -4,
-                    borderBottom: `5px solid ${Colors.blue}`
+                    transform: 'translateY(-4px)',
+                    boxShadow: `0 4px 0 0 ${Colors.blue}`
                 }
             }} {...this.props}>
             {this.props.children}
