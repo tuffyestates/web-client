@@ -36,7 +36,7 @@ class Register extends React.PureComponent {
                 flexDirection: 'column',
                 alignItems: 'center',
                 height: '100%',
-                backgroundImage: `url(${require('../images/shifaaz-shamoon-1113391-unsplash.jpg?size=2000')})`,
+                backgroundImage: `url(${require('../assets/images/shifaaz-shamoon-1113391-unsplash.jpg?size=2000')})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundBlendMode: 'overlay',

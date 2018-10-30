@@ -12,7 +12,7 @@ export default class FourOFour extends React.Component {
                 flexDirection: 'column',
                 backgroundColor: '#ffffffe6',
                 backgroundBlendMode: 'overlay',
-                backgroundImage: `url(${require('../images/missing-house.svg')})`,
+                backgroundImage: `url(${require('../assets/images/missing-house.svg')})`,
                 backgroundSize: 'auto 90%',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',

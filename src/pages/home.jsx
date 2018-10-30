@@ -48,7 +48,7 @@ class Jumbotron extends React.PureComponent {
                     left: -5,
                     transform: 'translateX(-20px)',
                     clipPath: 'polygon(0 0, 100% 0%, 75% 100%, 0% 100%)',
-                    background: `linear-gradient(rgba(0, 55, 107, 0.8), rgba(0, 55, 107, 0.8)), url(${require('../images/jesse-roberts-146556-unsplash.jpg?size=2000')})`,
+                    background: `linear-gradient(rgba(0, 55, 107, 0.8), rgba(0, 55, 107, 0.8)), url(${require('../assets/images/jesse-roberts-146556-unsplash.jpg?size=2000')})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center'
                 }}>
@@ -63,7 +63,7 @@ class Jumbotron extends React.PureComponent {
                     right: -5,
                     transform: 'translateX(20px)',
                     clipPath: 'polygon(25% 0, 100% 0%, 100% 100%, 0 100%)',
-                    background: `linear-gradient(rgba(255, 104, 0, 0.8), rgba(255, 104, 0, 0.8)), url(${require('../images/rowan-heuvel-51244-unsplash.jpg?size=2000')})`,
+                    background: `linear-gradient(rgba(255, 104, 0, 0.8), rgba(255, 104, 0, 0.8)), url(${require('../assets/images/rowan-heuvel-51244-unsplash.jpg?size=2000')})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center'
                 }}>
