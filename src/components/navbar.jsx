@@ -20,13 +20,13 @@ class Link extends React.Component {
                 '&:hover' : {
                     backgroundColor: Colors.blue,
                     color: '#fafafa',
-                    clipPath: 'polygon(25% 0, 100% 0%, 75% 100%, 0 100%)',
+                    clipPath: 'polygon(25% 0, 100% 0%, 75% 100%, 0 100%)'
                 }
 
             }} activeStyle={{
                 backgroundColor: Colors.orange,
                 color: '#fafafa',
-                clipPath: 'polygon(25% 0, 100% 0%, 75% 100%, 0 100%)',
+                clipPath: 'polygon(25% 0, 100% 0%, 75% 100%, 0 100%)'
             }} {...this.props}>
             {this.props.children}
         </RouterLink>);
@@ -35,6 +35,16 @@ class Link extends React.Component {
 
 export default class Navbar extends React.Component {
     render() {
+        const developmentLinks = process.env.NODE_ENV === 'development'
+            ? (<React.Fragment>
+                <Link to="/docs">
+                    Docs
+                </Link>
+                <Link to="/api">
+                    API Spec
+                </Link>
+            </React.Fragment>)
+            : null;
         return (<div css={{
 
                 fontFamily: 'cabin',
@@ -79,9 +89,7 @@ export default class Navbar extends React.Component {
                 <Link to="/login">
                     Login
                 </Link>
-                <Link to="/api">
-                    API Spec
-                </Link>
+                {developmentLinks}
                 <Subscribe to={Account}>
                     {store => <span>{store.username}</span>}
                 </Subscribe>
