@@ -31,7 +31,7 @@ class Comp extends React.PureComponent {
         const props = Object.keys(componentProps).map(propName => {
             const prop = componentProps[propName];
             const propType = prop.type.name === 'union'
-                ? `[${prop.type.value.map(x => x.name).join(', ')}]`
+                ? `[${prop.type.value.map(x => x.name).join(' | ')}]`
                 : prop.type.name;
             const placeholder = prop.defaultValue
                 ? prop.defaultValue.value
