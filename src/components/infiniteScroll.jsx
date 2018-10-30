@@ -22,12 +22,12 @@ export default class InfiniteScroll extends React.PureComponent {
     componentWillUnmount() {
         this.container.current.removeEventListener('scroll', this.handleScroll.bind(this), {passive: true});
     }
-    async handleScroll(e) {
+    handleScroll = throttle(async(e) => {
         // If we have already loaded everything that exists
         if (this.state.done)
             return;
 
-        const container = e.currentTarget;
+        const container = e.target;
         if (container.scrollTop + container.clientHeight > container.scrollHeight - this.props.offset) {
             let done = false;
 
@@ -38,12 +38,9 @@ export default class InfiniteScroll extends React.PureComponent {
                 done = true;
 
             const content = this.state.content.concat(newContent);
-            this.setState({
-                content,
-                done
-            });
+            this.setState({content, done});
         }
-    }
+    });
     render() {
         // onWheel={this.handleScroll.bind(this)}
         return (<div {...this.props} ref={this.container}>
@@ -55,16 +52,33 @@ export default class InfiniteScroll extends React.PureComponent {
         /**
          * Function called when new data is requested
          */
-         onLoad: PropTypes.instanceOf(Function).isRequired,
+        onLoad: PropTypes.instanceOf(Function).isRequired,
         /**
-         * Location of scroll in which onLoad is called 
+         * Location of scroll in which onLoad is called
          */
-         offset: PropTypes.number,
+        offset: PropTypes.number
     };
     static defaultProps = {
         offset: 300
     };
     static docProps = {
-
+        onLoad: () => []
     };
+}
+
+// https://gist.github.com/beaucharman/e46b8e4d03ef30480d7f4db5a78498ca
+function throttle(callback, wait = 200, context = this) {
+    let timeout = null, callbackArgs = null;
+
+    const later = () => {
+        callback.apply(context, callbackArgs);
+        timeout = null;
+    };
+
+    return function() {
+        if (!timeout) {
+            callbackArgs = arguments;
+            timeout = setTimeout(later, wait);
+        }
+    }
 }
