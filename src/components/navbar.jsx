@@ -18,48 +18,15 @@ class Link extends React.Component {
                 transition: 'backgroundColor .4s ease-in-out',
 
                 '&:hover' : {
-                    // color: 'blue',
-
-                    // backgroundColor: '#fafafa',
                     backgroundColor: Colors.blue,
-                    // color: Colors.orange,
                     color: '#fafafa',
-
-                    // borderRadius: '25px',
-
                     clipPath: 'polygon(25% 0, 100% 0%, 75% 100%, 0 100%)',
-
-                    // webkitBorderRadius: '200px',
-                    // webkitBorderTopRightRadius: '0px',
-                    // webkitBorderBottomLeftRadius: '25px',
-                    // mozBorderRadius: '200px',
-                    // mozBorderRadiusTopRight: '0px',
-                    // mozBorderRadiusBottomLeft: '25px',
-                    // borderRadius: '200px',
-                    // borderTopRightRadius: '0px',
-                    // borderBottomLeftRadius: '0px',
                 }
 
             }} activeStyle={{
-
-                // backgroundColor: '#fafafa',
                 backgroundColor: Colors.orange,
-                // color: Colors.orange,
                 color: '#fafafa',
-
-                // borderRadius: '25px',
-
                 clipPath: 'polygon(25% 0, 100% 0%, 75% 100%, 0 100%)',
-
-                // webkitBorderRadius: '200px',
-                // webkitBorderTopRightRadius: '20px',
-                // webkitBorderBottomLeftRadius: '25px',
-                // mozBorderRadius: '200px',
-                // mozBorderRadiusTopRight: '20px',
-                // mozBorderRadiusBottomLeft: '25px',
-                // borderRadius: '200px',
-                // borderTopRightRadius: '20px',
-                // borderBottomLeftRadius: '25px',
             }} {...this.props}>
             {this.props.children}
         </RouterLink>);
@@ -71,40 +38,22 @@ export default class Navbar extends React.Component {
         return (<div css={{
 
                 fontFamily: 'cabin',
-                borderTop: '1px solid lightgrey',
-                borderBottom: '1px solid lightgrey',
+                borderTop: '1px solid #d3d3d34d',
+                borderBottom: '1px solid #d3d3d34d',
                 margin: '0.5em 0',
                 padding: '0 1em',
                 display: 'flex',
-                // backgroundColor: Colors.orange,
-                // backgroundColor: '#fafafa',
                 justifyContent: 'space-between'
-                // position: 'sticky',
-                // top: 0
             }}>
             <RouterLink exact={true} to="/" css={{
                     padding: '1em 2em',
                     display: 'inline-block',
                     fontWeight: '300',
                     color: 'white',
-                    // color: Colors.orange,
                     textDecoration: 'none',
                     transition: 'all .4s ease-in-out',
-
                     backgroundColor: Colors.orange,
-                    // borderRadius: '25px',
-
                     clipPath: 'polygon(25% 0, 100% 0%, 75% 100%, 0 100%)',
-
-                    // webkitBorderRadius: '25px',
-                    // webkitBorderTopRightRadius: '200px',
-                    // webkitBorderBottomLeftRadius: '200px',
-                    // mozBorderRadius: '25px',
-                    // mozBorderRadiusTopRight: '200px',
-                    // mozBorderRadiusBottomLeft: '200px',
-                    // borderRadius: '25px',
-                    // borderTopRightRadius: '200px',
-                    // borderBottomLeftRadius: '200px',
 
                     '&:hover' : {
                         backgroundColor: Colors.blue,
