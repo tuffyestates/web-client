@@ -14,8 +14,8 @@ import Colors from '../colors';
 import {Input} from '../components';
 
 // Find all components and load their sources
-const ComponentSources = require.context('!raw-loader!../components/', false, /\.jsx$/);
-const Components = require.context('../components/', false, /\.jsx$/);
+const ComponentSources = require.context('!raw-loader!../components/', true, /\.jsx$/);
+const Components = require.context('../components/', true, /\.jsx$/);
 
 class Comp extends React.PureComponent {
     state = {

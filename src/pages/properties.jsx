@@ -111,7 +111,7 @@ class Filter extends React.Component {
                     marginBottom: '1.5em'
                 }}/>
 
-            <AutoComplete placeholder="Location" data={require('../assets/data/usCounties.json')} settings={{keys: ['name', 'state']}} css={{
+            <AutoComplete placeholder="Location" data={require('../assets/data/usCounties.json')} settings={{keys: ['name', 'state'], threshold: 0.2, distance: 3}} css={{
                     width: '100%',
                     marginBottom: '1.5em'
                 }}/>

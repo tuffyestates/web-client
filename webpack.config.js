@@ -66,6 +66,16 @@ module.exports = (env, argv) => {
                             limit: 8192
                         }
                     }]
+                },
+
+                // Load worker files
+                {
+                    rules: [{
+                        test: /\.worker\.js$/,
+                        use: {
+                            loader: 'worker-loader'
+                        }
+                    }]
                 }
             ]
         },
@@ -73,7 +83,10 @@ module.exports = (env, argv) => {
             path: path.resolve(__dirname, 'build'),
             publicPath: '/',
             filename: '[name].[hash].js',
-            chunkFilename: "[name].[hash].js"
+            chunkFilename: "[name].[hash].js",
+
+            // https://github.com/webpack/webpack/issues/6525
+            globalObject: 'this'
         },
         resolve: {
             extensions: ['.js', '.jsx', '.json'],

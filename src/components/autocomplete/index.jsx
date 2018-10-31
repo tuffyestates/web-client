@@ -1,35 +1,41 @@
 import React from 'react';
-import Colors from '../colors';
+import Colors from '../../colors';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import PropTypes from 'prop-types';
-import Fuse from 'fuse.js';
+import Search from './search.worker.js';
 
 export default class AutoComplete extends React.PureComponent {
     state = {
         value: this.props.defaultValue || '',
-        results: [],
-        selection: ''
+        results: []
     };
     constructor(props) {
         super(props);
         this.input = React.createRef();
     }
+    onSearchResults = (event) => this.setState({
+        results: event.data.slice(0, this.props.maxNumResults)
+    });
     static getDerivedStateFromProps(props, state) {
-        const fuse = new Fuse(props.data, props.settings);
-        return {fuse};
+        const searcher = state.searcher || new Search();
+        searcher.postMessage({type: 'init', settings: props.settings, data: props.data});
+        return {searcher};
+    }
+    componentDidMount() {
+        this.state.searcher.onmessage = this.onSearchResults;
+        this.state.searcher.sendMessage = debounce(this.state.searcher.postMessage);
     }
     search = (e, cb) => {
+        this.state.searcher.sendMessage({type: 'search', value: e.target.value});
         this.setState({
-            value: e.target.value,
-            results: this.state.fuse.search(e.target.value).slice(0, this.props.maxNumResults)
+            value: e.target.value
         }, cb);
     }
     render() {
-        const results = this.state.results.map(result => <div key={result.name + result.description} onClick={() => this.search({
-                target: {
-                    value: result.name
-                }
+        const results = this.state.results.map(result => <div key={result.name + result.description} onClick={() => this.setState({
+                value: result.name,
+                results: []
             }, () => this.input.current.focus())} css={{
                 padding: '0.5em',
                 cursor: 'pointer',
@@ -45,7 +51,9 @@ export default class AutoComplete extends React.PureComponent {
                 }
             }}>
             <span>{result.name}</span>
-            <span style={{color: 'grey'}}>{result.description}</span>
+            <span style={{
+                    color: 'grey'
+                }}>{result.description}</span>
         </div>);
         return (<div css={{
                 minWidth: 0,
@@ -99,7 +107,7 @@ export default class AutoComplete extends React.PureComponent {
         /**
          * A settings object passed to [fuse]{@link http://fusejs.io/}
          */
-        settings: PropTypes.object,
+        settings: PropTypes.object
     };
     static defaultProps = {
         maxNumResults: 5
@@ -136,4 +144,33 @@ export default class AutoComplete extends React.PureComponent {
             }
         ]
     };
+}
+
+// Credit David Walsh (https://davidwalsh.name/javascript-debounce-function)
+
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+function debounce(func, wait = 200, immediate = false) {
+    let timeout;
+
+    return function executedFunction() {
+        const context = this, args = arguments;
+
+        const later = function() {
+            timeout = null;
+            if (!immediate)
+                func.apply(context, args);
+            };
+
+        const callNow = immediate && !timeout;
+
+        clearTimeout(timeout);
+
+        timeout = setTimeout(later, wait);
+
+        if (callNow)
+            func.apply(context, args);
+        };
 }
