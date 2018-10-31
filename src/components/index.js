@@ -6,3 +6,4 @@ export {default as Range} from "./range";
 export {default as SelectEnum} from "./selectEnum";
 export {default as InfiniteScroll} from "./infiniteScroll";
 export {default as FallbackImage} from "./fallbackImage";
+export {default as AutoComplete} from "./autocomplete";

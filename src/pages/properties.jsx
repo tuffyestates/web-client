@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 
-import {FallbackImage, Input, Range, SelectEnum, InfiniteScroll} from '../components';
+import {FallbackImage, Input, AutoComplete, Range, SelectEnum, InfiniteScroll} from '../components';
 
 const HOME_DETAILS_PADDING = '0.5em';
 
@@ -111,7 +111,7 @@ class Filter extends React.Component {
                     marginBottom: '1.5em'
                 }}/>
 
-            <Input placeholder="Location" css={{
+            <AutoComplete data={require('../assets/data/usCounties.json')} settings={{keys: ['name', 'state']}} css={{
                     width: '100%',
                     marginBottom: '1.5em'
                 }}/>
@@ -146,7 +146,7 @@ class Filter extends React.Component {
                         margin: '0 1.5em',
                         flex: 1
                     }}>Bathrooms</h4>
-                <SelectEnum name="bathrooms" select={'left'} css={{
+                <SelectEnum name="bathrooms" css={{
                         color: '#666'
                     }}>
                     <option value={1} defaultChecked={true}>1 +</option>
@@ -156,7 +156,7 @@ class Filter extends React.Component {
                 </SelectEnum>
             </div>
 
-                {/* <div className="filters features">
+            {/* <div className="filters features">
                     <span
 
                       style={{
@@ -216,7 +216,7 @@ class Filter extends React.Component {
                         <input name="Guest_House" value="Guest_House" type="checkbox"/>
                     </label>
                 </div> */
-                }
+            }
 
         </div>);
     }

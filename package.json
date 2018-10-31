@@ -52,6 +52,7 @@
         "@fortawesome/free-solid-svg-icons": "^5.4.1",
         "@fortawesome/react-fontawesome": "^0.1.3",
         "axios": "^0.18.0",
+        "fuse.js": "^3.3.0",
         "normalize.css": "^8.0.0",
         "react": "^16.6.0",
         "react-contextual": "git://github.com/FallingSnow/react-contextual.git",
