@@ -15,13 +15,7 @@ module.exports = (env, argv) => {
         },
         optimization: {
             splitChunks: {
-                cacheGroups: {
-                    commons: {
-                        test: /[\\/]node_modules[\\/](react|react-dom|react-contextual|react-helmet|react-router-dom)[\\/]/,
-                        name: 'react',
-                        chunks: 'all'
-                    }
-                }
+                chunks: 'all',
             }
         },
         module: {
@@ -56,7 +50,11 @@ module.exports = (env, argv) => {
                 // Load images & make them responsive
                 {
                     test: /\.(jpe?g|png)$/i,
-                    loader: 'responsive-loader'
+                    loader: 'responsive-loader',
+                    options: {
+                        name: '[hash]-[width].[ext]',
+                        outputPath: 'images'
+                    }
                 },
 
                 // Load SVG placeholder image
@@ -81,7 +79,9 @@ module.exports = (env, argv) => {
             extensions: ['.js', '.jsx', '.json'],
         },
         plugins: [
-            new HtmlWebpackPlugin({title: "Tuffy Estates"}),
+            new HtmlWebpackPlugin({
+                title: "Tuffy Estates"
+            }),
             new GoogleFontsPlugin({
                 fonts: [{
                         family: 'Cabin',
