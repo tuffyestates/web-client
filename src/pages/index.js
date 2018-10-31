@@ -1,8 +1,10 @@
+import {lazy} from "react";
 export {default as Home} from "./home";
-export {default as Properties} from "./properties";
-export {default as Register} from "./register";
-export {default as Property} from "./property";
-export {default as Login} from "./login";
-export {default as API} from "./api";
-export {default as Docs} from "./docs";
-export {default as FourOFour} from "./404";
+export const Properties = lazy(() => import(/* webpackChunkName: "rest" */"./properties"));
+export const Register = lazy(() => import(/* webpackChunkName: "rest" */"./register"));
+export const Login = lazy(() => import(/* webpackChunkName: "rest" */"./login"));
+export const Property = lazy(() => import(/* webpackChunkName: "rest" */"./property"));
+export const FourOFour = lazy(() => import(/* webpackChunkName: "rest" */"./404"));
+
+export const API = lazy(() => import(/* webpackChunkName: "dev" */"./api"));
+export const Docs = lazy(() => import(/* webpackChunkName: "dev" */"./docs"));

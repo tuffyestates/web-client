@@ -1,31 +1,32 @@
 import React from 'react';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+// import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import SyntaxHighlighter, {registerLanguage} from/* webpackChunkName: "docs" */
-"react-syntax-highlighter/prism-light";
-import language from/* webpackChunkName: "docs" */
-'react-syntax-highlighter/languages/prism/jsx';
-import theme from/* webpackChunkName: "docs" */
-'react-syntax-highlighter/styles/prism/vs';
-import {parse} from/* webpackChunkName: "docs" */
-'react-docgen';
+
+// Load a bunch of code processing libraries
+import SyntaxHighlighter, {registerLanguage} from "react-syntax-highlighter/prism-light";
+import language from 'react-syntax-highlighter/languages/prism/jsx';
+import theme from 'react-syntax-highlighter/styles/prism/vs';
+import {parse} from 'react-docgen';
 registerLanguage('jsx', language);
 
 import Colors from '../colors';
-import * as Components from '../components';
+import {Input} from '../components';
+
+// Find all components and load their sources
+const ComponentSources = require.context('!raw-loader!../components/', false, /\.jsx$/);
+const Components = require.context('../components/', false, /\.jsx$/);
 
 class Comp extends React.PureComponent {
     state = {
         component: null,
-        props: Components[this.props.component.displayName].docProps || {}
+        props: this.props.component.docProps || {}
     };
     render() {
-        const Example = Components[this.props.component.displayName];
-
-        const componentProps = this.props.component.props || {};
-        const description = this.props.component.description
-            ? <h4>component.description</h4>
+        const details = parse(this.props.source);
+        const componentProps = details.props || {};
+        const description = details.description
+            ? <h4>details.description</h4>
             : null;
 
         const props = Object.keys(componentProps).map(propName => {
@@ -44,23 +45,24 @@ class Comp extends React.PureComponent {
             });
 
             return (<React.Fragment key={propName}>
-                <Components.Input css={{
+                <Input css={{
                         marginBottom: '1em'
                     }} prefix={propName} suffix={propType} message={prop.description} placeholder={placeholder} defaultValue={JSON.stringify(this.state.props[propName])} onChange={onChange}/>
             </React.Fragment>);
         });
-        const example = <Example {...this.state.props}/>;
+
+        const example = <this.props.component {...this.state.props}/>;
         return (<div css={{
                 marginBottom: '4em',
-                fontSize: '1.1em',
-            }} {...this.props}>
+                fontSize: '1.1em'
+            }}>
             <h2 css={{
                     backgroundImage: `linear-gradient(to right, ${Colors.darkblue}, ${Colors.blue})`,
                     color: 'white',
                     padding: '0.5em 1em',
                     marginTop: '2em',
-                    boxShadow: '0 5px 6px -2px #0000004d',
-                }}>{this.props.component.displayName}</h2>
+                    boxShadow: '0 5px 6px -2px #0000004d'
+                }}>{details.displayName}</h2>
             <div css={{
                     paddingLeft: '2em'
                 }}>{description}
@@ -77,7 +79,7 @@ class Comp extends React.PureComponent {
                         marginBottom: '0 !important',
                         border: '1px solid lightgrey',
                         borderBottom: 'none'
-                    }}>{`<${this.props.component.displayName}${propsToString(this.state.props)}/>`}</SyntaxHighlighter>
+                    }}>{`<${details.displayName}${propsToString(this.state.props)}/>`}</SyntaxHighlighter>
                 <div css={{
                         backgroundColor: '#efefef',
                         border: '1px solid lightgrey',
@@ -90,17 +92,15 @@ class Comp extends React.PureComponent {
 }
 
 export default class Docs extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        const components = Components.keys().map(componentPath => ({component: Components(componentPath).default, source: ComponentSources(componentPath)}));
+        this.state = {
+            components
+        };
+    }
     render() {
-        // Load all components raw text async
-        const components = importAll(require.context('../components/', false, /\.jsx$/), components);
-
-        let details = {};
-        // Parse each component
-        for (const [filename, component] of Object.entries(components)) {
-            details[filename] = parse(component);
-        }
-
-        const docs = Object.keys(details).sort().map(key => (<Comp key={key} component={details[key]}/>));
+        const docs = this.state.components.map(component => (<Comp key={component.component.name} component={component.component} source={component.source}/>));
         return (<div css={{
                 fontFamily: 'monospace',
                 padding: '1em'
@@ -120,10 +120,4 @@ function propsToString(props) {
             output += ` ${key}={${JSON.stringify(props[key])}}`
     });
     return output;
-}
-
-function importAll(context) {
-    let cache = {};
-    context.keys().forEach(key => cache[key] = require(`!raw-loader!../components${key.substr(1)}`));
-    return cache;
 }

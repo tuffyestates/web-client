@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import {hot} from 'react-hot-loader';
 import {Helmet} from "react-helmet";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
@@ -9,10 +9,9 @@ import {Provider} from 'react-contextual';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {faLock, faUser, faHome, faHandHoldingUsd, faSearch} from '@fortawesome/free-solid-svg-icons';
 /** @jsx jsx */
-import { jsx } from '@emotion/core';
+import {jsx} from '@emotion/core';
 
 library.add(faLock, faUser, faHome, faHandHoldingUsd, faSearch);
-
 const App = () => (<Provider store={Account}>
     <Router>
         <div id="app" css={{
@@ -31,16 +30,18 @@ const App = () => (<Provider store={Account}>
                     backgroundColor: '#FAFAFA',
                     overflow: 'auto'
                 }}>
-                <Switch>
-                    <Route exact={true} path="/" component={Pages.Home}/>
-                    <Route path="/properties/:id" component={Pages.Property}/>
-                    <Route path="/properties" component={Pages.Properties}/>
-                    <Route path="/register" component={Pages.Register}/>
-                    <Route path="/login" component={Pages.Login}/>
-                    <Route path="/api" component={Pages.API}/>
-                    <Route path="/docs" component={Pages.Docs}/>
-                    <Route component={Pages.FourOFour}/>
-                </Switch>
+                <Suspense fallback={(<div></div>)}>
+                    <Switch>
+                        <Route exact={true} path="/" component={Pages.Home}/>
+                        <Route path="/properties/:id" component={Pages.Property}/>
+                        <Route path="/properties" component={Pages.Properties}/>
+                        <Route path="/register" component={Pages.Register}/>
+                        <Route path="/login" component={Pages.Login}/>
+                        <Route path="/api" component={Pages.API}/>
+                        <Route path="/docs" component={Pages.Docs}/>
+                        <Route component={Pages.FourOFour}/>
+                    </Switch>
+                </Suspense>
             </div>
             <Footer/>
         </div>
