@@ -334,147 +334,147 @@
         "id": "01133"
     },
     {
-        "name": "Aleutians East Borough[8]",
+        "name": "Aleutians East Borough",
         "description": "Alaska",
         "id": "02013"
     },
     {
-        "name": "Aleutians West Census Area[9]",
+        "name": "Aleutians West Census Area",
         "description": "Alaska",
         "id": "02016"
     },
     {
-        "name": "Anchorage, Municipality of[10]",
+        "name": "Anchorage, Municipality of",
         "description": "Alaska",
         "id": "02020"
     },
     {
-        "name": "Bethel Census Area[9]",
+        "name": "Bethel Census Area",
         "description": "Alaska",
         "id": "02050"
     },
     {
-        "name": "Bristol Bay Borough[8]",
+        "name": "Bristol Bay Borough",
         "description": "Alaska",
         "id": "02060"
     },
     {
-        "name": "Denali Borough[8]",
+        "name": "Denali Borough",
         "description": "Alaska",
         "id": "02068"
     },
     {
-        "name": "Dillingham Census Area[9]",
+        "name": "Dillingham Census Area",
         "description": "Alaska",
         "id": "02070"
     },
     {
-        "name": "Fairbanks North Star Borough[8]",
+        "name": "Fairbanks North Star Borough",
         "description": "Alaska",
         "id": "02090"
     },
     {
-        "name": "Haines Borough[8]",
+        "name": "Haines Borough",
         "description": "Alaska",
         "id": "02100"
     },
     {
-        "name": "Hoonah–Angoon Census Area[9]",
+        "name": "Hoonah–Angoon Census Area",
         "description": "Alaska",
         "id": "02105"
     },
     {
-        "name": "Juneau, City and Borough of[11]",
+        "name": "Juneau, City and Borough of",
         "description": "Alaska",
         "id": "02110"
     },
     {
-        "name": "Kenai Peninsula Borough[8]",
+        "name": "Kenai Peninsula Borough",
         "description": "Alaska",
         "id": "02122"
     },
     {
-        "name": "Ketchikan Gateway Borough[8]",
+        "name": "Ketchikan Gateway Borough",
         "description": "Alaska",
         "id": "02130"
     },
     {
-        "name": "Kodiak Island Borough[8]",
+        "name": "Kodiak Island Borough",
         "description": "Alaska",
         "id": "02150"
     },
     {
-        "name": "Lake and Peninsula Borough[8]",
+        "name": "Lake and Peninsula Borough",
         "description": "Alaska",
         "id": "02164"
     },
     {
-        "name": "Matanuska-Susitna Borough[8]",
+        "name": "Matanuska-Susitna Borough",
         "description": "Alaska",
         "id": "02170"
     },
     {
-        "name": "Nome Census Area[9]",
+        "name": "Nome Census Area",
         "description": "Alaska",
         "id": "02180"
     },
     {
-        "name": "North Slope Borough[8]",
+        "name": "North Slope Borough",
         "description": "Alaska",
         "id": "02185"
     },
     {
-        "name": "Northwest Arctic Borough[8]",
+        "name": "Northwest Arctic Borough",
         "description": "Alaska",
         "id": "02188"
     },
     {
-        "name": "Petersburg Borough[8]",
+        "name": "Petersburg Borough",
         "description": "Alaska",
         "id": "02195"
     },
     {
-        "name": "Prince of Wales – Hyder Census Area[9]",
+        "name": "Prince of Wales – Hyder Census Area",
         "description": "Alaska",
         "id": "02198"
     },
     {
-        "name": "Sitka, City and Borough of[12]",
+        "name": "Sitka, City and Borough of",
         "description": "Alaska",
         "id": "02220"
     },
     {
-        "name": "Skagway, Municipality of[8]",
+        "name": "Skagway, Municipality of",
         "description": "Alaska",
         "id": "02230"
     },
     {
-        "name": "Southeast Fairbanks Census Area[9]",
+        "name": "Southeast Fairbanks Census Area",
         "description": "Alaska",
         "id": "02240"
     },
     {
-        "name": "Valdez–Cordova Census Area[9]",
+        "name": "Valdez–Cordova Census Area",
         "description": "Alaska",
         "id": "02261"
     },
     {
-        "name": "Kusilvak Census Area[9]",
+        "name": "Kusilvak Census Area",
         "description": "Alaska",
         "id": "02270"
     },
     {
-        "name": "Wrangell, City and Borough of[8]",
+        "name": "Wrangell, City and Borough of",
         "description": "Alaska",
         "id": "02275"
     },
     {
-        "name": "Yakutat, City and Borough of[13]",
+        "name": "Yakutat, City and Borough of",
         "description": "Alaska",
         "id": "02282"
     },
     {
-        "name": "Yukon–Koyukuk Census Area[9]",
+        "name": "Yukon–Koyukuk Census Area",
         "description": "Alaska",
         "id": "02290"
     },
@@ -1619,7 +1619,7 @@
         "id": "10005"
     },
     {
-        "name": "District of Columbia[19]",
+        "name": "District of Columbia",
         "description": "District of Columbia",
         "id": "11001"
     },
@@ -2754,7 +2754,7 @@
         "id": "13321"
     },
     {
-        "name": "Guam[1]",
+        "name": "Guam",
         "description": "Guam",
         "id": "66010"
     },
@@ -5769,7 +5769,7 @@
         "id": "22069"
     },
     {
-        "name": "Orleans Parish[21]",
+        "name": "Orleans Parish",
         "description": "Louisiana",
         "id": "22071"
     },
@@ -6109,7 +6109,7 @@
         "id": "24047"
     },
     {
-        "name": "Baltimore City[22]",
+        "name": "Baltimore City",
         "description": "Maryland",
         "id": "24510"
     },
@@ -8014,7 +8014,7 @@
         "id": "29229"
     },
     {
-        "name": "St. Louis, City of[24]",
+        "name": "St. Louis, City of",
         "description": "Missouri",
         "id": "29510"
     },
@@ -8844,7 +8844,7 @@
         "id": "32033"
     },
     {
-        "name": "Carson City, Consolidated Municipality of[25]",
+        "name": "Carson City, Consolidated Municipality of",
         "description": "Nevada",
         "id": "32510"
     },
@@ -10244,7 +10244,7 @@
         "id": "38105"
     },
     {
-        "name": "Northern Islands Municipality[1]",
+        "name": "Northern Islands Municipality",
         "description": "Northern Mariana Islands",
         "id": "69085"
     },
@@ -14324,7 +14324,7 @@
         "id": "48507"
     },
     {
-        "name": "Baker Island[28]",
+        "name": "Baker Island",
         "description": "U.S. Minor Outlying Islands",
         "id": "74050"
     },
@@ -14584,7 +14584,7 @@
         "id": "50027"
     },
     {
-        "name": "Saint Croix Island[1]",
+        "name": "Saint Croix Island",
         "description": "Virgin Islands (U.S.)",
         "id": "78010"
     },
@@ -15074,192 +15074,192 @@
         "id": "51199"
     },
     {
-        "name": "Alexandria, City of[32]",
+        "name": "Alexandria, City of",
         "description": "Virginia",
         "id": "51510"
     },
     {
-        "name": "Bristol, City of[32]",
+        "name": "Bristol, City of",
         "description": "Virginia",
         "id": "51520"
     },
     {
-        "name": "Buena Vista, City of[32]",
+        "name": "Buena Vista, City of",
         "description": "Virginia",
         "id": "51530"
     },
     {
-        "name": "Charlottesville, City of[32]",
+        "name": "Charlottesville, City of",
         "description": "Virginia",
         "id": "51540"
     },
     {
-        "name": "Chesapeake, City of[32]",
+        "name": "Chesapeake, City of",
         "description": "Virginia",
         "id": "51550"
     },
     {
-        "name": "Colonial Heights, City of[32]",
+        "name": "Colonial Heights, City of",
         "description": "Virginia",
         "id": "51570"
     },
     {
-        "name": "Covington, City of[32]",
+        "name": "Covington, City of",
         "description": "Virginia",
         "id": "51580"
     },
     {
-        "name": "Danville, City of[32]",
+        "name": "Danville, City of",
         "description": "Virginia",
         "id": "51590"
     },
     {
-        "name": "Emporia, City of[32]",
+        "name": "Emporia, City of",
         "description": "Virginia",
         "id": "51595"
     },
     {
-        "name": "Fairfax, City of[32]",
+        "name": "Fairfax, City of",
         "description": "Virginia",
         "id": "51600"
     },
     {
-        "name": "Falls Church, City of[32]",
+        "name": "Falls Church, City of",
         "description": "Virginia",
         "id": "51610"
     },
     {
-        "name": "Franklin, City of[32]",
+        "name": "Franklin, City of",
         "description": "Virginia",
         "id": "51620"
     },
     {
-        "name": "Fredericksburg, City of[32]",
+        "name": "Fredericksburg, City of",
         "description": "Virginia",
         "id": "51630"
     },
     {
-        "name": "Galax, City of[32]",
+        "name": "Galax, City of",
         "description": "Virginia",
         "id": "51640"
     },
     {
-        "name": "Hampton, City of[32]",
+        "name": "Hampton, City of",
         "description": "Virginia",
         "id": "51650"
     },
     {
-        "name": "Harrisonburg, City of[32]",
+        "name": "Harrisonburg, City of",
         "description": "Virginia",
         "id": "51660"
     },
     {
-        "name": "Hopewell, City of[32]",
+        "name": "Hopewell, City of",
         "description": "Virginia",
         "id": "51670"
     },
     {
-        "name": "Lexington, City of[32]",
+        "name": "Lexington, City of",
         "description": "Virginia",
         "id": "51678"
     },
     {
-        "name": "Lynchburg, City of[32]",
+        "name": "Lynchburg, City of",
         "description": "Virginia",
         "id": "51680"
     },
     {
-        "name": "Manassas, City of[32]",
+        "name": "Manassas, City of",
         "description": "Virginia",
         "id": "51683"
     },
     {
-        "name": "Manassas Park, City of[32]",
+        "name": "Manassas Park, City of",
         "description": "Virginia",
         "id": "51685"
     },
     {
-        "name": "Martinsville, City of[32]",
+        "name": "Martinsville, City of",
         "description": "Virginia",
         "id": "51690"
     },
     {
-        "name": "Newport News, City of[32]",
+        "name": "Newport News, City of",
         "description": "Virginia",
         "id": "51700"
     },
     {
-        "name": "Norfolk, City of[32]",
+        "name": "Norfolk, City of",
         "description": "Virginia",
         "id": "51710"
     },
     {
-        "name": "Norton, City of[32]",
+        "name": "Norton, City of",
         "description": "Virginia",
         "id": "51720"
     },
     {
-        "name": "Petersburg, City of[32]",
+        "name": "Petersburg, City of",
         "description": "Virginia",
         "id": "51730"
     },
     {
-        "name": "Poquoson, City of[32]",
+        "name": "Poquoson, City of",
         "description": "Virginia",
         "id": "51735"
     },
     {
-        "name": "Portsmouth, City of[32]",
+        "name": "Portsmouth, City of",
         "description": "Virginia",
         "id": "51740"
     },
     {
-        "name": "Radford, City of[32]",
+        "name": "Radford, City of",
         "description": "Virginia",
         "id": "51750"
     },
     {
-        "name": "Richmond, City of[32]",
+        "name": "Richmond, City of",
         "description": "Virginia",
         "id": "51760"
     },
     {
-        "name": "Roanoke, City of[32]",
+        "name": "Roanoke, City of",
         "description": "Virginia",
         "id": "51770"
     },
     {
-        "name": "Salem, City of[32]",
+        "name": "Salem, City of",
         "description": "Virginia",
         "id": "51775"
     },
     {
-        "name": "Staunton, City of[32]",
+        "name": "Staunton, City of",
         "description": "Virginia",
         "id": "51790"
     },
     {
-        "name": "Suffolk, City of[32]",
+        "name": "Suffolk, City of",
         "description": "Virginia",
         "id": "51800"
     },
     {
-        "name": "Virginia Beach, City of[32]",
+        "name": "Virginia Beach, City of",
         "description": "Virginia",
         "id": "51810"
     },
     {
-        "name": "Waynesboro, City of[32]",
+        "name": "Waynesboro, City of",
         "description": "Virginia",
         "id": "51820"
     },
     {
-        "name": "Williamsburg, City of[32]",
+        "name": "Williamsburg, City of",
         "description": "Virginia",
         "id": "51830"
     },
     {
-        "name": "Winchester, City of[32]",
+        "name": "Winchester, City of",
         "description": "Virginia",
         "id": "51840"
     },
