@@ -86,8 +86,8 @@ class InfoCircle extends React.PureComponent {
             <div css={{
                     textAlign: 'center'
                 }}><FontAwesomeIcon css={{
-                fontSize: '5em',
-                padding: 40,
+                fontSize: '3em',
+                padding: 30,
                 borderRadius: '100%',
                 backgroundColor: Colors.orange,
                 color: 'white'
@@ -95,7 +95,7 @@ class InfoCircle extends React.PureComponent {
             <div css={{
                     textAlign: 'center',
                     fontSize: '0.9em',
-                    marginTop: '2em'
+                    marginTop: '1em'
                 }}>{this.props.text}</div>
         </div>);
 
@@ -107,13 +107,18 @@ export default class Home extends React.Component {
     render() {
         return (<React.Fragment><Jumbotron css={{
                 margin: '1em 0',
-                height: 500,
+                height: 450,
                 maxHeight: '80vh'
             }}/>
             <div css={{
+                    fontFamily: 'Cabin',
+                    fontSize: 18,
+                    color: Colors.blue,
+                    letterSpacing: 1,
                     display: 'flex',
+                    height: 100,
                     justifyContent: 'space-around',
-                    margin: '5em auto',
+                    margin: '2em auto',
                     maxWidth: 1080
                 }}>
                 <InfoCircle icon="home" text="Search through over 25 different properties"/>
