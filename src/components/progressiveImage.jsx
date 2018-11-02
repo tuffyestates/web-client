@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {FallbackImage} from './';
 
 export default class ProgressiveImage extends React.PureComponent {
     state = {
@@ -25,7 +26,7 @@ export default class ProgressiveImage extends React.PureComponent {
                     bottom: offset,
                     objectFit: 'cover'
                 }} onLoad={() => this.setState({loaded: true})} src={this.props.src}/>
-            <img style={{
+            <FallbackImage style={{
                     width: offsetSize,
                     height: offsetSize,
                     position: 'relative',
@@ -35,7 +36,6 @@ export default class ProgressiveImage extends React.PureComponent {
                     display: 'block',
                     filter: `blur(${this.props.blur}px)`,
                     transition: 'opacity ease 0.9s',
-                    backgroundColor: 'white',
                     opacity: this.state.loaded
                         ? 0
                         : 1
