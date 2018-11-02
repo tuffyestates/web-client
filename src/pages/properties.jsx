@@ -250,13 +250,13 @@ export default class Container extends React.PureComponent {
         return (<div css={{
                 display: 'flex',
                 justifyContent: 'flex-stretch',
-                height: '100%'
+                height: '100%',
             }}>
             <Filter onChange={(filters) => this.setState({filters})}/>
             <div css={{
                     flex: 1,
                     display: 'flex',
-                    flexDirection: 'column'
+                    flexDirection: 'column',
                 }}>
                 <Listings css={{
                         flex: 1

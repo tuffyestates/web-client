@@ -35,12 +35,14 @@ class Register extends React.PureComponent {
                 justifyContent: 'center',
                 flexDirection: 'column',
                 alignItems: 'center',
-                height: '100%',
+                marginTop: 14,
+                height: '95%',
+                overflow: 'hidden',
                 backgroundImage: `url(${require('../assets/images/shifaaz-shamoon-1113391-unsplash.jpg?size=2000')})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundBlendMode: 'overlay',
-                backgroundColor: '#0000004d'
+                backgroundColor: '#0000004d',
             }}>
 
             <div css={{
@@ -51,7 +53,8 @@ class Register extends React.PureComponent {
                     backgroundColor: 'white',
                     boxShadow: '0px 5px 10px 1px rgba(0, 0, 0, 0.1)',
                     borderRadius: '5px',
-                    padding: '4em'
+                    padding: '4em',
+                    opacity: '.9',
                 }}>
                 <h1 css={{
                         fontFamily: 'cabin',
