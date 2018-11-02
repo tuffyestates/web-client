@@ -7,23 +7,33 @@ import {jsx} from '@emotion/core';
 import SyntaxHighlighter, {registerLanguage} from "react-syntax-highlighter/prism-light";
 import language from 'react-syntax-highlighter/languages/prism/jsx';
 import theme from 'react-syntax-highlighter/styles/prism/vs';
-import {parse} from 'react-docgen';
 registerLanguage('jsx', language);
 
-import Colors from '../colors';
-import {Input} from '../components';
+import Colors from '../../colors';
+import {Input} from '../../components';
+import Parser from './parser.worker';
 
 // Find all components and load their sources
-const ComponentSources = require.context('!raw-loader!../components/', true, /\.jsx$/);
-const Components = require.context('../components/', true, /\.jsx$/);
+const ComponentSources = require.context('!raw-loader!../../components/', false, /\.jsx$/);
+const Components = require.context('../../components/', false, /\.jsx$/);
 
 class Comp extends React.PureComponent {
     state = {
+        parser: new Parser(),
         component: null,
-        props: this.props.component.docProps || {}
+        props: this.props.component.docProps || {},
+        details: {displayName: 'Loading...'}
     };
+    constructor(props) {
+        super(props);
+        this.state.parser.onmessage = e => {
+            this.setState({details: e.data});
+        };
+        this.state.parser.postMessage(props.source);
+    }
+
     render() {
-        const details = parse(this.props.source);
+        const details = this.state.details;
         const componentProps = details.props || {};
         const description = details.description
             ? <h4>details.description</h4>
@@ -37,16 +47,24 @@ class Comp extends React.PureComponent {
             const placeholder = prop.defaultValue
                 ? prop.defaultValue.value
                 : '';
-            const onChange = (e) => this.setState({
-                props: {
-                    ...this.state.props,
-                    [propName]: JSON.parse(e.target.value)
+
+            const onChange = e => {
+                try {
+                    const value = JSON.parse(e.target.value);
+                    this.setState({
+                        props: {
+                            ...this.state.props,
+                            [propName]: value
+                        }
+                    });
+                } catch (e) {
+
                 }
-            });
+            };
 
             return (<React.Fragment key={propName}>
                 <Input css={{
-                        marginBottom: '1em'
+                        marginBottom: '1em',
                     }} prefix={propName} suffix={propType} message={prop.description} placeholder={placeholder} defaultValue={JSON.stringify(this.state.props[propName])} onChange={onChange}/>
             </React.Fragment>);
         });
