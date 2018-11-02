@@ -14,19 +14,18 @@ class Link extends React.Component {
                 display: 'inline-block',
                 textDecoration: 'none',
                 color: Colors.orange,
-                clipPath: 'polygon(25% 0, 100% 0%, 75% 100%, 0 100%)',
+                clipPath: 'polygon(1em 0, 100% 0%, calc(100% - 1em) 100%, 0 100%)',
                 transition: 'backgroundColor .4s ease-in-out',
+                margin: '0 -0.3em',
 
                 '&:hover' : {
                     backgroundColor: Colors.blue,
                     color: '#fafafa',
-                    clipPath: 'polygon(25% 0, 100% 0%, 75% 100%, 0 100%)'
                 }
 
             }} activeStyle={{
                 backgroundColor: Colors.orange,
                 color: '#fafafa',
-                clipPath: 'polygon(25% 0, 100% 0%, 75% 100%, 0 100%)'
             }} {...this.props}>
             {this.props.children}
         </RouterLink>);
@@ -49,8 +48,7 @@ export default class Navbar extends React.Component {
 
                 fontFamily: 'cabin',
                 borderTop: '1px solid #d3d3d34d',
-                borderBottom: '1px solid #d3d3d34d',
-                margin: '0.5em 0',
+                margin: '0.5em 0 -1px',
                 padding: '0 1em',
                 display: 'flex',
                 justifyContent: 'space-between'
@@ -67,7 +65,6 @@ export default class Navbar extends React.Component {
 
                     '&:hover' : {
                         backgroundColor: Colors.blue,
-
                         transform: 'translateX(1em)'
                     }
 

@@ -93,19 +93,19 @@ export default class AutoComplete extends React.PureComponent {
     }
     static propTypes = {
         /**
-         * Styles to be applied to the inner input dom node
+         * Styles to be applied to the inner input dom node.
          */
         inputStyle: PropTypes.object,
         /**
-         * Maximum number of results to display
+         * Maximum number of results to display.
          */
         maxNumResults: PropTypes.number,
         /**
-         * Data to be matched against
+         * Data to be matched against. Passed to fuse.
          */
         data: PropTypes.array,
         /**
-         * A settings object passed to [fuse]{@link http://fusejs.io/}
+         * A settings object passed to [fuse]{@link http://fusejs.io/}.
          */
         settings: PropTypes.object
     };
