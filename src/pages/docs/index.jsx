@@ -2,6 +2,7 @@ import React from 'react';
 // import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
+import {Link} from 'react-router-dom';
 
 // Load a bunch of code processing libraries
 import SyntaxHighlighter, {registerLanguage} from "react-syntax-highlighter/prism-light";
@@ -22,7 +23,9 @@ class Comp extends React.PureComponent {
         parser: new Parser(),
         component: null,
         props: this.props.component.docProps || {},
-        details: {displayName: 'Loading...'}
+        details: {
+            displayName: 'Loading...'
+        }
     };
     constructor(props) {
         super(props);
@@ -57,19 +60,19 @@ class Comp extends React.PureComponent {
                             [propName]: value
                         }
                     });
-                // eslint-disable-next-line no-empty
+                    // eslint-disable-next-line no-empty
                 } catch (e) {}
             };
 
             return (<React.Fragment key={propName}>
                 <Input css={{
-                        marginBottom: '1em',
+                        marginBottom: '1em'
                     }} prefix={propName} suffix={propType} message={prop.description} placeholder={placeholder} defaultValue={JSON.stringify(this.state.props[propName])} onChange={onChange}/>
             </React.Fragment>);
         });
 
         const example = <this.props.component {...this.state.props}/>;
-        return (<div css={{
+        return (<div id={this.props.component.name} css={{
                 marginBottom: '4em',
                 fontSize: '1.1em'
             }}>
@@ -108,6 +111,33 @@ class Comp extends React.PureComponent {
     }
 }
 
+class Navbar extends React.PureComponent {
+    goTo(id) {
+        const el = document.getElementById(id);
+        if (el) {
+            el.scrollIntoView(true);
+        }
+    }
+    render() {
+        const links = this.props.links.map(linkName => (<span css={{
+                display: 'block',
+                textDecoration: 'none',
+                padding: '1em',
+                cursor: 'pointer',
+                color: '#333',
+                overflow: 'auto',
+                ':hover, :active, :target' : {
+                    backgroundColor: Colors.blue,
+                    color: 'white'
+                }
+            }} key={linkName} onClick={() => this.goTo(linkName)}>{linkName}</span>));
+        return (<div css={{
+                position: 'sticky',
+                top: 0
+            }} className={this.props.className}>{links}</div>);
+    }
+}
+
 export default class Docs extends React.PureComponent {
     constructor(props) {
         super(props);
@@ -125,7 +155,18 @@ export default class Docs extends React.PureComponent {
             <h1 css={{
                     textAlign: 'center'
                 }}>Documentation</h1>
-            {docs}
+            <div css={{
+                    display: 'flex',
+                    alignItems: 'flex-start'
+                }}>
+                <Navbar css={{
+                        width: 200
+                    }} links={this.state.components.map(component => component.component.name)}/>
+                <div style={{
+                        flex: 1
+                    }}>{docs}</div>
+            </div>
+
         </div>);
     }
 }

@@ -10,7 +10,6 @@ export default class Container extends React.PureComponent {
         filters: {}
     }
     render() {
-        console.log(this.state)
         return (<div css={{
                 display: 'flex',
                 justifyContent: 'flex-stretch',

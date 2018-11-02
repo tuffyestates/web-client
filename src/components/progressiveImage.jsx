@@ -36,7 +36,7 @@ export default class ProgressiveImage extends React.PureComponent {
         /**
          * Amount of blur on preview image
          */
-        blur: PropTypes.number,
+        blur: PropTypes.string,
         /**
          * Link to preview image
          */
