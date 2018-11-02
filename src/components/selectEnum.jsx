@@ -1,21 +1,22 @@
 import React from 'react';
-import Colors from '../colors';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
+
+import Colors from '../colors';
 
 export default class SelectEnum extends React.PureComponent {
     render() {
         const options = React.Children.map(this.props.children, child => {
             const id = shortid.generate();
             return (<div css={{
-                backgroundColor: 'white',
-                'input[type="radio"]:checked + label': {
-                    backgroundColor: Colors.orange,
-                    color: 'white'
-                }
-            }} key={child.props.value}>
+                    backgroundColor: 'white',
+                    'input[type="radio"]:checked + label' : {
+                        backgroundColor: Colors.orange,
+                        color: 'white'
+                    }
+                }} key={child.props.value}>
 
                 <input name={this.props.name} defaultChecked={child.props.defaultChecked} style={{
                         display: 'none'
@@ -33,7 +34,7 @@ export default class SelectEnum extends React.PureComponent {
         });
         return (<div css={{
                 display: 'flex',
-                alignItems: 'center',
+                alignItems: 'center'
             }} className={this.props.className}>
             {options}
         </div>);

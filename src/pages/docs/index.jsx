@@ -57,9 +57,8 @@ class Comp extends React.PureComponent {
                             [propName]: value
                         }
                     });
-                } catch (e) {
-
-                }
+                // eslint-disable-next-line no-empty
+                } catch (e) {}
             };
 
             return (<React.Fragment key={propName}>

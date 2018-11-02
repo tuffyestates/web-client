@@ -1,8 +1,9 @@
 import React from 'react';
-import Colors from '../colors';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import PropTypes from 'prop-types';
+
+import Colors from '../colors';
 
 export default class Button extends React.PureComponent {
     render() {
