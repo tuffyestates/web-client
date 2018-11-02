@@ -3,19 +3,30 @@ import Colors from '../colors';
 import {Link} from 'react-router-dom';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
+import queryString from 'query-string';
 
-import {FallbackImage, Input, AutoComplete, Range, SelectEnum, InfiniteScroll} from '../components';
-
-const HOME_DETAILS_PADDING = '0.5em';
+import api from '../api';
+import {FallbackImage, AutoComplete, Range, SelectEnum, InfiniteScroll} from '../components';
 
 class Listings extends React.PureComponent {
     async loadHomes(offset) {
-        const limit = 10;
-        const listings = this.props.listings.slice(offset, offset + limit);
+        const listings = await this.loadData(offset);
         return listings.reduce((arr, house, idx) => {
-            arr.push(<Home key={offset + idx} street={house.address} price={house.price} id={house.id}/>)
+            arr.push(<Property key={offset + idx} address={house.address} details={house.details} id={house.id}/>)
             return arr;
         }, []);
+    }
+    async loadData(offset) {
+        const options = {
+            limit: 9,
+            offset
+        };
+        try {
+            const response = await api.get(`/properties?${queryString.stringify(options)}`);
+            return response.data;
+        } catch (e) {
+            console.error(e);
+        }
     }
     render() {
         return (<InfiniteScroll css={{
@@ -26,24 +37,16 @@ class Listings extends React.PureComponent {
                 justifyContent: 'center',
                 padding: '1em',
                 overflowY: 'auto'
-            }} onLoad={this.loadHomes.bind(this)}/>);
+            }} loadMore={this.loadHomes.bind(this)}/>);
     }
 }
-class HomeDetails extends React.PureComponent {
+
+class Property extends React.PureComponent {
     priceFormatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
         minimumFractionDigits: 0
     });
-    render() {
-        return (<div css={{
-                padding: HOME_DETAILS_PADDING
-            }} {...this.props}>
-            <span>{this.priceFormatter.format(this.props.price)}</span>
-        </div>);
-    }
-}
-class Home extends React.PureComponent {
     render() {
         return (<Link css={{
                 boxShadow: '0 3px 5px -1px rgba(0,0,0,.2),0 6px 10px 0 rgba(0,0,0,.14),0 1px 18px 0 rgba(0,0,0,.12)',
@@ -57,7 +60,9 @@ class Home extends React.PureComponent {
                     transform: 'translateY(-5px)',
                     boxShadow: '0 6px 7px -4px rgba(0,0,0,.2),0 11px 15px 1px rgba(0,0,0,.14),0 4px 20px 3px rgba(0,0,0,.12)'
                 }
-            }} to={`/properties/123456789`} {...this.props}>
+            }} to={{
+                pathname: `/properties/${this.props.id}`
+            }} {...this.props}>
 
             {/* Image Container */}
             <div css={{
@@ -72,14 +77,22 @@ class Home extends React.PureComponent {
                 <div css={{
                         position: 'absolute',
                         bottom: 0,
-                        padding: `0.6em ${HOME_DETAILS_PADDING}`,
+                        padding: `0.6em 0.5em`,
                         color: 'white',
                         textShadow: '1px 1px 1px black'
-                    }}>{this.props.street}</div>
+                    }}>{this.props.address}</div>
             </div>
 
-            <HomeDetails price={this.props.price}/>
+            <div css={{
+                    padding: '0.5em'
+                }} className={this.props.className}>
+                <span>{this.priceFormatter.format(this.props.details.price)}</span>
+            </div>
         </Link>);
+    }
+    static defaultProps = {
+        address: '',
+        details: {}
     }
 }
 class Filter extends React.Component {
@@ -111,7 +124,13 @@ class Filter extends React.Component {
                     marginBottom: '1.5em'
                 }}/>
 
-            <AutoComplete placeholder="Location" data={require('../assets/data/usCounties.json')} settings={{keys: ['name', 'state'], threshold: 0.2, distance: 3}} css={{
+            <AutoComplete placeholder="Location" data={require('../assets/data/usCounties.json')} settings={{
+                    keys: [
+                        'name', 'state'
+                    ],
+                    threshold: 0.2,
+                    distance: 3
+                }} css={{
                     width: '100%',
                     marginBottom: '1.5em'
                 }}/>
@@ -226,18 +245,14 @@ export default class Container extends React.PureComponent {
     state = {
         filters: {}
     }
-    filter(data) {
-        // TODO: use this.state.filters to filter data
-        return data;
-    }
     render() {
-        const filteredData = this.filter(DATA.concat(DATA).concat(DATA).concat(DATA));
+        console.log(this.state)
         return (<div css={{
                 display: 'flex',
                 justifyContent: 'flex-stretch',
                 height: '100%'
             }}>
-            <Filter filters={this.state.filters}/>
+            <Filter onChange={(filters) => this.setState({filters})}/>
             <div css={{
                     flex: 1,
                     display: 'flex',
@@ -245,136 +260,8 @@ export default class Container extends React.PureComponent {
                 }}>
                 <Listings css={{
                         flex: 1
-                    }} listings={filteredData}/>
+                    }} filters={this.filters}/>
             </div>
         </div>);
     }
 }
-
-const DATA = [
-    {
-        id: 1,
-        homeType: 'Houses',
-        address: '6231 Hacienda Pl',
-        city: 'Hollywood',
-        state: 'CA',
-        bedroom: 4,
-        bathroom: 3,
-        price: 850000,
-        squareFeet: 3115,
-        lotSize: 4312,
-        // features: [
-        //   'Garage',
-        //   'Swimming Pool',
-        //   'Fireplace'
-        // ],
-        Garage: true,
-        Swimming_Pool: true,
-        Fireplace: true,
-        Guest_House: false,
-        image: './img/house_1.jpg'
-    }, {
-        id: 2,
-        homeType: 'Condos',
-        address: '511 Clark Way',
-        city: 'Malibu',
-        state: 'CA',
-        bedroom: 3,
-        bathroom: 2,
-        price: 720000,
-        squareFeet: 2785,
-        lotSize: 4115,
-        // features: [
-        //   'Garage',
-        //   'Fireplace',
-        // ],
-        Garage: true,
-        Swimming_Pool: false,
-        Fireplace: true,
-        Guest_House: false,
-        image: './img/house_2.jpg'
-    }, {
-        id: 3,
-        homeType: 'Townhomes',
-        address: '745 Granada Ave',
-        city: 'Brentwood',
-        state: 'CA',
-        bedroom: 3,
-        bathroom: 3,
-        price: 785000,
-        squareFeet: 2825,
-        lotSize: 3824,
-        // features: [
-        //   'Garage',
-        //   'Swimming Pool'
-        // ],
-        Garage: true,
-        Swimming_Pool: true,
-        Fireplace: false,
-        Guest_House: false,
-        image: './img/house_3.jpg'
-    }, {
-        id: 4,
-        homeType: 'Houses',
-        address: '2113 Park Pl',
-        city: 'Hollywood',
-        state: 'CA',
-        bedroom: 4,
-        bathroom: 4,
-        price: 885000,
-        squareFeet: 3815,
-        lotSize: 4798,
-        // features: [
-        //   'Garage',
-        //   'Swimming Pool',
-        //   'Fireplace'
-        // ],
-        Garage: true,
-        Swimming_Pool: true,
-        Fireplace: true,
-        Guest_House: false,
-        image: './img/house_4.jpg'
-    }, {
-        id: 5,
-        homeType: 'Condos',
-        address: '638 Hollints Ct',
-        city: 'Downey',
-        state: 'CA',
-        bedroom: 2,
-        bathroom: 2,
-        price: 620000,
-        squareFeet: 2815,
-        lotSize: 4035,
-        // features: [
-        //   'Garage',
-        //   'Fireplace'
-        // ],
-        Garage: true,
-        Swimming_Pool: false,
-        Fireplace: true,
-        Guest_House: false,
-        image: './img/house_5.jpg'
-    }, {
-        id: 6,
-        homeType: 'Houses',
-        address: '854 Summit Dr',
-        city: 'Beverly Hills',
-        state: 'CA',
-        bedroom: 4,
-        bathroom: 3,
-        price: 970000,
-        squareFeet: 4316,
-        lotSize: 6295,
-        // features: [
-        //   'Garage',
-        //   'Swimming Pool',
-        //   'Fireplace',
-        //   'Guest House'
-        // ],
-        Garage: true,
-        Swimming_Pool: true,
-        Fireplace: true,
-        Guest_House: true,
-        image: './img/house_6.jpg'
-    }
-];
