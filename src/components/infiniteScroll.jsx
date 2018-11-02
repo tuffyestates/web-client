@@ -53,7 +53,7 @@ export default class InfiniteScroll extends React.PureComponent {
     });
     render() {
         // onWheel={this.handleScroll.bind(this)}
-        return (<div {...this.props} ref={this.container}>
+        return (<div className={this.props.className} ref={this.container}>
             {this.state.content}
             {this.props.children}
         </div>);
