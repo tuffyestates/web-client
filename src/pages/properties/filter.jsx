@@ -8,19 +8,7 @@ import US_COUNTIES from '../../assets/data/usCounties.json';
 
 export default class Filter extends React.Component {
     render() {
-        return (<div css={{
-
-                fontFamily: 'cabin',
-                fontWeight: '200',
-
-                margin: '20px 0 0 0',
-                // borderRadius: '5px',
-                backgroundColor: Colors.blue,
-                color: 'white',
-                width: 400,
-                padding: '1em 2em',
-                overflow: 'auto'
-            }} {...this.props}>
+        return (<div {...this.props}>
             <h3 style={{
                     textAlign: 'center'
                 }}>Filters</h3>
