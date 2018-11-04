@@ -18,25 +18,12 @@ import Parser from './parser.worker';
 const ComponentSources = require.context('!raw-loader!../../components/', false, /\.jsx$/);
 const Components = require.context('../../components/', false, /\.jsx$/);
 
-class Comp extends React.PureComponent {
+class Component extends React.PureComponent {
     state = {
-        parser: new Parser(),
-        component: null,
-        props: this.props.component.docProps || {},
-        details: {
-            displayName: 'Loading...'
-        }
-    };
-    constructor(props) {
-        super(props);
-        this.state.parser.onmessage = e => {
-            this.setState({details: e.data});
-        };
-        this.state.parser.postMessage(props.source);
+        props: this.props.component.docProps || {}
     }
-
     render() {
-        const details = this.state.details;
+        const details = this.props.details;
         const componentProps = details.props || {};
         const description = details.description
             ? <h4>details.description</h4>
@@ -76,13 +63,11 @@ class Comp extends React.PureComponent {
                 marginBottom: '4em',
                 fontSize: '1.1em'
             }}>
-            <h2 css={{
-                    backgroundImage: `linear-gradient(to right, ${Colors.darkblue}, ${Colors.blue})`,
-                    color: 'white',
+            <h3 css={{
                     padding: '0.5em 1em',
-                    marginTop: '2em',
+                    marginTop: '1em',
                     boxShadow: '0 5px 6px -2px #0000004d'
-                }}>{details.displayName}</h2>
+                }}>{details.displayName}</h3>
             <div css={{
                     paddingLeft: '2em'
                 }}>{description}
@@ -108,6 +93,37 @@ class Comp extends React.PureComponent {
                     }}>{example}</div>
             </div>
         </div>);
+    }
+}
+
+class ComponentFile extends React.PureComponent {
+    parser = new Parser();
+    state = {
+        components: []
+    };
+    constructor(props) {
+        super(props);
+        this.parser.onmessage = e => {
+            this.setState({components: e.data});
+        };
+        this.parser.postMessage(props.source);
+    }
+
+    render() {
+        const components = this.state.components.map(c => {
+            const component = this.props.fileComponents[c.displayName] || this.props.fileComponents.default;
+            return (<Component key={c.displayName} component={component} details={c}/>);
+        });
+        return (<React.Fragment>
+            <h2 css={{
+                    backgroundImage: `linear-gradient(to right, ${Colors.darkBlue}, ${Colors.blue})`,
+                    color: 'white',
+                    padding: '0.5em 1em',
+                    marginTop: '2em',
+                    boxShadow: '0 5px 6px -2px #0000004d'
+                }}>{this.props.fileComponents.default.name}</h2>
+            {components}
+        </React.Fragment>);
     }
 }
 
@@ -139,15 +155,18 @@ class Navbar extends React.PureComponent {
 }
 
 export default class Docs extends React.PureComponent {
+    state = {
+        files: []
+    };
     constructor(props) {
         super(props);
-        const components = Components.keys().map(componentPath => ({component: Components(componentPath).default, source: ComponentSources(componentPath)}));
+        const files = Components.keys().map(componentPath => ({fileComponents: Components(componentPath), source: ComponentSources(componentPath)}));
         this.state = {
-            components
+            files
         };
     }
     render() {
-        const docs = this.state.components.map(component => (<Comp key={component.component.name} component={component.component} source={component.source}/>));
+        const docs = this.state.files.map(f => (<ComponentFile fileComponents={f.fileComponents} source={f.source}/>));
         return (<div css={{
                 fontFamily: 'monospace',
                 padding: '1em'
@@ -161,7 +180,7 @@ export default class Docs extends React.PureComponent {
                 }}>
                 <Navbar css={{
                         width: 200
-                    }} links={this.state.components.map(component => component.component.name)}/>
+                    }} links={this.state.files.map(component => component.fileComponents.default.name)}/>
                 <div style={{
                         flex: 1
                     }}>{docs}</div>

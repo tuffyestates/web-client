@@ -13,6 +13,7 @@ export default new Proxy({
 
 function generateColor(colors, request) {
     let [modifier, color] = request.split(/(?=[A-Z])/);
+    color = color || modifier;
     const colorCode = colors[color.toLowerCase()];
     const processor = chroma(colorCode);
     switch (modifier) {
