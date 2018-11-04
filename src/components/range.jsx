@@ -4,7 +4,7 @@ import Colors from '../colors';
 import {jsx} from '@emotion/core';
 import PropTypes from 'prop-types';
 
-import {Input} from './';
+import {Form} from './';
 
 export default class Range extends React.PureComponent {
     render() {
@@ -20,9 +20,9 @@ export default class Range extends React.PureComponent {
                 }
             }} className={this.props.className}>
 
-            <Input type="number" pattern="\d" inputMode="numeric" styep={this.props.step} min={this.props.min} max={this.props.max} placeholder={this.props.min} suffix={this.props.suffix} prefix={this.props.prefix}/> {this.props.children}
+            <Form.Input type="number" pattern="\d" inputMode="numeric" styep={this.props.step} min={this.props.min} max={this.props.max} placeholder={this.props.min} suffix={this.props.suffix} prefix={this.props.prefix}/> {this.props.children}
 
-            <Input type="number" pattern="\d" inputMode="numeric" styep={this.props.step} min={this.props.min} max={this.props.max} placeholder={this.props.max} suffix={this.props.suffix} prefix={this.props.prefix}/>
+            <Form.Input type="number" pattern="\d" inputMode="numeric" styep={this.props.step} min={this.props.min} max={this.props.max} placeholder={this.props.max} suffix={this.props.suffix} prefix={this.props.prefix}/>
 
         </div>);
     }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Input, Button} from '../components';
+import {Form, Button} from '../components';
 import Colors from '../colors';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 /** @jsx jsx */
@@ -35,8 +35,8 @@ class Register extends React.PureComponent {
                 justifyContent: 'center',
                 flexDirection: 'column',
                 alignItems: 'center',
-                marginTop: 14,
-                height: '95%',
+                marginBottom: '1em',
+                height: 'calc(100% - 1em)',
                 overflow: 'hidden',
                 backgroundImage: `url(${require('../assets/images/shifaaz-shamoon-1113391-unsplash.jpg?size=2000')})`,
                 backgroundSize: 'cover',
@@ -70,8 +70,8 @@ class Register extends React.PureComponent {
                         flexDirection: 'column',
                         alignItems: 'center'
                     }} onSubmit={this.register}>
-                    <Input css={{marginBottom: '1em'}} prefix={(<FontAwesomeIcon icon="user"/>)} placeholder="Username" name="username" message={this.state.error}/>
-                    <Input css={{marginBottom: '2em'}} prefix={(<FontAwesomeIcon icon="lock"/>)} placeholder="Password" type="password" name="password" message={this.state.message}/>
+                    <Form.Input css={{marginBottom: '1em'}} prefix={(<FontAwesomeIcon icon="user"/>)} placeholder="Username" name="username" message={this.state.error}/>
+                    <Form.Input css={{marginBottom: '2em'}} prefix={(<FontAwesomeIcon icon="lock"/>)} placeholder="Password" type="password" name="password" message={this.state.message}/>
                     <Button>Register</Button>
                 </form>
             </div>

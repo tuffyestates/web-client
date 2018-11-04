@@ -11,7 +11,7 @@ import theme from 'react-syntax-highlighter/styles/prism/vs';
 registerLanguage('jsx', language);
 
 import Colors from '../../colors';
-import {Input} from '../../components';
+import {Form} from '../../components';
 import Parser from './parser.worker';
 
 // Find all components and load their sources
@@ -52,7 +52,7 @@ class Component extends React.PureComponent {
             };
 
             return (<React.Fragment key={propName}>
-                <Input css={{
+                <Form.Input css={{
                         marginBottom: '1em'
                     }} prefix={propName} suffix={propType} message={prop.description} placeholder={placeholder} defaultValue={JSON.stringify(this.state.props[propName])} onChange={onChange}/>
             </React.Fragment>);
@@ -110,18 +110,20 @@ class ComponentFile extends React.PureComponent {
     }
 
     render() {
+        // FIXME: this.state.components contains unexported classes, like Link
+        // from navbar.jsx
         const components = this.state.components.map(c => {
             const component = this.props.fileComponents[c.displayName] || this.props.fileComponents.default;
             return (<Component key={c.displayName} component={component} details={c}/>);
         });
         return (<React.Fragment>
-            <h2 css={{
+            <h2 id={this.props.fileName} css={{
                     backgroundImage: `linear-gradient(to right, ${Colors.darkBlue}, ${Colors.blue})`,
                     color: 'white',
                     padding: '0.5em 1em',
                     marginTop: '2em',
                     boxShadow: '0 5px 6px -2px #0000004d'
-                }}>{this.props.fileComponents.default.name}</h2>
+                }}>{this.props.fileName}</h2>
             {components}
         </React.Fragment>);
     }
@@ -160,13 +162,13 @@ export default class Docs extends React.PureComponent {
     };
     constructor(props) {
         super(props);
-        const files = Components.keys().map(componentPath => ({fileComponents: Components(componentPath), source: ComponentSources(componentPath)}));
+        const files = Components.keys().map(componentPath => ({path: componentPath, fileComponents: Components(componentPath), source: ComponentSources(componentPath)}));
         this.state = {
             files
         };
     }
     render() {
-        const docs = this.state.files.map(f => (<ComponentFile fileComponents={f.fileComponents} source={f.source}/>));
+        const docs = this.state.files.map(f => (<ComponentFile key={f.path} fileName={f.path} fileComponents={f.fileComponents} source={f.source}/>));
         return (<div css={{
                 fontFamily: 'monospace',
                 padding: '1em'
@@ -180,7 +182,7 @@ export default class Docs extends React.PureComponent {
                 }}>
                 <Navbar css={{
                         width: 200
-                    }} links={this.state.files.map(component => component.fileComponents.default.name)}/>
+                    }} links={this.state.files.map(component => component.path)}/>
                 <div style={{
                         flex: 1
                     }}>{docs}</div>

@@ -1,6 +1,6 @@
 export {default as Navbar} from "./navbar";
 export {default as Footer} from "./footer";
-export {default as Input} from "./input";
+export * as Form from "./form";
 export {default as Button} from "./button";
 export {default as Range} from "./range";
 export {default as SelectEnum} from "./selectEnum";

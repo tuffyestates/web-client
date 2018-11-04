@@ -4,7 +4,7 @@ import Colors from '../colors';
 import {jsx} from '@emotion/core';
 import PropTypes from 'prop-types';
 
-export default class Input extends React.PureComponent {
+export class Input extends React.PureComponent {
     render() {
         let message = null,
             prefix = null,
@@ -19,7 +19,7 @@ export default class Input extends React.PureComponent {
                 }}>{this.props.message}</div>);
         }
         if (this.props.prefix) {
-            prefix = <span css={{
+            prefix = (<span css={{
                     backgroundColor: '#F2F2F2',
                     display: 'flex',
                     justifyContent: 'center',
@@ -29,10 +29,10 @@ export default class Input extends React.PureComponent {
                     borderRight: '1px solid #C1C1C1'
                 }}>
                 {this.props.prefix}
-            </span>;
+            </span>);
         }
         if (this.props.suffix) {
-            suffix = <span css={{
+            suffix = (<span css={{
                     backgroundColor: '#F2F2F2',
                     display: 'flex',
                     justifyContent: 'center',
@@ -42,29 +42,42 @@ export default class Input extends React.PureComponent {
                     borderLeft: '1px solid #C1C1C1'
                 }}>
                 {this.props.suffix}
-            </span>;
+            </span>);
         }
-        return (<div css={{
+
+        const passthroughInputProps = {
+            name: this.props.name,
+            value: this.props.value,
+            defaultValue: this.props.defaultValue,
+            placeholder: this.props.placeholder,
+            disabled: this.props.disabled,
+            type: this.props.type,
+            readOnly: this.props.readOnly,
+            onChange: this.props.onChange,
+            min: this.props.min,
+            max: this.props.max,
+        }
+
+        return (<div css={[{
                 minWidth: 0,
-            }} className={this.props.className}>
+                border: '1px solid #C1C1C1',
+                borderBottom: message
+                    ? 'none'
+                    : '1px solid #C1C1C1'
+            }, this.props.className]}>
             <div css={{
-                    display: 'flex',
-                    border: '1px solid #C1C1C1',
-                    borderBottom: message
-                        ? 'none'
-                        : '1px solid #C1C1C1'
+                    display: 'flex'
                 }}>
                 {prefix}
-                <input {...this.props} className='' css={{
+                <input {...passthroughInputProps} css={Object.assign({
                         flex: 1,
                         padding: '0.5em 0.8em',
                         border: 'none',
                         minWidth: 0,
-                        '::placeholder': {
-                            color: '#A8A8A8',
+                        '::placeholder' : {
+                            color: '#A8A8A8'
                         },
-                        ...this.props.inputStyle
-                    }}/> {suffix}
+                    }, this.props.inputStyle)}/> {suffix}
             </div>
             {message}
             {this.props.children}
@@ -74,7 +87,7 @@ export default class Input extends React.PureComponent {
         error: {
             borderColor: '#CB3837',
             backgroundColor: '#FEF2F2',
-            color: '#CB3837',
+            color: '#CB3837'
         }
     };
     static propTypes = {
@@ -93,7 +106,7 @@ export default class Input extends React.PureComponent {
         /**
          * Information displayed after the input
          */
-        suffix: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+        suffix: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
     };
     static defaultProps = {};
     static docProps = {

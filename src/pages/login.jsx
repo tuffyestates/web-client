@@ -1,5 +1,5 @@
 import React from 'react';
-import {Input, Button} from '../components';
+import {Form, Button} from '../components';
 import Colors from '../colors';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {Subscribe} from 'react-contextual';
@@ -59,8 +59,8 @@ class Login extends React.PureComponent {
                         flexDirection: 'column',
                         alignItems: 'center'
                     }} onSubmit={this.login}>
-                    <Input prefix={(<FontAwesomeIcon icon="user"/>)} placeholder="Username" name="username" message={this.state.error}/>
-                    <Input prefix={(<FontAwesomeIcon icon="lock"/>)} placeholder="Password" type="password" name="password" message={this.state.message}/>
+                    <Form.Input prefix={(<FontAwesomeIcon icon="user"/>)} placeholder="Username" name="username" message={this.state.error}/>
+                    <Form.Input prefix={(<FontAwesomeIcon icon="lock"/>)} placeholder="Password" type="password" name="password" message={this.state.message}/>
                     <Button>Login</Button>
                 </form>
             </div>
