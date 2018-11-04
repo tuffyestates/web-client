@@ -36,7 +36,8 @@ const App = () => (<Provider store={Account}>
             <div css={{
                     flex: 1,
                     backgroundColor: '#FAFAFA',
-                    overflow: 'auto'
+                    overflow: 'auto',
+                    paddingTop: '1em'
                 }}>
                 <Suspense fallback={(<div></div>)}>
                     <Switch>

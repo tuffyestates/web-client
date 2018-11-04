@@ -18,6 +18,7 @@ export default class Property extends React.PureComponent {
                 margin: '1em',
                 flex: 1,
                 minWidth: 400,
+                maxWidth: 500,
                 borderRadius: 2,
                 overflow: 'hidden',
                 transition: 'all 0.3s',

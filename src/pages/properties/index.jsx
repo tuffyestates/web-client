@@ -1,6 +1,7 @@
 import React from 'react';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
+import {Link} from 'react-router-dom';
 
 import {Primary} from '../../components/button';
 import Colors from '../../colors';
@@ -18,12 +19,12 @@ export default class Container extends React.PureComponent {
                 height: '100%'
             }}>
             <div css={{
-                    width: 400,
+                    width: 500,
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'stretch'
                 }}>
-                <Primary>Post a Listing</Primary>
+                <Link to="/properties/create"><Primary css={{width: '100%'}}>Post a Listing</Primary></Link>
                 <Filter css={{
                         fontFamily: 'cabin',
                         fontWeight: '200',

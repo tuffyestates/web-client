@@ -106,7 +106,7 @@ export default class Home extends React.Component {
 
     render() {
         return (<React.Fragment><Jumbotron css={{
-                margin: '1em 0',
+                marginBottom: '1em',
                 height: 450,
                 maxHeight: '80vh'
             }}/>
