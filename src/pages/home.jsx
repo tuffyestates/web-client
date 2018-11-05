@@ -43,7 +43,7 @@ class Jumbotron extends React.PureComponent {
                 position: 'relative',
                 overflow: 'hidden'
             }}>
-            <Link to='/properties' css={{
+            <Link to='/properties/create' css={{
                     ...this.style.container,
                     left: -5,
                     transform: 'translateX(-20px)',

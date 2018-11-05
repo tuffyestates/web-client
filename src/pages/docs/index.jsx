@@ -2,7 +2,6 @@ import React from 'react';
 // import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import {Link} from 'react-router-dom';
 
 // Load a bunch of code processing libraries
 import SyntaxHighlighter, {registerLanguage} from "react-syntax-highlighter/prism-light";
@@ -47,8 +46,16 @@ class Component extends React.PureComponent {
                             [propName]: value
                         }
                     });
-                    // eslint-disable-next-line no-empty
-                } catch (e) {}
+                } catch (err) {
+                    if (e.target.value === '') {
+                        this.setState({
+                            props: {
+                                ...this.state.props,
+                                [propName]: undefined
+                            }
+                        });
+                    }
+                }
             };
 
             return (<React.Fragment key={propName}>
