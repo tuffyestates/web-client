@@ -1,19 +1,21 @@
 import React, {Suspense} from 'react';
 import {hot} from 'react-hot-loader';
 import {Helmet} from "react-helmet";
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import {Provider} from 'react-contextual';
-import {library} from '@fortawesome/fontawesome-svg-core';
-import {faLock, faUser, faHome, faHandHoldingUsd, faSearch, faCheck} from '@fortawesome/free-solid-svg-icons';
-import {faEdit} from '@fortawesome/free-regular-svg-icons';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 
 import * as Pages from './pages';
-import {Navbar, Footer} from './components';
+import {Navbar, Footer, LoadingAnimation} from './components';
 import {Account} from './contexts';
 
-library.add(faLock, faUser, faHome, faHandHoldingUsd, faSearch, faCheck, faEdit);
+const LoadingScreen = (<div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100%'
+    }}><LoadingAnimation/></div>);
 
 const App = () => (<Provider store={Account}>
     <Router>
@@ -23,7 +25,7 @@ const App = () => (<Provider store={Account}>
                 overflow: 'hidden',
                 flexDirection: 'column',
                 color: '#333',
-                'input': {
+                'input' : {
                     color: 'inherit',
                     fontFamily: 'inherit',
                     fontWeight: 'inherit'
@@ -39,15 +41,18 @@ const App = () => (<Provider store={Account}>
                     overflow: 'auto',
                     paddingTop: '1em'
                 }}>
-                <Suspense fallback={(<div></div>)}>
+                <Suspense fallback={LoadingScreen}>
                     <Switch>
                         <Route exact={true} path="/" component={Pages.Home}/>
+                        <Route path="/properties/create" component={Pages.Property}/>
+                        <Route path="/properties/edit/:id" component={Pages.Property}/>
                         <Route path="/properties/:id" component={Pages.Property}/>
                         <Route path="/properties" component={Pages.Properties}/>
                         <Route path="/register" component={Pages.Register}/>
                         <Route path="/login" component={Pages.Login}/>
                         <Route path="/api" component={Pages.API}/>
                         <Route path="/docs" component={Pages.Docs}/>
+                        <Route path="/logout" render={() => <Redirect to="/login"/>}/>
                         <Route component={Pages.FourOFour}/>
                     </Switch>
                 </Suspense>

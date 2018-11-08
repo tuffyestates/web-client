@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faHome, faHandHoldingUsd, faSearch} from '@fortawesome/free-solid-svg-icons';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 
@@ -121,9 +122,9 @@ export default class Home extends React.Component {
                     margin: '2em auto',
                     maxWidth: 1080
                 }}>
-                <InfoCircle icon="home" text="Search through over 25 different properties"/>
-                <InfoCircle icon="hand-holding-usd" text="Define your budget, along with 22 other parameters"/>
-                <InfoCircle icon="search" text="Find the perfect home for you and your family"/>
+                <InfoCircle icon={faHome} text="Search through over 25 different properties"/>
+                <InfoCircle icon={faHandHoldingUsd} text="Define your budget, along with 22 other parameters"/>
+                <InfoCircle icon={faSearch} text="Find the perfect home for you and your family"/>
             </div>
         </React.Fragment>);
     }

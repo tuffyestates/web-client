@@ -1,10 +1,15 @@
 const path = require('path');
-const Package = require('./package.json');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const webpack = require('webpack');
 const GoogleFontsPlugin = require('@beyonk/google-fonts-webpack-plugin');
+const DynamicCdnWebpackPlugin = require('dynamic-cdn-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const zopfli = require('@gfx/zopfli');
+const PreloadWebpackPlugin = require('preload-webpack-plugin');
+
+const Package = require('./package.json');
 
 module.exports = (env, argv) => {
     return {
@@ -32,18 +37,6 @@ module.exports = (env, argv) => {
                         loader: 'style-loader'
                     }, {
                         loader: 'css-loader'
-                    }]
-                },
-
-                // Needed to load api theme
-                {
-                    test: /\.scss$/,
-                    use: [{
-                        loader: 'style-loader'
-                    }, {
-                        loader: 'css-loader'
-                    }, {
-                        loader: 'sass-loader'
                     }]
                 },
 
@@ -107,7 +100,7 @@ module.exports = (env, argv) => {
                         subsets: ['latin']
                     }
                 ]
-            })
+            }),
         ].concat(argv.mode === 'production' ? [new BundleAnalyzerPlugin({
                 analyzerMode: 'static',
                 openAnalyzer: false
@@ -115,6 +108,17 @@ module.exports = (env, argv) => {
             new webpack.EnvironmentPlugin({
                 STATIC_PATH: `https://tuffyestates.sparling.us:1163${process.env.BRANCH === 'dev' ? '7': '8'}/static`,
                 API_PATH: `https://tuffyestates.sparling.us:1163${process.env.BRANCH === 'dev' ? '7': '8'}/api`
+            }),
+            new DynamicCdnWebpackPlugin(),
+            new CompressionPlugin({
+                compressionOptions: {
+                    numiterations: 15
+                },
+                algorithm: zopfli.gzip
+            }),
+            new PreloadWebpackPlugin({
+                rel: 'prefetch',
+                include: 'allAssets',
             })
         ] : [
             new webpack.EnvironmentPlugin({

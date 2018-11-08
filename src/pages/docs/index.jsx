@@ -8,14 +8,12 @@ import SyntaxHighlighter, {registerLanguage} from "react-syntax-highlighter/pris
 import language from 'react-syntax-highlighter/languages/prism/jsx';
 import theme from 'react-syntax-highlighter/styles/prism/vs';
 registerLanguage('jsx', language);
+import {HashLink} from 'react-router-hash-link';
 
 import Colors from '../../colors';
 import {Form} from '../../components';
-import Parser from './parser.worker';
 
-// Find all components and load their sources
-const ComponentSources = require.context('!raw-loader!../../components/', false, /\.jsx$/);
-const Components = require.context('../../components/', false, /\.jsx$/);
+const Components = require.context('../../components/', true, /\.jsx$/);
 
 class Component extends React.PureComponent {
     state = {
@@ -90,7 +88,8 @@ class Component extends React.PureComponent {
                 <SyntaxHighlighter language='javascript' style={theme} css={{
                         marginBottom: '0 !important',
                         border: '1px solid lightgrey',
-                        borderBottom: 'none'
+                        borderBottom: 'none',
+                        overflow: 'auto'
                     }}>{`<${details.displayName}${propsToString(this.state.props)}/>`}</SyntaxHighlighter>
                 <div css={{
                         backgroundColor: '#efefef',
@@ -104,24 +103,10 @@ class Component extends React.PureComponent {
 }
 
 class ComponentFile extends React.PureComponent {
-    parser = new Parser();
-    state = {
-        components: []
-    };
-    constructor(props) {
-        super(props);
-        this.parser.onmessage = e => {
-            this.setState({components: e.data});
-        };
-        this.parser.postMessage(props.source);
-    }
-
     render() {
-        // FIXME: this.state.components contains unexported classes, like Link
-        // from navbar.jsx
-        const components = this.state.components.map(c => {
-            const component = this.props.fileComponents[c.displayName] || this.props.fileComponents.default;
-            return (<Component key={c.displayName} component={component} details={c}/>);
+        const components = this.props.spec.map(s => {
+            const component = this.props.components[s.displayName] || this.props.components.default;
+            return (<Component key={s.displayName} component={component} details={s}/>);
         });
         return (<React.Fragment>
             <h2 id={this.props.fileName} css={{
@@ -144,7 +129,7 @@ class Navbar extends React.PureComponent {
         }
     }
     render() {
-        const links = this.props.links.map(linkName => (<span css={{
+        const links = this.props.links.map(linkName => (<HashLink css={{
                 display: 'block',
                 textDecoration: 'none',
                 padding: '1em',
@@ -155,7 +140,7 @@ class Navbar extends React.PureComponent {
                     backgroundColor: Colors.blue,
                     color: 'white'
                 }
-            }} key={linkName} onClick={() => this.goTo(linkName)}>{linkName}</span>));
+            }} key={linkName} to={`#${linkName}`}>{linkName}</HashLink>));
         return (<div css={{
                 position: 'sticky',
                 top: 0
@@ -165,17 +150,10 @@ class Navbar extends React.PureComponent {
 
 export default class Docs extends React.PureComponent {
     state = {
-        files: []
+        files: require('./gen-docs')
     };
-    constructor(props) {
-        super(props);
-        const files = Components.keys().map(componentPath => ({path: componentPath, fileComponents: Components(componentPath), source: ComponentSources(componentPath)}));
-        this.state = {
-            files
-        };
-    }
     render() {
-        const docs = this.state.files.map(f => (<ComponentFile key={f.path} fileName={f.path} fileComponents={f.fileComponents} source={f.source}/>));
+        const docs = this.state.files.map(f => (<ComponentFile key={f.relativePath} fileName={f.relativePath} spec={f.spec} components={Components(f.relativePath)}/>));
         return (<div css={{
                 fontFamily: 'monospace',
                 padding: '1em'
@@ -187,11 +165,10 @@ export default class Docs extends React.PureComponent {
                     display: 'flex',
                     alignItems: 'flex-start'
                 }}>
-                <Navbar css={{
-                        width: 200
-                    }} links={this.state.files.map(component => component.path)}/>
+                <Navbar links={this.state.files.map(component => component.relativePath)}/>
                 <div style={{
-                        flex: 1
+                        flex: '0 1 auto',
+                        minWidth: 0
                     }}>{docs}</div>
             </div>
 

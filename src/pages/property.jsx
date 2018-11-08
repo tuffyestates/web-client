@@ -1,12 +1,14 @@
 import React from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faEdit} from '@fortawesome/free-regular-svg-icons';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import Set from 'lodash.set';
 
 import Colors from '../colors';
-import {ProgressiveImage, Editable} from '../components';
+import {ProgressiveImage, Editable, LoadingAnimation} from '../components';
 import {Primary} from '../components/button';
+import api from '../api';
 
 // Formats a numerical price into a localized string
 const priceFormatter = new Intl.NumberFormat('en-US', {
@@ -26,22 +28,24 @@ class EditButton extends React.PureComponent {
                 display: this.props.show
                     ? 'block'
                     : 'none'
-            }} className={this.props.className} style={this.props.style} onClick={this.props.onClick} icon={['far', 'edit']}/>);
+            }} className={this.props.className} style={this.props.style} onClick={this.props.onClick} icon={faEdit}/>);
     }
 }
 
-class ImageHeader extends React.Component {
+class ImageHeader extends React.PureComponent {
     fileInput = React.createRef();
     uploadPhoto = (e) => {
         this.fileInput.current.click();
     }
     render() {
-
-        // Define path for thumbnail (Really low resolution of the actual image)
-        const thumbnailImageSrc = this.props.previewImage || `${process.env.STATIC_PATH}/property/image/${this.props.property.id}-thumbnail.jpg`;
-
-        // Define path for actual image
-        const imageSrc = `${process.env.STATIC_PATH}/property/image/${this.props.property.id}.jpg`;
+        let thumbnailImageSrc,
+            imageSrc;
+        if (this.props.property._id) {
+            // Define path for thumbnail (Really low resolution of the actual image)
+            thumbnailImageSrc = this.props.previewImage || `${process.env.STATIC_PATH}/property/image/${this.props.property._id}-thumbnail.jpg`;
+            // Define path for actual image
+            imageSrc = `${process.env.STATIC_PATH}/property/image/${this.props.property._id}.jpg`;
+        }
 
         return (<div css={{
                 width: '100%'
@@ -54,7 +58,7 @@ class ImageHeader extends React.Component {
                         objectFit: 'cover',
                         width: '100%'
                     }}/>
-                <input ref={this.fileInput} name="property.image" type="file" hidden={true}/>
+                <input ref={this.fileInput} name="image" type="file" hidden={true}/>
                 <EditButton style={{
                         color: 'white',
                         filter: 'drop-shadow(black 1px 1px 1px)',
@@ -75,12 +79,19 @@ class ImageHeader extends React.Component {
                         fontSize: '1.2em',
                         padding: '1em 0'
                     }}>
-                    <Editable.Input editable={this.props.editable} onChange={this.props.onChange} name="property.address" placeholder="Address" value={this.props.property.address} inputStyle={{
+                    <Editable.Input autoFocus={this.props.editable} editable={this.props.editable} onChange={this.props.onChange} name="address" placeholder="Address" value={this.props.property.address} inputStyle={{
                             '::placeholder' : {
                                 color: 'white'
                             }
                         }}/>
-                    <Editable.Input editable={this.props.editable} onChange={this.props.onChange} name="property.price" placeholder="Price" value={this.props.property.price} inputStyle={{
+                    <Editable.Input editable={this.props.editable} onChange={e => this.props.onChange({
+                            target: {
+                                name: e.target.name,
+                                value: parseLocaleNumber(e.target.value)
+                            }
+                        })} name="price" placeholder="Price" value={this.props.property.price
+                            ? priceFormatter.format(this.props.property.price)
+                            : ''} inputStyle={{
                             direction: 'rtl',
                             textAlign: 'right',
                             '::placeholder' : {
@@ -95,7 +106,7 @@ class ImageHeader extends React.Component {
 export default class Property extends React.Component {
     state = {
         property: {
-            id: this.props.match.params.id
+            _id: this.props.match.params.id
         }
     };
     style = {
@@ -106,43 +117,80 @@ export default class Property extends React.Component {
     };
     constructor(props) {
         super(props);
-        if (this.state.property.id === 'create') {
-            this.state.edit = true;
-            this.state.create = true;
+        if (this.props.match.path === '/properties/create') {
             Object.assign(this.state, {
-                address: '',
-                price: ''
+                create: true,
+                edit: true,
+                property: {
+                    address: '',
+                    price: ''
+                }
             });
         }
 
-        if (this.state.property.id !== 'create')
-            setTimeout(() => {
-                this.setState({
-                    property: {
-                        id: this.state.property.id,
-                        homeType: 'Houses',
-                        address: '6231 Hacienda Pl',
-                        city: 'Hollywood',
-                        state: 'CA',
-                        bedroom: 4,
-                        bathroom: 3,
-                        price: 850000,
-                        squareFeet: 3115,
-                        lotSize: 4312,
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel consequat tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed viverra tincidunt ex in pretium. Quisque iaculis sem eu sagittis pellentesque. Curabitur porta sed ligula in pellentesque. Morbi fermentum aliquam urna eu lobortis. Donec pellentesque massa vel est maximus, ut finibus sem condimentum. Donec a fermentum ligula. Nulla efficitur maximus mauris in suscipit. Duis aliquam gravida dui, et consectetur ligula ornare ac. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc luctus dolor et fringilla dictum.'
-                    }
-                });
-            }, 500);
-
+        // We are not creating a property listing so loads load the information
+        if (!this.state.create) {
+            (async () => {
+                try {
+                    const response = await api.get(`/property/${this.state.property._id}`);
+                    // if (response.data.error) {
+                    //
+                    // }
+                    this.setState({
+                        property: response.data,
+                        edit: this.props.match.path === '/properties/edit'
+                    });
+                } catch (err) {
+                    console.error(err);
+                }
+            })();
         }
+
+    }
     onChange = (e) => {
-        let state = Object.assign({}, this.state);
-        Set(state, e.target.name, e.target.value);
-        this.setState(state);
+        let property = Object.assign({}, this.state.property);
+        Set(property, e.target.name, e.target.value);
+        this.setState({property});
+    }
+    onSubmit = async (e) => {
+        e.preventDefault();
+        this.setState({loading: true});
+        try {
+            if (this.state.create) {
+                const formdata = new FormData(e.currentTarget);
+                const response = await api.post(`/property`, formdata);
+                // if (response.data.error) {
+                //
+                // }
+                console.log(response)
+            } else if (this.state.edit) {
+                // Submit changes
+            }
+        } catch (err) {
+            console.error(err);
+        }
+        this.setState({loading: false});
     }
     render() {
+        if (!this.state.create && !this.state.property._id) {
+            return (<div css={{display: 'flex', justifyContent: 'center', alignContent: 'center', height: '100%'}}><LoadingAnimation/></div>);
+        }
 
-        return (<form>
+        const submitButton = this.state.edit
+            ? (<Primary disabled={this.state.loading} css={{
+                    gridColumnEnd: 'span 2',
+                    marginTop: '2em'
+                }}>{
+                    this.state.create
+                        ? 'Submit'
+                        : 'Save'
+                }</Primary>)
+            : null;
+        const message = this.state.message
+            ? (<div>{this.state.message}</div>)
+            : null;
+        return (<form onSubmit={this.onSubmit}>
+            {message}
             <ImageHeader editable={this.state.edit} onChange={this.onChange} previewImage={this.state.previewImage} property={this.state.property}/>
             <div css={{
                     display: 'grid',
@@ -162,7 +210,7 @@ export default class Property extends React.Component {
                     }}>
                     <h3 css={this.style.header}>Description</h3>
 
-                    <Editable.Textarea name="property.description" editable={this.state.edit} onChange={this.onChange} css={{
+                    <Editable.Textarea name="description" editable={this.state.edit} onChange={this.onChange} css={{
                             width: '100%'
                         }} value={this.state.property.description} placeholder="Description" textareaStyle={{
                             paddingLeft: 0,
@@ -178,15 +226,15 @@ export default class Property extends React.Component {
                     <p>lorem</p>
                 </div>
                 <Primary disabled={this.state.edit}>Contact Owner</Primary>
-                <Primary css={{
-                        gridColumnEnd: 'span 2',
-                        marginTop: '2em'
-                    }}>{
-                        this.state.create
-                            ? 'Submit'
-                            : 'Save'
-                    }</Primary>
+                {submitButton}
             </div>
         </form>);
     }
+}
+
+function parseLocaleNumber(stringNumber) {
+    var thousandSeparator = (1111).toLocaleString().replace(/1/g, '');
+    var decimalSeparator = (1.1).toLocaleString().replace(/1/g, '');
+
+    return parseFloat(stringNumber.replace(/^\D*/, '').replace(new RegExp('\\' + thousandSeparator, 'g'), '').replace(new RegExp('\\' + decimalSeparator), '.'));
 }

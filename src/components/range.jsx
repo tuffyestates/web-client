@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 
 import {Form} from './';
 
+const numberFormatter = new Intl.NumberFormat('en-US');
+
 export default class Range extends React.PureComponent {
     render() {
         return (<div css={{
@@ -20,9 +22,9 @@ export default class Range extends React.PureComponent {
                 }
             }} className={this.props.className}>
 
-            <Form.Input type="number" pattern="\d" inputMode="numeric" styep={this.props.step} min={this.props.min} max={this.props.max} placeholder={this.props.min} suffix={this.props.suffix} prefix={this.props.prefix}/> {this.props.children}
+            <Form.Input type="number" pattern="\d" inputMode="numeric" styep={this.props.step} min={this.props.min} max={this.props.max} placeholder={numberFormatter.format(this.props.min)} suffix={this.props.suffix} prefix={this.props.prefix}/> {this.props.children}
 
-            <Form.Input type="number" pattern="\d" inputMode="numeric" styep={this.props.step} min={this.props.min} max={this.props.max} placeholder={this.props.max} suffix={this.props.suffix} prefix={this.props.prefix}/>
+            <Form.Input type="number" pattern="\d" inputMode="numeric" styep={this.props.step} min={this.props.min} max={this.props.max} placeholder={numberFormatter.format(this.props.max)} suffix={this.props.suffix} prefix={this.props.prefix}/>
 
         </div>);
     }

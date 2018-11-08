@@ -26,6 +26,7 @@ export default class Listings extends React.PureComponent {
             return response.data;
         } catch (e) {
             console.error(e);
+            return [];
         }
     }
     render() {

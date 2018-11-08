@@ -1,5 +1,4 @@
 import React from 'react';
-import Colors from '../colors';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import PropTypes from 'prop-types';
@@ -47,6 +46,7 @@ export class Input extends React.PureComponent {
         }
 
         const passthroughProps = {
+            autoFocus: this.props.autoFocus,
             name: this.props.name,
             value: this.props.value,
             defaultValue: this.props.defaultValue,
@@ -143,6 +143,7 @@ export class Textarea extends React.PureComponent {
         }
 
         const passthroughProps = {
+            autoFocus: this.props.autoFocus,
             name: this.props.name,
             value: this.props.value,
             defaultValue: this.props.defaultValue,

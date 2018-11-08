@@ -5,7 +5,7 @@ import api from '../api';
 
 // This is the global account store's default state
 export default createStore({
-    username: null, // There is no username initial since no user is logged in
+    username: undefined, // There is no username initial since no user is logged in
 
     register: async (formdata) => {
         // Ask the server to register user
@@ -13,12 +13,7 @@ export default createStore({
         try {
             const response = await api.post('/users', formdata);
 
-            /**
-             * For sending a JWT in the Authentication Header
-             * on every request. Just simply edit the axios instance!
-             *
-             * api.defaults.headers.common['Authorization'] = `Bearer ${JWT_access_token}`
-             */
+             api.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
 
             // Now we return what the updated information to the global account store
             return {
@@ -46,12 +41,8 @@ export default createStore({
         try {
             const response = await api.post('/users/login', formdata);
 
-            /**
-             * For sending a JWT in the Authentication Header
-             * on every request. Just simply edit the axios instance!
-             *
-             * api.defaults.headers.common['Authorization'] = `Bearer ${JWT_access_token}`
-             */
+             api.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+
 
             // Now we return what the updated information to the global account store
             return {
@@ -67,11 +58,15 @@ export default createStore({
              */
             throw new Error(error.response.data.error);
             /**
-             * this will print the generic error that the
+             * this will print the generic error that they
              * browser will use upon a failed network request
              */
             // throw new Error(error.message);
         }
     },
+    logout: () => {
+        delete api.defaults.headers.common['Authorization'];
 
+        return {username: undefined};
+    }
 });

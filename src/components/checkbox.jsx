@@ -4,6 +4,7 @@ import {jsx} from '@emotion/core';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faCheck} from '@fortawesome/free-solid-svg-icons';
 
 import Colors from '../colors';
 
@@ -37,7 +38,7 @@ export default class Checkbox extends React.PureComponent {
                         alignItems: 'center',
                         justifyContent: 'center',
                         marginRight: '0.3em'
-                    }}><FontAwesomeIcon className="checkmark" icon="check" style={{
+                    }}><FontAwesomeIcon className="checkmark" icon={faCheck} style={{
                 color: Colors.orange,
                 visibility: 'hidden'
             }}/></div>{this.props.children}</label>

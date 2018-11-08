@@ -21,12 +21,12 @@ class Link extends React.Component {
 
                 '&:hover' : {
                     backgroundColor: Colors.blue,
-                    color: '#fafafa',
+                    color: '#fafafa'
                 }
 
             }} activeStyle={{
                 backgroundColor: Colors.orange,
-                color: '#fafafa',
+                color: '#fafafa'
             }} {...this.props}>
             {this.props.children}
         </RouterLink>);
@@ -46,7 +46,6 @@ export default class Navbar extends React.Component {
             </React.Fragment>)
             : null;
         return (<div css={{
-
                 fontFamily: 'cabin',
                 borderTop: '1px solid #d3d3d34d',
                 margin: '0.5em 0 -1px',
@@ -81,15 +80,24 @@ export default class Navbar extends React.Component {
                 <Link to="/properties">
                     Listings
                 </Link>
-                <Link to="/register">
-                    Register
-                </Link>
-                <Link to="/login">
-                    Login
-                </Link>
+
                 {developmentLinks}
                 <Subscribe to={Account}>
-                    {store => <span>{store.username}</span>}
+                    {
+                        store => (
+                            store.username
+                            ? (<Link css={{textTransform: 'uppercase'}} exact={true} to="/logout" onClick={store.logout}>
+                                {store.username}
+                            </Link>)
+                            : (<React.Fragment>
+                                <Link to="/register">
+                                    Register
+                                </Link>
+                                <Link to="/login">
+                                    Login
+                                </Link>
+                            </React.Fragment>))
+                    }
                 </Subscribe>
             </div>
         </div>);

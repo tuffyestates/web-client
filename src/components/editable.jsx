@@ -17,12 +17,23 @@ import Colors from '../colors';
 
 export class Input extends React.PureComponent {
     render() {
+        const passThroughProps = {
+            autoFocus: this.props.autoFocus,
+            name: this.props.name,
+            value: this.props.value,
+            defaultValue: this.props.defaultValue,
+            placeholder: this.props.placeholder,
+            disabled: this.props.disabled,
+            type: this.props.type,
+            readOnly: this.props.readOnly || !this.props.editable,
+            onChange: this.props.onChange
+        }
         return (<div css={{
                 display: 'inline-flex',
                 alignItems: 'center'
             }} className={this.props.className}>
 
-            <Form.Input name={this.props.name} value={this.props.value} defaultValue={this.props.defaultValue} placeholder={this.props.placeholder} disabled={this.props.disabled} type={this.props.type} inputStyle={Object.assign({
+            <Form.Input {...passThroughProps} inputStyle={Object.assign({
                     backgroundColor: 'transparent'
                 }, this.props.inputStyle)} css={{
                     flex: 1,
@@ -30,7 +41,7 @@ export class Input extends React.PureComponent {
                     borderBottom: `1px solid ${this.props.editable && !this.props.value
                         ? '#ffffff'
                         : 'transparent'}`
-                }} readOnly={this.props.readOnly || !this.props.editable} onChange={this.props.onChange}/>
+                }}/>
 
         </div>);
     }
@@ -49,15 +60,25 @@ export class Input extends React.PureComponent {
     };
 }
 
-
 export class Textarea extends React.PureComponent {
     render() {
+        const passThroughProps = {
+            autoFocus: this.props.autoFocus,
+            name: this.props.name,
+            value: this.props.value,
+            defaultValue: this.props.defaultValue,
+            placeholder: this.props.placeholder,
+            disabled: this.props.disabled,
+            type: this.props.type,
+            readOnly: this.props.readOnly || !this.props.editable,
+            onChange: this.props.onChange
+        }
         return (<div css={{
                 display: 'inline-flex',
                 alignItems: 'center'
             }} className={this.props.className}>
 
-            <Form.Textarea name={this.props.name} value={this.props.value} defaultValue={this.props.defaultValue} placeholder={this.props.placeholder} disabled={this.props.disabled} type={this.props.type} textareaStyle={Object.assign({
+            <Form.Textarea {...passThroughProps} textareaStyle={Object.assign({
                     backgroundColor: 'transparent'
                 }, this.props.textareaStyle)} css={{
                     flex: 1,
@@ -65,7 +86,7 @@ export class Textarea extends React.PureComponent {
                     borderBottom: `1px solid ${this.props.editable && !this.props.value
                         ? '#ffffff'
                         : 'transparent'}`
-                }} readOnly={this.props.readOnly || !this.props.editable} onChange={this.props.onChange}/>
+                }} />
 
         </div>);
     }

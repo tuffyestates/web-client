@@ -1,7 +1,9 @@
 import React from 'react';
-import {Form, Button} from '../components';
+import {Form} from '../components';
+import {Primary} from '../components/button';
 import Colors from '../colors';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faUser, faLock} from '@fortawesome/free-solid-svg-icons';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import {Subscribe} from 'react-contextual';
@@ -45,7 +47,7 @@ class Register extends React.PureComponent {
                 backgroundColor: '#0000004d',
             }}>
 
-            <div css={{
+            <form onSubmit={this.register} css={{
                     display: 'flex',
                     justifyContent: 'center',
                     flexDirection: 'column',
@@ -53,28 +55,31 @@ class Register extends React.PureComponent {
                     backgroundColor: 'white',
                     boxShadow: '0px 5px 10px 1px rgba(0, 0, 0, 0.1)',
                     borderRadius: '5px',
-                    padding: '4em',
-                    opacity: '.9',
                 }}>
                 <h1 css={{
                         fontFamily: 'cabin',
                         fontWeight: '100',
                         marginTop: 0,
                         width: '100%',
-                        borderBottom: '1px solid lightgrey',
-                        textAlign: 'center'
+                        backgroundColor: '#333',
+                        color: 'white',
+                        padding: '0.4em',
+                        boxShadow: '0px 5px 10px 1px rgba(0, 0, 0, 0.1)',
+                        boxSizing: 'border-box',
+                        textAlign: 'center',
                     }}>Register</h1>
-                <form css={{
+                <div css={{
                         display: 'flex',
                         justifyContent: 'center',
                         flexDirection: 'column',
+                        padding: '1em 4em',
                         alignItems: 'center'
-                    }} onSubmit={this.register}>
-                    <Form.Input css={{marginBottom: '1em'}} prefix={(<FontAwesomeIcon icon="user"/>)} placeholder="Username" name="username" message={this.state.error}/>
-                    <Form.Input css={{marginBottom: '2em'}} prefix={(<FontAwesomeIcon icon="lock"/>)} placeholder="Password" type="password" name="password" message={this.state.message}/>
-                    <Button>Register</Button>
-                </form>
-            </div>
+                    }}>
+                    <Form.Input css={{marginBottom: '1em'}} prefix={(<FontAwesomeIcon icon={faUser}/>)} placeholder="Username" name="username" message={this.state.error}/>
+                    <Form.Input css={{marginBottom: '2em'}} prefix={(<FontAwesomeIcon icon={faLock}/>)} placeholder="Password" type="password" name="password" message={this.state.message}/>
+                </div>
+                <Primary css={{width: '100%'}}>Register</Primary>
+            </form>
         </div>);
     }
 }
@@ -82,7 +87,10 @@ class Register extends React.PureComponent {
 export default class Wrapper extends React.PureComponent {
     render() {
         return (<Subscribe to={Account}>
-            {account => <Register account={account}/>}
+            {account => {
+                console.log(account.register)
+                return <Register account={account}/>
+            }}
         </Subscribe>);
     }
 }
