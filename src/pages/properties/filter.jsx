@@ -7,33 +7,21 @@ import {AutoComplete, Range, SelectEnum} from '../../components';
 import US_COUNTIES from '../../assets/data/usCounties.json';
 
 export default class Filter extends React.Component {
+    style = {
+        input: {
+            marginBottom: '1.5em',
+            color: '#333'
+        }
+    };
     render() {
-        return (<div css={{
-
-                fontFamily: 'cabin',
-                fontWeight: '200',
-
-                margin: '20px 0 0 0',
-                // borderRadius: '5px',
-                backgroundColor: Colors.blue,
-                color: 'white',
-                width: 400,
-                padding: '1em 2em',
-                overflow: 'auto'
-            }} {...this.props}>
+        return (<div {...this.props}>
             <h3 style={{
                     textAlign: 'center'
                 }}>Filters</h3>
 
-            <Range min={0} max={100000000} suffix="$" css={{
-                    marginBottom: '1.5em'
-                }}/>
-            <Range min={0} max={10000} suffix="SqFt" css={{
-                    marginBottom: '1.5em'
-                }}/>
-            <Range min={0} max={1000} suffix="Acres" css={{
-                    marginBottom: '1.5em'
-                }}/>
+            <Range min={0} max={100000000} suffix="$" css={this.style.input}/>
+            <Range min={0} max={10000} suffix="SqFt" css={this.style.input}/>
+            <Range min={0} max={1000} suffix="Acres" css={this.style.input}/>
 
             <AutoComplete placeholder="Location" data={US_COUNTIES} settings={{
                     keys: [
@@ -41,10 +29,7 @@ export default class Filter extends React.Component {
                     ],
                     threshold: 0.2,
                     distance: 3
-                }} css={{
-                    width: '100%',
-                    marginBottom: '1.5em'
-                }}/>
+                }} css={this.style.input}/>
 
             <div css={{
                     display: 'flex',

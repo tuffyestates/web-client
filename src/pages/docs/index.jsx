@@ -2,41 +2,25 @@ import React from 'react';
 // import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import {Link} from 'react-router-dom';
 
 // Load a bunch of code processing libraries
 import SyntaxHighlighter, {registerLanguage} from "react-syntax-highlighter/prism-light";
 import language from 'react-syntax-highlighter/languages/prism/jsx';
 import theme from 'react-syntax-highlighter/styles/prism/vs';
 registerLanguage('jsx', language);
+import {HashLink} from 'react-router-hash-link';
 
 import Colors from '../../colors';
-import {Input} from '../../components';
-import Parser from './parser.worker';
+import {Form} from '../../components';
 
-// Find all components and load their sources
-const ComponentSources = require.context('!raw-loader!../../components/', false, /\.jsx$/);
-const Components = require.context('../../components/', false, /\.jsx$/);
+const Components = require.context('../../components/', true, /\.jsx$/);
 
-class Comp extends React.PureComponent {
+class Component extends React.PureComponent {
     state = {
-        parser: new Parser(),
-        component: null,
-        props: this.props.component.docProps || {},
-        details: {
-            displayName: 'Loading...'
-        }
-    };
-    constructor(props) {
-        super(props);
-        this.state.parser.onmessage = e => {
-            this.setState({details: e.data});
-        };
-        this.state.parser.postMessage(props.source);
+        props: this.props.component.docProps || {}
     }
-
     render() {
-        const details = this.state.details;
+        const details = this.props.details;
         const componentProps = details.props || {};
         const description = details.description
             ? <h4>details.description</h4>
@@ -60,12 +44,20 @@ class Comp extends React.PureComponent {
                             [propName]: value
                         }
                     });
-                    // eslint-disable-next-line no-empty
-                } catch (e) {}
+                } catch (err) {
+                    if (e.target.value === '') {
+                        this.setState({
+                            props: {
+                                ...this.state.props,
+                                [propName]: undefined
+                            }
+                        });
+                    }
+                }
             };
 
             return (<React.Fragment key={propName}>
-                <Input css={{
+                <Form.Input css={{
                         marginBottom: '1em'
                     }} prefix={propName} suffix={propType} message={prop.description} placeholder={placeholder} defaultValue={JSON.stringify(this.state.props[propName])} onChange={onChange}/>
             </React.Fragment>);
@@ -76,13 +68,11 @@ class Comp extends React.PureComponent {
                 marginBottom: '4em',
                 fontSize: '1.1em'
             }}>
-            <h2 css={{
-                    backgroundImage: `linear-gradient(to right, ${Colors.darkblue}, ${Colors.blue})`,
-                    color: 'white',
+            <h3 css={{
                     padding: '0.5em 1em',
-                    marginTop: '2em',
+                    marginTop: '1em',
                     boxShadow: '0 5px 6px -2px #0000004d'
-                }}>{details.displayName}</h2>
+                }}>{details.displayName}</h3>
             <div css={{
                     paddingLeft: '2em'
                 }}>{description}
@@ -98,7 +88,8 @@ class Comp extends React.PureComponent {
                 <SyntaxHighlighter language='javascript' style={theme} css={{
                         marginBottom: '0 !important',
                         border: '1px solid lightgrey',
-                        borderBottom: 'none'
+                        borderBottom: 'none',
+                        overflow: 'auto'
                     }}>{`<${details.displayName}${propsToString(this.state.props)}/>`}</SyntaxHighlighter>
                 <div css={{
                         backgroundColor: '#efefef',
@@ -111,6 +102,25 @@ class Comp extends React.PureComponent {
     }
 }
 
+class ComponentFile extends React.PureComponent {
+    render() {
+        const components = this.props.spec.map(s => {
+            const component = this.props.components[s.displayName] || this.props.components.default;
+            return (<Component key={s.displayName} component={component} details={s}/>);
+        });
+        return (<React.Fragment>
+            <h2 id={this.props.fileName} css={{
+                    backgroundImage: `linear-gradient(to right, ${Colors.darkBlue}, ${Colors.blue})`,
+                    color: 'white',
+                    padding: '0.5em 1em',
+                    marginTop: '2em',
+                    boxShadow: '0 5px 6px -2px #0000004d'
+                }}>{this.props.fileName}</h2>
+            {components}
+        </React.Fragment>);
+    }
+}
+
 class Navbar extends React.PureComponent {
     goTo(id) {
         const el = document.getElementById(id);
@@ -119,7 +129,7 @@ class Navbar extends React.PureComponent {
         }
     }
     render() {
-        const links = this.props.links.map(linkName => (<span css={{
+        const links = this.props.links.map(linkName => (<HashLink css={{
                 display: 'block',
                 textDecoration: 'none',
                 padding: '1em',
@@ -130,7 +140,7 @@ class Navbar extends React.PureComponent {
                     backgroundColor: Colors.blue,
                     color: 'white'
                 }
-            }} key={linkName} onClick={() => this.goTo(linkName)}>{linkName}</span>));
+            }} key={linkName} to={`#${linkName}`}>{linkName}</HashLink>));
         return (<div css={{
                 position: 'sticky',
                 top: 0
@@ -139,15 +149,11 @@ class Navbar extends React.PureComponent {
 }
 
 export default class Docs extends React.PureComponent {
-    constructor(props) {
-        super(props);
-        const components = Components.keys().map(componentPath => ({component: Components(componentPath).default, source: ComponentSources(componentPath)}));
-        this.state = {
-            components
-        };
-    }
+    state = {
+        files: require('./gen-docs')
+    };
     render() {
-        const docs = this.state.components.map(component => (<Comp key={component.component.name} component={component.component} source={component.source}/>));
+        const docs = this.state.files.map(f => (<ComponentFile key={f.relativePath} fileName={f.relativePath} spec={f.spec} components={Components(f.relativePath)}/>));
         return (<div css={{
                 fontFamily: 'monospace',
                 padding: '1em'
@@ -159,11 +165,10 @@ export default class Docs extends React.PureComponent {
                     display: 'flex',
                     alignItems: 'flex-start'
                 }}>
-                <Navbar css={{
-                        width: 200
-                    }} links={this.state.components.map(component => component.component.name)}/>
+                <Navbar links={this.state.files.map(component => component.relativePath)}/>
                 <div style={{
-                        flex: 1
+                        flex: '0 1 auto',
+                        minWidth: 0
                     }}>{docs}</div>
             </div>
 

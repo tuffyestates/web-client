@@ -1,7 +1,8 @@
 import React from 'react';
-import {Input, Button} from '../components';
-import Colors from '../colors';
+import {Form} from '../components';
+import {Primary} from '../components/button';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faUser, faLock} from '@fortawesome/free-solid-svg-icons';
 import {Subscribe} from 'react-contextual';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
@@ -34,36 +35,50 @@ class Login extends React.PureComponent {
                 display: 'flex',
                 justifyContent: 'center',
                 flexDirection: 'column',
-                alignItems: 'center'
+                alignItems: 'center',
+                marginBottom: '1em',
+                height: 'calc(100% - 1em)',
+                overflow: 'hidden',
+                backgroundImage: `url(${require('../assets/images/jakob-owens-720574-unsplash.jpg?size=2000')})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundBlendMode: 'overlay',
+                backgroundColor: '#0000002a',
             }}>
 
-            <div css={{
+            <form onSubmit={this.login} css={{
                     display: 'flex',
                     justifyContent: 'center',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    backgroundColor: Colors.blue,
-                    marginTop: '5em',
+                    backgroundColor: 'white',
+                    boxShadow: '0px 5px 10px 1px rgba(0, 0, 0, 0.1)',
                     borderRadius: '5px',
-                    padding: '4em'
                 }}>
                 <h1 css={{
-                        color: 'white',
                         fontFamily: 'cabin',
                         fontWeight: '100',
-                        marginTop: 0
+                        marginTop: 0,
+                        width: '100%',
+                        backgroundColor: '#333',
+                        color: 'white',
+                        padding: '0.4em',
+                        boxShadow: '0px 5px 10px 1px rgba(0, 0, 0, 0.1)',
+                        boxSizing: 'border-box',
+                        textAlign: 'center',
                     }}>Login</h1>
-                <form css={{
+                <div css={{
                         display: 'flex',
                         justifyContent: 'center',
                         flexDirection: 'column',
+                        padding: '1em 4em',
                         alignItems: 'center'
-                    }} onSubmit={this.login}>
-                    <Input prefix={(<FontAwesomeIcon icon="user"/>)} placeholder="Username" name="username" message={this.state.error}/>
-                    <Input prefix={(<FontAwesomeIcon icon="lock"/>)} placeholder="Password" type="password" name="password" message={this.state.message}/>
-                    <Button>Login</Button>
-                </form>
-            </div>
+                    }}>
+                    <Form.Input css={{marginBottom: '1em'}} prefix={(<FontAwesomeIcon icon={faUser}/>)} placeholder="Username" name="username" message={this.state.error}/>
+                    <Form.Input css={{marginBottom: '2em'}} prefix={(<FontAwesomeIcon icon={faLock}/>)} placeholder="Password" type="password" name="password" message={this.state.message}/>
+                </div>
+                <Primary css={{width: '100%'}}>Login</Primary>
+            </form>
         </div>);
     }
 }
@@ -71,7 +86,9 @@ class Login extends React.PureComponent {
 export default class Wrapper extends React.PureComponent {
     render() {
         return (<Subscribe to={Account}>
-            {account => <Login account={account}/>}
+            {account => {
+                return <Login account={account}/>
+            }}
         </Subscribe>);
     }
 }
