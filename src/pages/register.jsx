@@ -88,7 +88,6 @@ export default class Wrapper extends React.PureComponent {
     render() {
         return (<Subscribe to={Account}>
             {account => {
-                console.log(account.register)
                 return <Register account={account}/>
             }}
         </Subscribe>);
