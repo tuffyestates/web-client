@@ -22,9 +22,9 @@ export default class Range extends React.PureComponent {
                 }
             }} className={this.props.className}>
 
-            <Form.Input type="number" pattern="\d" inputMode="numeric" styep={this.props.step} min={this.props.min} max={this.props.max} placeholder={numberFormatter.format(this.props.min)} suffix={this.props.suffix} prefix={this.props.prefix}/> {this.props.children}
+            <Form.Input css={{flex: 1}} type="number" pattern="\d" inputMode="numeric" styep={this.props.step} min={this.props.min} max={this.props.max} placeholder={numberFormatter.format(this.props.min)} suffix={this.props.suffix} prefix={this.props.prefix}/> {this.props.children}
 
-            <Form.Input type="number" pattern="\d" inputMode="numeric" styep={this.props.step} min={this.props.min} max={this.props.max} placeholder={numberFormatter.format(this.props.max)} suffix={this.props.suffix} prefix={this.props.prefix}/>
+            <Form.Input css={{flex: 1}} type="number" pattern="\d" inputMode="numeric" styep={this.props.step} min={this.props.min} max={this.props.max} placeholder={numberFormatter.format(this.props.max)} suffix={this.props.suffix} prefix={this.props.prefix}/>
 
         </div>);
     }
