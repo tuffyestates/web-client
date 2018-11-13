@@ -6,7 +6,10 @@ export default class LoadingAnimation extends React.PureComponent {
     componentDidMount() {
         this.vivus = new Vivus("svg-loading", {
             duration: this.props.duration,
-            start: 'autostart'
+            start: 'autostart',
+            onReady: function(v) {
+                v.el.style.visibility = 'visible';
+            }
         }, function(v) {
             v.play(
                 v.getStatus() === 'end'
@@ -20,7 +23,9 @@ export default class LoadingAnimation extends React.PureComponent {
         }
     }
     render() {
-        return (<object id="svg-loading" data={SVG}/>);
+        return (<object id="svg-loading" style={{
+                visibility: 'hidden'
+            }} data={SVG}/>);
     }
     static propTypes = {
         /**
