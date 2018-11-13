@@ -30,12 +30,12 @@ export default class ProgressiveImage extends React.PureComponent {
             <FallbackImage style={{
                     width: offsetSize,
                     height: offsetSize,
-                    position: 'relative',
-                    top: offset,
-                    left: offset,
                     objectFit: 'cover',
                     display: 'block',
                     filter: `blur(${this.props.blur}px)`,
+                    margin: offset,
+                    // Force GPU rendering
+                    transform: `translateZ(1px)`,
                     transition: 'opacity ease 1.2s',
                     zIndex: 1,
                     opacity: this.state.loaded
