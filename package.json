@@ -41,7 +41,6 @@
         "prop-types": "^15.6.2",
         "raw-loader": "^0.5.1",
         "react-docgen": "^3.0.0-rc.1",
-        "react-docgen-displayname-handler": "^2.1.1",
         "react-hot-loader": "^4.3.12",
         "react-router-hash-link": "^1.2.1",
         "react-syntax-highlighter": "^9.0.1",
