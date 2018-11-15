@@ -3,7 +3,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const webpack = require('webpack');
-const GoogleFontsPlugin = require('@beyonk/google-fonts-webpack-plugin');
 const DynamicCdnWebpackPlugin = require('dynamic-cdn-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const zopfli = require('@gfx/zopfli');
@@ -50,6 +49,17 @@ module.exports = (env, argv) => {
                     }
                 },
 
+                {
+                    test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+                    use: [{
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'fonts/'
+                        }
+                    }]
+                },
+
                 // Load SVG placeholder image
                 {
                     test: /\.(svg|gif)$/i,
@@ -87,19 +97,6 @@ module.exports = (env, argv) => {
         plugins: [
             new HtmlWebpackPlugin({
                 title: "Tuffy Estates"
-            }),
-            new GoogleFontsPlugin({
-                fonts: [{
-                        family: 'Cabin',
-                        variants: ['400', '500', '700'],
-                        subsets: ['latin']
-                    },
-                    {
-                        family: 'Roboto',
-                        variants: ['300', '400', '500', '700'],
-                        subsets: ['latin']
-                    }
-                ]
             }),
         ].concat(argv.mode === 'production' ? [new BundleAnalyzerPlugin({
                 analyzerMode: 'static',
