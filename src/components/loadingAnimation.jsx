@@ -6,10 +6,14 @@ export default class LoadingAnimation extends React.PureComponent {
     componentDidMount() {
         this.vivus = new Vivus("svg-loading", {
             duration: this.props.duration,
+            // Start the animation when ready
             start: 'autostart',
             onReady: function(v) {
+                // Display svg when vivus is ready
                 v.el.style.visibility = 'visible';
             }
+            // Callback on vivus finish
+            // We restart the animation in reverse when vivus finished
         }, function(v) {
             v.play(
                 v.getStatus() === 'end'
@@ -19,18 +23,20 @@ export default class LoadingAnimation extends React.PureComponent {
     }
     componentWillUnmount() {
         if (this.vivus) {
+            // Remove vivus instance on component dismount
             this.vivus.destroy();
         }
     }
     render() {
         return (<object id="svg-loading" style={{
+                // Hide svg as vivus loads
                 visibility: 'hidden'
             }} data={SVG}/>);
     }
     static propTypes = {
         /**
-             * Link to fallback image
-             */
+         * Link to fallback image
+         */
         duration: PropTypes.number
     };
     static defaultProps = {
