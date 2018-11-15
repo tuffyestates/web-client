@@ -200,3 +200,63 @@ export class Textarea extends React.PureComponent {
         message: "You've been selected to become a unicorn!",
     };
 }
+
+
+import shortid from 'shortid';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faCheck} from '@fortawesome/free-solid-svg-icons';
+
+import Colors from '../colors';
+
+export class Checkbox extends React.PureComponent {
+    state = {
+        checked: this.props.defaultChecked || this.props.checked
+    }
+    render() {
+        const id = shortid.generate();
+
+        const passthroughProps = {
+            autoFocus: this.props.autoFocus,
+            name: this.props.name,
+            checked: this.props.checked,
+            defaultchecked: this.props.defaultchecked,
+            disabled: this.props.disabled,
+            readOnly: this.props.readOnly,
+            onChange: this.props.onChange,
+        };
+
+        return (<div className={this.props.className} css={{
+                'input:checked + label > div > .checkmark' : {
+                    visibility: 'visible !important'
+                }
+            }}>
+            <input style={{
+                    display: 'none'
+                }} type="checkbox" id={id} {...passthroughProps}/>
+
+            <label css={{
+                    display: 'inline-flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    cursor: 'pointer'
+                }} htmlFor={id}>
+                <div css={{
+                        border: `2px solid ${Colors.blue}`,
+                        backgroundColor: 'white',
+                        padding: '0.2em',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        marginRight: '0.3em'
+                    }}><FontAwesomeIcon className="checkmark" icon={faCheck} style={{
+                color: Colors.orange,
+                visibility: 'hidden'
+            }}/></div>{this.props.children}</label>
+        </div>);
+    }
+    static propTypes = {};
+    static defaultProps = {};
+    static docProps = {
+        children: "Hello!"
+    };
+}
