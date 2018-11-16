@@ -2,9 +2,10 @@ import {
     createStore
 } from 'react-contextual';
 import api from '../api';
+import cookies from 'js-cookie';
 
 // This is the global account store's default state
-export default createStore({
+const store = createStore({
     username: undefined, // There is no username initial since no user is logged in
 
     register: async (formdata) => {
@@ -13,14 +14,11 @@ export default createStore({
         try {
             const response = await api.post('/users', formdata);
 
-             api.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
-
             // Now we return what the updated information to the global account store
             return {
                 username: formdata.get('username')
             };
-        }
-        catch (error) {
+        } catch (error) {
             console.error(error);
             /**
              * this will print the error message sent by the
@@ -41,15 +39,11 @@ export default createStore({
         try {
             const response = await api.post('/users/login', formdata);
 
-             api.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
-
-
             // Now we return what the updated information to the global account store
             return {
                 username: formdata.get('username')
             };
-        }
-        catch (error) {
+        } catch (error) {
             console.error(error);
             /**
              * this will print the error message sent by the
@@ -65,8 +59,21 @@ export default createStore({
         }
     },
     logout: () => {
-        delete api.defaults.headers.common['Authorization'];
-
-        return {username: undefined};
+        return {
+            username: undefined
+        };
     }
 });
+
+// Check if the user is already authenticated
+const token = cookies.get('token');
+if (token) {
+    console.debug('attempting to validate previous token')
+    api.get('/users/status').then(res => {
+        store.state.setState(res.data);
+    }).catch(console.error);
+}
+else
+    console.debug('no token found');
+
+export default store;

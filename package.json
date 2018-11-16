@@ -67,6 +67,7 @@
         "axios": "^0.18.0",
         "chroma-js": "^1.4.0",
         "fuse.js": "^3.3.0",
+        "js-cookie": "^2.2.0",
         "lodash.set": "^4.3.2",
         "normalize.css": "^8.0.0",
         "query-string": "^6.2.0",
