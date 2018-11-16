@@ -8,6 +8,7 @@ import {jsx} from '@emotion/core';
 
 import * as Pages from './pages';
 import {Navbar, Footer, LoadingAnimation} from './components';
+import Colors from './colors';
 import {Account} from './contexts';
 
 const LoadingScreen = (<div style={{
@@ -28,7 +29,10 @@ const App = () => (<Provider store={Account}>
                 'input' : {
                     color: 'inherit',
                     fontFamily: 'inherit',
-                    fontWeight: 'inherit'
+                    fontWeight: 'inherit',
+                    ':invalid': {
+                        // boxShadow: `0 1px 0 0 ${Colors.lightRed}`
+                    }
                 }
             }}>
             <Helmet>
@@ -44,7 +48,7 @@ const App = () => (<Provider store={Account}>
                 <Suspense fallback={LoadingScreen}>
                     <Switch>
                         <Route exact={true} path="/" component={Pages.Home}/>
-                        <Route path="/properties/create" component={Pages.Property}/>
+                        <Route path="/properties/create" component={Pages.CreateProperty}/>
                         <Route path="/properties/edit/:id" component={Pages.Property}/>
                         <Route path="/properties/:id" component={Pages.Property}/>
                         <Route path="/properties" component={Pages.Properties}/>

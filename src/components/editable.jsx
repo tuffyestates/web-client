@@ -23,40 +23,44 @@ export class Input extends React.PureComponent {
             value: this.props.value,
             defaultValue: this.props.defaultValue,
             placeholder: this.props.placeholder,
-            disabled: this.props.disabled,
+            disabled: this.props.disabled || !this.props.editable,
             type: this.props.type,
             readOnly: this.props.readOnly || !this.props.editable,
-            onChange: this.props.onChange
+            onChange: this.props.onChange,
+            required: this.props.required,
+            className: this.props.className,
+            prefix: this.props.prefix,
+            suffix: this.props.suffix,
+            message: this.props.message,
+            suffixStyle: this.props.suffixStyle
         }
-        return (<div css={{
-                display: 'inline-flex',
-                alignItems: 'center'
-            }} className={this.props.className}>
-
-            <Form.Input {...passThroughProps} inputStyle={Object.assign({
-                    backgroundColor: 'transparent'
-                }, this.props.inputStyle)} css={{
-                    flex: 1,
-                    border: 'none',
-                    borderBottom: `1px solid ${this.props.editable && !this.props.value
-                        ? '#ffffff'
-                        : 'transparent'}`
-                }}/>
-
-        </div>);
+        return (<Form.Input {...passThroughProps} inputStyle={Object.assign({
+                backgroundColor: 'transparent'
+            }, this.props.inputStyle)} css={{
+                border: 'none',
+                borderBottom: `1px solid ${this.props.editable && !this.props.value
+                    ? this.props.editableLineColor
+                    : 'transparent'}`
+            }}/>);
     }
     static propTypes = {
         /**
          * Defines whether the field can be modified
          */
-        editable: PropTypes.bool
+        editable: PropTypes.bool,
+        /**
+         * Defines whether the field can be modified
+         */
+        editableLineColor: PropTypes.string
     };
     static defaultProps = {
-        editable: false
+        editable: false,
+        editableLineColor: '#ffffff'
     };
     static docProps = {
         placeholder: 'Edit Me!',
-        editable: true
+        editable: true,
+        editableLineColor: '#333'
     };
 }
 
@@ -68,7 +72,8 @@ export class Textarea extends React.PureComponent {
             value: this.props.value,
             defaultValue: this.props.defaultValue,
             placeholder: this.props.placeholder,
-            disabled: this.props.disabled,
+            required: this.props.required,
+            disabled: this.props.disabled || !this.props.editable,
             type: this.props.type,
             readOnly: this.props.readOnly || !this.props.editable,
             onChange: this.props.onChange
@@ -79,14 +84,15 @@ export class Textarea extends React.PureComponent {
             }} className={this.props.className}>
 
             <Form.Textarea {...passThroughProps} textareaStyle={Object.assign({
-                    backgroundColor: 'transparent'
+                    backgroundColor: 'transparent',
                 }, this.props.textareaStyle)} css={{
                     flex: 1,
                     border: 'none',
                     borderBottom: `1px solid ${this.props.editable && !this.props.value
                         ? '#ffffff'
-                        : 'transparent'}`
-                }} />
+                        : 'transparent'}`,
+
+                }}/>
 
         </div>);
     }
