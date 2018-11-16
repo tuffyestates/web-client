@@ -30,10 +30,6 @@ export default class Range extends React.PureComponent {
     }
     static propTypes = {
         /**
-         * An array containing placeholders, first element goes to the min input and the second to the max input
-         */
-        placeholders: PropTypes.array,
-        /**
          * Suffix for each input
          */
         suffix: PropTypes.string,
@@ -55,9 +51,8 @@ export default class Range extends React.PureComponent {
             }}></div>)
     };
     static docProps = {
-        placeholders: [
-            '10,512', '539,294,213'
-        ],
+        min: 10512,
+        max: 539294213,
         prefix: 'Secure',
         suffix: 'Score'
     };

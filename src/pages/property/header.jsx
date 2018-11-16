@@ -4,14 +4,7 @@ import {faEdit} from '@fortawesome/free-regular-svg-icons';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 
-import {ProgressiveImage, Editable, LoadingAnimation, Form} from '../../components';
-
-// Formats a numerical price into a localized string
-const priceFormatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 0
-});
+import {ProgressiveImage, Editable} from '../../components';
 
 class EditButton extends React.PureComponent {
     render() {
@@ -47,25 +40,30 @@ export default class ImageHeader extends React.PureComponent {
                 : undefined;
 
         return (<div css={{
-                width: '100%'
+                height: '30em',
+                position: 'relative'
             }}>
+            <ProgressiveImage preview={thumbnailImageSrc} src={imageSrc} css={{
+                    objectFit: 'cover',
+                    width: '100%',
+                    height: '100%',
+                    position: 'absolute'
+                }}/>
+            <input style={{
+                    display: 'none'
+                }} ref={this.fileInput} accept="image/*" name="image" type="file" required={true} hidden={true} onChange={this.props.onChange}/>
+            <EditButton style={{
+                    color: 'white',
+                    filter: 'drop-shadow(black 1px 1px 1px)',
+                    cursor: 'pointer'
+                }} show={this.props.editable} onClick={this.changePhoto}/>
             <div css={{
-                    position: 'relative'
-                }}>
-                <ProgressiveImage preview={thumbnailImageSrc} src={imageSrc} css={{
-                        height: '30em',
-                        objectFit: 'cover',
-                        width: '100%'
-                    }}/>
-                <input ref={this.fileInput} accept="image/*" name="image" type="file" hidden={true} onChange={this.props.onChange}/>
-                <EditButton style={{
-                        color: 'white',
-                        filter: 'drop-shadow(black 1px 1px 1px)',
-                        cursor: 'pointer'
-                    }} show={this.props.editable} onClick={this.changePhoto}/>
-            </div>
-            <div css={{
-                    backgroundColor: '#000c'
+                    backgroundColor: '#000b',
+                    bottom: 0,
+                    position: 'absolute',
+                    zIndex: 3,
+                    left: 0,
+                    right: 0
                 }}>
                 <div css={{
                         maxWidth: 1080,
@@ -76,21 +74,14 @@ export default class ImageHeader extends React.PureComponent {
                         fontFamily: 'Roboto',
                         fontWeight: 300,
                         fontSize: '1.2em',
-                        padding: '1em 0'
+                        padding: '0.5em 0'
                     }}>
                     <Editable.Input required={true} autoFocus={this.props.editable} editable={this.props.editable} onChange={this.props.onChange} name="address" placeholder="Address" value={this.props.property.address} inputStyle={{
                             '::placeholder' : {
                                 color: 'white'
                             }
                         }}/>
-                    <Editable.Input required={true} editable={this.props.editable} onChange={e => this.props.onChange({
-                            target: {
-                                name: e.target.name,
-                                value: parseLocaleNumber(e.target.value)
-                            }
-                        })} name="price" placeholder="Price" value={this.props.property.price
-                            ? priceFormatter.format(this.props.property.price)
-                            : ''} inputStyle={{
+                    <Editable.Input required={true} editable={this.props.editable} onChange={this.props.onChange} name="price" placeholder="Price" value={this.props.property.price} inputStyle={{
                             direction: 'rtl',
                             textAlign: 'right',
                             '::placeholder' : {

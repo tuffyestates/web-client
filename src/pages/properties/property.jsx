@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 
-import Colors from '../../colors';
+// import Colors from '../../colors';
 import {FallbackImage} from '../../components';
 
 export default class Property extends React.PureComponent {
@@ -52,12 +52,8 @@ export default class Property extends React.PureComponent {
             <div css={{
                     padding: '0.5em'
                 }} className={this.props.className}>
-                <span>{this.priceFormatter.format(this.props.details.price)}</span>
+                <span>{this.priceFormatter.format(this.props.price)}</span>
             </div>
         </Link>);
-    }
-    static defaultProps = {
-        address: '',
-        details: {}
     }
 }

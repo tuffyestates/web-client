@@ -12,13 +12,12 @@ import {Features, Specifications} from './details';
 export default class Property extends React.Component {
     style = {
         header: {
-            borderBottom: `1.5px solid ${Colors.orange}`,
+            borderBottom: `1.5px solid ${Colors.lightOrange}`,
             fontWeight: 300
         }
     };
     render() {
         const editable = this.props.mode === 'edit' || this.props.mode === 'create';
-
         // Loading animation
         if (typeof this.props.property._id === 'undefined') {
             return (<div css={{
@@ -82,11 +81,4 @@ export default class Property extends React.Component {
          */
         onChange: PropTypes.func
     };
-}
-
-function parseLocaleNumber(stringNumber) {
-    var thousandSeparator = (1111).toLocaleString().replace(/1/g, '');
-    var decimalSeparator = (1.1).toLocaleString().replace(/1/g, '');
-
-    return parseFloat(stringNumber.replace(/^\D*/, '').replace(new RegExp('\\' + thousandSeparator, 'g'), '').replace(new RegExp('\\' + decimalSeparator), '.'));
 }

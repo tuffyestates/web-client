@@ -3,7 +3,7 @@ import React from 'react';
 import {jsx} from '@emotion/core';
 import queryString from 'query-string';
 
-import Colors from '../../colors';
+// import Colors from '../../colors';
 import api from '../../api';
 import {InfiniteScroll} from '../../components';
 import Property from './property';
@@ -12,7 +12,7 @@ export default class Listings extends React.PureComponent {
     async loadHomes(offset) {
         const listings = await this.loadData(offset);
         return listings.reduce((arr, house, idx) => {
-            arr.push(<Property key={offset + idx} address={house.address} details={house.details} id={house._id}/>)
+            arr.push(<Property key={offset + idx} address={house.address} price={house.price} id={house._id}/>)
             return arr;
         }, []);
     }

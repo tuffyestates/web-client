@@ -40,10 +40,6 @@ export default class CreateProperty extends React.Component {
         this.setState({loading: true, message: undefined});
         try {
             const formdata = new FormData(e.currentTarget);
-            formdata.set('price', parseLocaleNumber(formdata.get('price'))); // sanitize price
-            for (var pair of formdata.entries()) {
-                console.debug(pair[0] + ', ' + pair[1]);
-            }
             const response = await api.post(`/property`, formdata);
             // if (response.data.error) {
             //
@@ -58,10 +54,10 @@ export default class CreateProperty extends React.Component {
     render() {
         return (<form onSubmit={this.onSubmit}>
             <Property mode="create" property={this.state.property} onChange={this.onChange}/>
-            <Primary disabled={this.props.loading} css={{
+            <div css={{maxWidth: 1080, margin: '0 auto'}}><Primary disabled={this.state.loading} css={{
                     gridColumnEnd: 'span 2',
-                    marginTop: '2em'
-                }}>Submit</Primary>
+                    width: '100%'
+                }}>Post Listing</Primary></div>
             {this.state.message}
         </form>);
     }

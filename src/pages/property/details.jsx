@@ -1,6 +1,6 @@
 import React from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faHammer, faExpand, faVectorSquare} from '@fortawesome/free-solid-svg-icons';
+import {faHammer, faExpand, faVectorSquare, faBed, faBath} from '@fortawesome/free-solid-svg-icons';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 
@@ -53,8 +53,8 @@ export class Specifications extends React.PureComponent {
             <Entry value={this.props.property.specification.built} icon={faHammer} name="specification.built" placeholder="Year Built" editable={this.props.editable} onChange={this.props.onChange}/>
             <Entry value={this.props.property.specification.size} icon={faExpand} name="specification.size" placeholder="Square Feet" editable={this.props.editable} onChange={this.props.onChange}/>
             <Entry value={this.props.property.specification.lot} icon={faVectorSquare} name="specification.lot" placeholder="Acres" editable={this.props.editable} onChange={this.props.onChange}/>
-            <Entry value={this.props.property.specification.bedrooms} icon={faVectorSquare} name="specification.bedrooms" placeholder="bedrooms" editable={this.props.editable} onChange={this.props.onChange}/>
-            <Entry value={this.props.property.specification.bathrooms} icon={faVectorSquare} name="specification.bathrooms" placeholder="bathrooms" editable={this.props.editable} onChange={this.props.onChange}/>
+            <Entry value={this.props.property.specification.bedrooms} icon={faBed} name="specification.bedrooms" placeholder="bedrooms" editable={this.props.editable} onChange={this.props.onChange}/>
+            <Entry value={this.props.property.specification.bathrooms} icon={faBath} name="specification.bathrooms" placeholder="bathrooms" editable={this.props.editable} onChange={this.props.onChange}/>
         </div>);
     }
 }

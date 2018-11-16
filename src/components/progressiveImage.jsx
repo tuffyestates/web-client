@@ -13,13 +13,13 @@ export default class ProgressiveImage extends React.PureComponent {
         // Double requestAnimationFrame because we want to wait for the image to finish rendering
         requestAnimationFrame(() => requestAnimationFrame(() => this.setState({loaded: true})));
     }
-    loadFailed = (e) => {
+    loadFailed = () => {
         this.setState({loaded: false});
     }
     render() {
         const offset = this.state.loaded
             ? 0
-            : `-${this.props.blur * 2}px`;
+            : -this.props.blur * 2;
         const offsetSize = this.state.loaded
             ? '100%'
             : `calc(100% + ${this.props.blur * 4}px)`;
@@ -36,7 +36,7 @@ export default class ProgressiveImage extends React.PureComponent {
                     margin: offset,
                     // Force GPU rendering
                     transform: `translateZ(1px)`,
-                    transition: 'opacity ease 1.2s',
+                    transition: 'all ease 0.9s',
                     zIndex: 1,
                     opacity: this.state.loaded
                         ? 0
@@ -50,6 +50,7 @@ export default class ProgressiveImage extends React.PureComponent {
                     left: offset,
                     right: offset,
                     bottom: offset,
+                    transition: 'all ease 0.9s',
                     objectFit: 'cover'
                 }} onLoad={this.imageLoaded} onError={this.loadFailed} src={this.props.src}/></div>);
     }

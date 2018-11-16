@@ -93,12 +93,19 @@ class Register extends React.PureComponent {
                     }}>
                     <Form.Input css={{
                             marginBottom: '1em'
-                        }} prefix={(<FontAwesomeIcon icon={faUser}/>)} placeholder="Username" name="username" message={this.state.error}/>
+                        }} autoFocus={true} prefix={(<FontAwesomeIcon icon={faUser}/>)} placeholder="Username" name="username" message={this.state.error}/>
                     <div css={{
                             marginBottom: '1em'
                         }}>
                         <Form.Input prefix={(<FontAwesomeIcon icon={faLock}/>)} placeholder="Password" type="password" name="password" message={this.state.message}/>
-                        <Link style={{float: 'right', marginTop: '0.2em',color: '#3C87BA', textDecoration: 'none', textTransform: 'lowercase', fontFamily: 'Roboto'}} to="/login">Login?</Link>
+                        <Link style={{
+                                float: 'right',
+                                marginTop: '0.2em',
+                                color: '#3C87BA',
+                                textDecoration: 'none',
+                                textTransform: 'lowercase',
+                                fontFamily: 'Roboto'
+                            }} to="/login">Login?</Link>
                     </div>
                 </div>
                 <Primary css={{

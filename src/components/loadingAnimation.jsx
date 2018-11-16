@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 import Vivus from 'vivus';
 
 export default class LoadingAnimation extends React.PureComponent {
+    state = {
+        loaded: false
+    };
     componentDidMount() {
         this.vivus = new Vivus("svg-loading", {
             duration: this.props.duration,
             // Start the animation when ready
             start: 'autostart',
-            onReady: function(v) {
-                // Display svg when vivus is ready
-                v.el.style.visibility = 'visible';
+            onReady: () => {
+                this.setState({loaded: true});
             }
             // Callback on vivus finish
             // We restart the animation in reverse when vivus finished
@@ -30,7 +32,9 @@ export default class LoadingAnimation extends React.PureComponent {
     render() {
         return (<object id="svg-loading" style={{
                 // Hide svg as vivus loads
-                visibility: 'hidden'
+                visibility: this.state.loaded
+                    ? 'visible'
+                    : 'hidden'
             }} data={SVG}/>);
     }
     static propTypes = {
