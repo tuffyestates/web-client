@@ -32,7 +32,7 @@ export class Input extends React.PureComponent {
             </span>);
         }
         if (this.props.suffix) {
-            suffix = (<span css={{
+            suffix = (<span css={Object.assign({
                     backgroundColor: '#F2F2F2',
                     display: 'flex',
                     justifyContent: 'center',
@@ -40,7 +40,7 @@ export class Input extends React.PureComponent {
                     padding: '0 1em',
                     color: '#888',
                     borderLeft: '1px solid #C1C1C1'
-                }}>
+                }, this.props.suffixStyle)}>
                 {this.props.suffix}
             </span>);
         }
@@ -53,6 +53,7 @@ export class Input extends React.PureComponent {
             placeholder: this.props.placeholder,
             disabled: this.props.disabled,
             type: this.props.type,
+            required: this.props.required,
             readOnly: this.props.readOnly,
             onChange: this.props.onChange,
             min: this.props.min,
@@ -147,6 +148,7 @@ export class Textarea extends React.PureComponent {
             name: this.props.name,
             value: this.props.value,
             defaultValue: this.props.defaultValue,
+            required: this.props.required,
             placeholder: this.props.placeholder,
             disabled: this.props.disabled,
             readOnly: this.props.readOnly,
@@ -220,6 +222,7 @@ export class Checkbox extends React.PureComponent {
             name: this.props.name,
             checked: this.props.checked,
             defaultchecked: this.props.defaultchecked,
+            required: this.props.required,
             disabled: this.props.disabled,
             readOnly: this.props.readOnly,
             onChange: this.props.onChange,
