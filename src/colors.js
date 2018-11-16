@@ -3,6 +3,7 @@ import chroma from 'chroma-js';
 export default new Proxy({
     "blue": "#184A79",
     "orange": "#FF6800",
+    "red": "#F44336"
 }, {
     get: function(obj, prop) {
         return prop in obj ?
@@ -24,10 +25,10 @@ function generateColor(colors, request) {
             color = processor.darken(2);
             break;
         case 'light':
-            color = processor.lighten();
+            color = processor.brighten();
             break;
         case 'lighter':
-            color = processor.lighten(2);
+            color = processor.brighten(2);
             break;
         default:
             throw new Error('Unknown modifier:', modifier);
