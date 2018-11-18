@@ -58,10 +58,30 @@ const store = createStore({
             // throw new Error(error.message);
         }
     },
-    logout: () => {
-        return {
-            username: undefined
-        };
+    logout: async () => {
+        console.debug("Logging out...");
+        try {
+            const response = await api.head('/users/logout');
+
+            // Now we return what the updated information to the global account store
+            return {
+                username: undefined
+            };
+        } catch (error) {
+            console.error(error);
+            /**
+             * this will print the error message sent by the
+             * server in the response body. It could be empty
+             * depending on what was sent back.
+             */
+            throw new Error(error);
+            /**
+             * this will print the generic error that they
+             * browser will use upon a failed network request
+             */
+            // throw new Error(error.message);
+        }
+
     }
 });
 
@@ -73,7 +93,5 @@ if (token) {
         store.state.setState(res.data);
     }).catch(console.error);
 }
-else
-    console.debug('no token found');
 
 export default store;

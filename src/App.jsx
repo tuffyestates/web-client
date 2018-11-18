@@ -56,7 +56,7 @@ const App = () => (<Provider store={Account}>
                         <Route path="/login" component={Pages.Login}/>
                         <Route path="/api" component={Pages.API}/>
                         <Route path="/docs" component={Pages.Docs}/>
-                        <Route path="/logout" render={() => <Redirect to="/login"/>}/>
+                        <Route path="/logout" component={Pages.Logout}/>
                         <Route component={Pages.FourOFour}/>
                     </Switch>
                 </Suspense>

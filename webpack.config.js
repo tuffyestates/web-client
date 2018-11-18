@@ -116,6 +116,8 @@ module.exports = (env, argv) => {
             new PreloadWebpackPlugin({
                 rel: 'prefetch',
                 include: 'allAssets',
+                // Only prefetch images (prefetching scripts is handled by webapck's import())
+                fileWhitelist: [/(jpe?g|png|svg|gif)$/]
             })
         ] : [
             new webpack.EnvironmentPlugin({

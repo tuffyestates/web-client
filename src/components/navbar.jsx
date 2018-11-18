@@ -74,7 +74,7 @@ export default class Navbar extends React.Component {
             <div css={{
                     textDecoration: 'none'
                 }}>
-                <Link exact={true} to="/">
+                <Link exact to="/">
                     Home
                 </Link>
                 <Link to="/properties">
@@ -86,7 +86,7 @@ export default class Navbar extends React.Component {
                     {
                         store => (
                             store.username
-                            ? (<Link css={{textTransform: 'uppercase'}} exact={true} to="/logout" onClick={store.logout}>
+                            ? (<Link exact css={{textTransform: 'uppercase'}} to="/logout">
                                 {store.username}
                             </Link>)
                             : (<React.Fragment>
