@@ -1,10 +1,12 @@
 import React from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faHammer, faExpand, faVectorSquare, faBed, faBath} from '@fortawesome/free-solid-svg-icons';
+import {Map as Leaflet, TileLayer, Marker,} from 'react-leaflet';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 
 import {Editable, Form, SelectEnum} from '../../components';
+import './leaflet.css';
 
 class Select extends React.PureComponent {
     render() {
@@ -36,7 +38,7 @@ class Entry extends React.PureComponent {
                     backgroundColor: 'transparent',
                     border: 'none'
                 }} onChange={this.props.onChange} editableLineColor="#bbb" css={{
-                    flex:1,
+                    flex: 1,
                     margin: '0 0.4em'
                 }} editable={this.props.editable} placeholder={this.props.placeholder}/>
         </div>);
@@ -58,6 +60,17 @@ export class Specifications extends React.PureComponent {
         </div>);
     }
 }
+
+export class Map extends React.PureComponent {
+    render() {
+        return (<Leaflet center={this.props.position || [0, 0,]} zoom={14} style={{
+                height: 400
+            }}>
+            <TileLayer attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>' url={`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`} subdomains="abcd" maxZoom={19}/>
+        </Leaflet>);
+    }
+}
+
 export class Features extends React.PureComponent {
     state = {};
     static getDerivedStateFromProps(props, state) {

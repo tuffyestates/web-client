@@ -1,10 +1,10 @@
 import React from 'react';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faEdit} from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/free-regular-svg-icons';
 /** @jsx jsx */
-import {jsx} from '@emotion/core';
+import { jsx } from '@emotion/core';
 
-import {ProgressiveImage, Editable} from '../../components';
+import { ProgressiveImage, Editable } from '../../components';
 
 class EditButton extends React.PureComponent {
     render() {
@@ -28,16 +28,16 @@ export default class ImageHeader extends React.PureComponent {
     }
     render() {
         // Define path for thumbnail (Really low resolution of the actual image)
-        const thumbnailImageSrc = this.props.property._id
-            ? this.props.previewImage || `${process.env.STATIC_PATH}/property/image/${this.props.property._id}-thumbnail.jpg`
-            : undefined;
+        const thumbnailImageSrc = this.props.property._id ?
+            this.props.previewImage || `${process.env.STATIC_PATH}/property/image/${this.props.property._id}-thumbnail.jpg` :
+            undefined;
 
         // Define path for actual image
-        const imageSrc = this.fileInput.current && this.fileInput.current.files[0]
-            ? URL.createObjectURL(this.fileInput.current.files[0])
-            : this.props.property._id
-                ? `${process.env.STATIC_PATH}/property/image/${this.props.property._id}.jpg`
-                : undefined;
+        const imageSrc = this.fileInput.current && this.fileInput.current.files[0] ?
+            URL.createObjectURL(this.fileInput.current.files[0]) :
+            this.props.property._id ?
+            `${process.env.STATIC_PATH}/property/image/${this.props.property._id}.jpg` :
+            undefined;
 
         return (<div css={{
                 height: '30em',
@@ -76,12 +76,12 @@ export default class ImageHeader extends React.PureComponent {
                         fontSize: '1.2em',
                         padding: '0.5em 0'
                     }}>
-                    <Editable.Input required={true} autoFocus={this.props.editable} editable={this.props.editable} onChange={this.props.onChange} name="address" placeholder="Address" value={this.props.property.address} inputStyle={{
+                    <Editable.Input required autoFocus={this.props.editable} editable={this.props.editable} onChange={this.props.onChange} css={{flex: 1}} name="address" placeholder="Address" value={this.props.property.address} inputStyle={{
                             '::placeholder' : {
                                 color: 'white'
                             }
                         }}/>
-                    <Editable.Input required={true} editable={this.props.editable} onChange={this.props.onChange} name="price" placeholder="Price" value={this.props.property.price} inputStyle={{
+                    <Editable.Input required editable={this.props.editable} onChange={this.props.onChange} css={{flex: 1}} name="price" placeholder="Price" value={this.props.property.price} inputStyle={{
                             direction: 'rtl',
                             textAlign: 'right',
                             '::placeholder' : {

@@ -4,16 +4,16 @@ import {jsx} from '@emotion/core';
 import PropTypes from 'prop-types';
 
 import Colors from '../../colors';
-import {Editable, LoadingAnimation} from '../../components';
+import {Editable, LoadingAnimation,} from '../../components';
 import {Primary} from '../../components/button';
 import Header from './header';
-import {Features, Specifications} from './details';
+import {Features, Specifications, Map,} from './details';
 
 export default class Property extends React.Component {
     style = {
         header: {
             borderBottom: `1.5px solid ${Colors.lightOrange}`,
-            fontWeight: 300
+            fontWeight: 300,
         }
     };
     render() {
@@ -24,7 +24,7 @@ export default class Property extends React.Component {
                     display: 'flex',
                     justifyContent: 'center',
                     alignContent: 'center',
-                    height: '100%'
+                    height: '100%',
                 }}><LoadingAnimation/></div>);
         }
 
@@ -40,11 +40,11 @@ export default class Property extends React.Component {
                     margin: '0 auto',
                     border: '1px solid #eee',
                     fontFamily: 'Roboto',
-                    fontWeight: 300
+                    fontWeight: 300,
                 }}>
                 <div css={{
                         gridRowStart: 1,
-                        gridRowEnd: 'span 3'
+                        gridRowEnd: 'span 3',
                     }}>
                     <h3 css={this.style.header}>Description</h3>
 
@@ -52,7 +52,7 @@ export default class Property extends React.Component {
                             width: '100%'
                         }} value={this.props.property.description} placeholder="Description" textareaStyle={{
                             paddingLeft: 0,
-                            paddingRight: 0
+                            paddingRight: 0,
                         }}/>
                 </div>
                 <div>
@@ -63,6 +63,10 @@ export default class Property extends React.Component {
                     <h3 css={this.style.header}>Features</h3>
                     <Features editable={editable} property={this.props.property} onChange={this.props.onChange}/>
                 </div>
+                <div>
+                    <h3 css={this.style.header}>Map</h3>
+                    <Map position={[this.props.property.location.lat, this.props.property.location.lng,]}/>
+                </div>
                 <Primary disabled={editable}>Contact Owner</Primary>
             </div>
         </React.Fragment>);
@@ -71,7 +75,7 @@ export default class Property extends React.Component {
         /**
          * Define if the content should be editable
          */
-        mode: PropTypes.oneOf(['edit', 'view', 'create']).isRequired,
+        mode: PropTypes.oneOf(['edit', 'view', 'create',]).isRequired,
         /**
          * Data about the property
          */
@@ -79,6 +83,6 @@ export default class Property extends React.Component {
         /**
          * Handle input change events
          */
-        onChange: PropTypes.func
+        onChange: PropTypes.func,
     };
 }
