@@ -1,6 +1,4 @@
 import React from 'react';
-import {Form} from '../components';
-import {Primary} from '../components/button';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faUser, faLock} from '@fortawesome/free-solid-svg-icons';
 import {Subscribe} from 'react-contextual';
@@ -8,7 +6,11 @@ import {Subscribe} from 'react-contextual';
 import {jsx} from '@emotion/core';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom'
+import get from 'lodash.get';
+
 import {Account} from '../contexts';
+import {Form} from '../components';
+import {Primary} from '../components/button';
 
 class Login extends React.PureComponent {
     static propTypes = {
@@ -36,7 +38,7 @@ class Login extends React.PureComponent {
             }, () => {
                 // let's redirect the user to the listings page
                 setTimeout(() => {
-                    this.props.history.push('/properties')
+                    this.props.history.push(get(this.props, 'location.state.from.pathname') || '/properties')
                 }, 2000)
             });
         } catch (error) {
@@ -81,6 +83,7 @@ class Login extends React.PureComponent {
                         boxSizing: 'border-box',
                         textAlign: 'center'
                     }}>Login</h1>
+                {get(this.props, 'location.state.from') ? (<small>You must login to access {location.state.from.pathname.pathname}</small>) : null}
                 <div css={{
                         display: 'flex',
                         justifyContent: 'center',

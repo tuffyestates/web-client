@@ -86,9 +86,9 @@ const store = createStore({
 });
 
 // Check if the user is already authenticated
-const token = cookies.get('token');
-if (token) {
-    console.debug('attempting to validate previous token')
+const hasToken = cookies.get('has-token');
+if (hasToken) {
+    console.debug('attempting to validate previous token');
     api.get('/users/status').then(res => {
         store.state.setState(res.data);
     }).catch(console.error);

@@ -1,13 +1,14 @@
 import React, {Suspense} from 'react';
 import {hot} from 'react-hot-loader';
 import {Helmet} from "react-helmet";
-import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, Redirect,} from 'react-router-dom';
+import cookies from 'js-cookie';
 import {Provider} from 'react-contextual';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 
 import * as Pages from './pages';
-import {Navbar, Footer, LoadingAnimation} from './components';
+import {Navbar, Footer, LoadingAnimation,} from './components';
 import Colors from './colors';
 import {Account} from './contexts';
 
@@ -15,8 +16,22 @@ const LoadingScreen = (<div style={{
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100%'
+        height: '100%',
     }}><LoadingAnimation/></div>);
+
+function PrivateRoute({
+    component: Component,
+    ...rest
+}) {
+    return (<Route {...rest} render={props => cookies.get('has-token')
+            ? (<Component computedMatch={rest.computedMatch} socket={rest.socket} {...props}/>)
+            : (<Redirect to={{
+                    pathname: "/login",
+                    state: {
+                        from: props.location
+                    },
+                }}/>)}/>);
+}
 
 const App = () => (<Provider store={Account}>
     <Router>
@@ -26,14 +41,15 @@ const App = () => (<Provider store={Account}>
                 overflow: 'hidden',
                 flexDirection: 'column',
                 color: '#333',
+                fontFamily: 'Roboto',
                 'input' : {
                     color: 'inherit',
                     fontFamily: 'inherit',
                     fontWeight: 'inherit',
                     ':invalid': {
                         // boxShadow: `0 1px 0 0 ${Colors.lightRed}`
-                    }
-                }
+                    },
+                },
             }}>
             <Helmet>
                 <title>Tuffy Estates</title>
@@ -43,13 +59,13 @@ const App = () => (<Provider store={Account}>
                     flex: 1,
                     backgroundColor: '#FAFAFA',
                     overflow: 'auto',
-                    paddingTop: '1em'
+                    paddingTop: '1em',
                 }}>
                 <Suspense fallback={LoadingScreen}>
                     <Switch>
                         <Route exact={true} path="/" component={Pages.Home}/>
-                        <Route path="/properties/create" component={Pages.CreateProperty}/>
-                        <Route path="/properties/edit/:id" component={Pages.Property}/>
+                        <PrivateRoute path="/properties/create" component={Pages.CreateProperty}/>
+                        <PrivateRoute path="/properties/edit/:id" component={Pages.Property}/>
                         <Route path="/properties/:id" component={Pages.Property}/>
                         <Route path="/properties" component={Pages.Properties}/>
                         <Route path="/register" component={Pages.Register}/>
