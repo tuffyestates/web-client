@@ -6,19 +6,17 @@ import autosize from 'autosize';
 
 export class Input extends React.PureComponent {
     render() {
-        let message = null,
-            prefix = null,
-            suffix = null;
-        if (this.props.message) {
+        let {message, prefix, suffix, messageStyle, suffixStyle, className, inputStyle, children, ...passthrough} = this.props;
+        if (message) {
             message = (<div css={{
                     border: '1px solid lightgrey',
                     backgroundColor: '#efefef',
                     padding: '0.3em 1.2em',
                     fontSize: '0.9em',
-                    ...this.props.messageStyle
-                }}>{this.props.message}</div>);
+                    ...messageStyle
+                }}>{message}</div>);
         }
-        if (this.props.prefix) {
+        if (prefix) {
             prefix = (<span css={{
                     backgroundColor: '#F2F2F2',
                     display: 'flex',
@@ -28,10 +26,10 @@ export class Input extends React.PureComponent {
                     color: '#888',
                     borderRight: '1px solid #C1C1C1'
                 }}>
-                {this.props.prefix}
+                {prefix}
             </span>);
         }
-        if (this.props.suffix) {
+        if (suffix) {
             suffix = (<span css={Object.assign({
                     backgroundColor: '#F2F2F2',
                     display: 'flex',
@@ -40,25 +38,10 @@ export class Input extends React.PureComponent {
                     padding: '0 1em',
                     color: '#888',
                     borderLeft: '1px solid #C1C1C1'
-                }, this.props.suffixStyle)}>
-                {this.props.suffix}
+                }, suffixStyle)}>
+                {suffix}
             </span>);
         }
-
-        const passthroughProps = {
-            autoFocus: this.props.autoFocus,
-            name: this.props.name,
-            value: this.props.value,
-            defaultValue: this.props.defaultValue,
-            placeholder: this.props.placeholder,
-            disabled: this.props.disabled,
-            type: this.props.type,
-            required: this.props.required,
-            readOnly: this.props.readOnly,
-            onChange: this.props.onChange,
-            min: this.props.min,
-            max: this.props.max
-        };
 
         return (<div css={[
                 {
@@ -68,13 +51,13 @@ export class Input extends React.PureComponent {
                         ? 'none'
                         : '1px solid #C1C1C1'
                 },
-                this.props.className
+                className
             ]}>
             <div css={{
                     display: 'flex'
                 }}>
                 {prefix}
-                <input {...passthroughProps} css={Object.assign({
+                <input {...passthrough} css={Object.assign({
                         flex: 1,
                         padding: '0.5em 0.8em',
                         border: 'none',
@@ -82,10 +65,10 @@ export class Input extends React.PureComponent {
                         '::placeholder': {
                             color: '#A8A8A8'
                         }
-                    }, this.props.inputStyle)}/> {suffix}
+                    }, inputStyle)}/> {suffix}
             </div>
             {message}
-            {this.props.children}
+            {children}
         </div>);
     }
     static messageStyle = {
@@ -132,28 +115,17 @@ export class Textarea extends React.PureComponent {
         autosize.destroy(this.textarea.current);
     }
     render() {
-        let message = null;
-        if (this.props.message) {
+        let {message, messageStyle, className, textareaStyle, children, ...passthrough} = this.props;
+
+        if (message) {
             message = (<div css={{
                     border: '1px solid lightgrey',
                     backgroundColor: '#efefef',
                     padding: '0.3em 1.2em',
                     fontSize: '0.9em',
-                    ...this.props.messageStyle
-                }}>{this.props.message}</div>);
+                    ...messageStyle
+                }}>{message}</div>);
         }
-
-        const passthroughProps = {
-            autoFocus: this.props.autoFocus,
-            name: this.props.name,
-            value: this.props.value,
-            defaultValue: this.props.defaultValue,
-            required: this.props.required,
-            placeholder: this.props.placeholder,
-            disabled: this.props.disabled,
-            readOnly: this.props.readOnly,
-            onChange: this.props.onChange
-        };
 
         return (<div css={[
                 {
@@ -163,9 +135,9 @@ export class Textarea extends React.PureComponent {
                         ? 'none'
                         : '1px solid #C1C1C1'
                 },
-                this.props.className
+                className
             ]}>
-            <textarea ref={this.textarea} {...passthroughProps} css={Object.assign({
+            <textarea ref={this.textarea} {...passthrough} css={Object.assign({
                     display: 'block',
                     width: '100%',
                     boxSizing: 'border-box',
@@ -175,8 +147,8 @@ export class Textarea extends React.PureComponent {
                     '::placeholder': {
                         color: '#A8A8A8'
                     }
-                }, this.props.textareaStyle)}/> {message}
-            {this.props.children}
+                }, textareaStyle)}/> {message}
+            {children}
         </div>);
     }
     static messageStyle = {
@@ -215,27 +187,17 @@ export class Checkbox extends React.PureComponent {
         checked: this.props.defaultChecked || this.props.checked
     }
     render() {
+        const {className, children, ...passthrough} = this.props;
         const id = shortid.generate();
 
-        const passthroughProps = {
-            autoFocus: this.props.autoFocus,
-            name: this.props.name,
-            checked: this.props.checked,
-            defaultchecked: this.props.defaultchecked,
-            required: this.props.required,
-            disabled: this.props.disabled,
-            readOnly: this.props.readOnly,
-            onChange: this.props.onChange,
-        };
-
-        return (<div className={this.props.className} css={{
+        return (<div className={className} css={{
                 'input:checked + label > div > .checkmark' : {
                     visibility: 'visible !important'
                 }
             }}>
             <input style={{
                     display: 'none'
-                }} type="checkbox" id={id} {...passthroughProps}/>
+                }} type="checkbox" id={id} {...passthrough}/>
 
             <label css={{
                     display: 'inline-flex',
@@ -254,7 +216,7 @@ export class Checkbox extends React.PureComponent {
                     }}><FontAwesomeIcon className="checkmark" icon={faCheck} style={{
                 color: Colors.orange,
                 visibility: 'hidden'
-            }}/></div>{this.props.children}</label>
+            }}/></div>{children}</label>
         </div>);
     }
     static propTypes = {};
