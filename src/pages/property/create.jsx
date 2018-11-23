@@ -10,19 +10,7 @@ import Property from './';
 
 export default class CreateProperty extends React.Component {
     state = {
-        property: {
-            _id: 0,
-            address: '',
-            price: '',
-            specification: {
-                built: '',
-                size: '',
-                lot: '',
-                bathrooms: '',
-                bedrooms: ''
-            },
-            features: {}
-        }
+        property: {}
     };
     style = {
         header: {

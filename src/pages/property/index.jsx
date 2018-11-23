@@ -2,6 +2,7 @@ import React from 'react';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import PropTypes from 'prop-types';
+import merge from 'deepmerge';
 
 import Colors from '../../colors';
 import {Editable, LoadingAnimation,} from '../../components';
@@ -16,10 +17,29 @@ export default class Property extends React.Component {
             fontWeight: 300,
         }
     };
+    static getDerivedStateFromProps(props, state) {
+        return {property: merge({
+            _id: '',
+            address: '',
+            price: '',
+            specification: {
+                built: '',
+                size: '',
+                lot: '',
+                bathrooms: '',
+                bedrooms: ''
+            },
+            location: {
+                lat: '',
+                lng: ''
+            },
+            features: {}
+        }, props.property)};
+    }
     render() {
         const editable = this.props.mode === 'edit' || this.props.mode === 'create';
         // Loading animation
-        if (typeof this.props.property._id === 'undefined') {
+        if (this.state.property._id === '' && this.props.mode !== 'create') {
             return (<div css={{
                     display: 'flex',
                     justifyContent: 'center',
@@ -29,7 +49,7 @@ export default class Property extends React.Component {
         }
 
         return (<React.Fragment>
-            <Header editable={editable} onChange={this.props.onChange} previewImage={this.props.previewImage} property={this.props.property}/>
+            <Header editable={editable} onChange={this.props.onChange} previewImage={this.props.previewImage} property={this.state.property}/>
             <div css={{
                     display: 'grid',
                     maxWidth: 1080,
@@ -41,33 +61,34 @@ export default class Property extends React.Component {
                     border: '1px solid #eee',
                     fontFamily: 'Roboto',
                     fontWeight: 300,
+                    backgroundColor: '#fcfcfc'
                 }}>
                 <div css={{
                         gridRowStart: 1,
-                        gridRowEnd: 'span 3',
+                        gridRowEnd: 'span 4',
                     }}>
                     <h3 css={this.style.header}>Description</h3>
 
                     <Editable.Textarea name="description" required={true} editable={editable} onChange={this.props.onChange} css={{
                             width: '100%'
-                        }} value={this.props.property.description} placeholder="Description" textareaStyle={{
+                        }} value={this.state.property.description} placeholder="Description" textareaStyle={{
                             paddingLeft: 0,
                             paddingRight: 0,
                         }}/>
                 </div>
                 <div>
                     <h3 css={this.style.header}>Specifications</h3>
-                    <Specifications editable={editable} property={this.props.property} onChange={this.props.onChange}/>
+                    <Specifications editable={editable} property={this.state.property} onChange={this.props.onChange}/>
                 </div>
                 <div>
                     <h3 css={this.style.header}>Features</h3>
-                    <Features editable={editable} property={this.props.property} onChange={this.props.onChange}/>
+                    <Features editable={editable} property={this.state.property} onChange={this.props.onChange}/>
                 </div>
                 <div>
                     <h3 css={this.style.header}>Map</h3>
-                    <Map position={[this.props.property.location.lat, this.props.property.location.lng,]}/>
+                    <Map position={[this.state.property.location.lat, this.state.property.location.lng,]}/>
                 </div>
-                <Primary disabled={editable}>Contact Owner</Primary>
+                <Primary css={{marginTop: '1em'}} disabled={editable}>Contact Owner</Primary>
             </div>
         </React.Fragment>);
     }
