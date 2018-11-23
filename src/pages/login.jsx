@@ -5,12 +5,12 @@ import {Subscribe} from 'react-contextual';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import PropTypes from 'prop-types';
-import {withRouter} from 'react-router-dom'
-import get from 'lodash.get';
+import {withRouter} from 'react-router-dom';
 
 import {Account} from '../contexts';
 import {Form} from '../components';
 import {Primary} from '../components/button';
+import {get} from '../utils';
 
 class Login extends React.PureComponent {
     static propTypes = {
@@ -34,7 +34,7 @@ class Login extends React.PureComponent {
 
             // If we got this far then the login was a success, lets inform the user
             this.setState({
-                message: "Login success! Redirecting to properties page..."
+                message: "Login success! Redirecting you..."
             }, () => {
                 // let's redirect the user to the listings page
                 setTimeout(() => {
@@ -83,7 +83,7 @@ class Login extends React.PureComponent {
                         boxSizing: 'border-box',
                         textAlign: 'center'
                     }}>Login</h1>
-                {get(this.props, 'location.state.from') ? (<small>You must login to access {location.state.from.pathname.pathname}</small>) : null}
+                {get(this.props, 'location.state.from') ? (<small>You must login to access {this.props.location.state.from.pathname}</small>) : null}
                 <div css={{
                         display: 'flex',
                         justifyContent: 'center',
