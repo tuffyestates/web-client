@@ -9,18 +9,19 @@ import Colors from '../colors';
 export default class SelectEnum extends React.PureComponent {
     render() {
         const options = React.Children.map(this.props.children, child => {
+            const {children, className, ...passthrough} = child.props;
             const id = shortid.generate();
             return (<div css={{
                     backgroundColor: 'white',
                     'input[type="radio"]:checked + label' : {
                         backgroundColor: Colors.orange,
                         color: 'white'
-                    }
-                }} key={child.props.value}>
+                    },
+                }} className={className} key={child.props.value}>
 
-                <input name={this.props.name} defaultChecked={child.props.defaultChecked} style={{
-                        display: 'none'
-                    }} type="radio" id={id} value={child.props.value}/>
+                <input {...passthrough} style={{
+                        display: 'none',
+                    }} type="radio"/>
                 <label htmlFor={id} css={{
                         display: 'inline-block',
                         padding: '0.5em 1em',
@@ -28,7 +29,7 @@ export default class SelectEnum extends React.PureComponent {
                         ':hover' : {
                             boxShadow: '0 0 7px -5px inset black'
                         }
-                    }}>{child.props.children}</label>
+                    }}>{children}</label>
 
             </div>)
         });

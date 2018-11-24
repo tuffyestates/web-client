@@ -33,6 +33,7 @@ export default class AutoComplete extends React.PureComponent {
         }, cb);
     }
     render() {
+        const {className, inputStyle, ...passthrough} = this.props;
         const results = this.state.results.map(result => <div key={result.name + result.description} onClick={() => this.setState({
                 value: result.name,
                 results: []
@@ -61,8 +62,8 @@ export default class AutoComplete extends React.PureComponent {
                 'input:focus + div' : {
                     display: 'block'
                 }
-            }} className={this.props.className}>
-            <input ref={this.input} placeholder={this.props.placeholder} value={this.state.value} onChange={this.search} css={{
+            }} className={className}>
+            <input ref={this.input} {...passthrough} onChange={this.search} css={{
                     flex: 1,
                     padding: '0.5em 0.8em',
                     border: 'none',
@@ -73,7 +74,7 @@ export default class AutoComplete extends React.PureComponent {
                     '::placeholder' : {
                         color: '#A8A8A8'
                     },
-                    ...this.props.inputStyle
+                    ...inputStyle
                 }}/>
             <div css={{
                     position: 'absolute',

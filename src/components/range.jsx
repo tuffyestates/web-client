@@ -10,6 +10,7 @@ const numberFormatter = new Intl.NumberFormat('en-US');
 
 export default class Range extends React.PureComponent {
     render() {
+        const {className, children, name, ...passthrough} = this.props;
         return (<div css={{
                 display: 'flex',
                 alignItems: 'center',
@@ -20,11 +21,11 @@ export default class Range extends React.PureComponent {
                 'input[type="number"]' : {
                     '-mozAppearance': 'textfield'
                 }
-            }} className={this.props.className}>
+            }} className={className}>
 
-            <Form.Input css={{flex: 1}} type="number" pattern="\d" inputMode="numeric" styep={this.props.step} min={this.props.min} max={this.props.max} placeholder={numberFormatter.format(this.props.min)} suffix={this.props.suffix} prefix={this.props.prefix}/> {this.props.children}
+            <Form.Input css={{flex: 1}} type="number" pattern="\d" inputMode="numeric" {...passthrough} name={`${name}-lower`} placeholder={numberFormatter.format(this.props.min)} /> {children}
 
-            <Form.Input css={{flex: 1}} type="number" pattern="\d" inputMode="numeric" styep={this.props.step} min={this.props.min} max={this.props.max} placeholder={numberFormatter.format(this.props.max)} suffix={this.props.suffix} prefix={this.props.prefix}/>
+            <Form.Input css={{flex: 1}} type="number" pattern="\d" inputMode="numeric" {...passthrough} name={`${name}-upper`} placeholder={numberFormatter.format(this.props.max)} />
 
         </div>);
     }
