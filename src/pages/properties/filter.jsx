@@ -19,17 +19,17 @@ export default class Filter extends React.Component {
                     textAlign: 'center'
                 }}>Filters</h3>
 
-            <Range min={0} max={100000000} suffix="$" css={this.style.input}/>
-            <Range min={0} max={10000} suffix="SqFt" css={this.style.input}/>
-            <Range min={0} max={1000} suffix="Acres" css={this.style.input}/>
+            <Range min={0} max={100000000} suffix="$" name="price" css={this.style.input} onChange={this.props.onChange}/>
+            <Range min={0} max={10000} suffix="SqFt" name="size" css={this.style.input} onChange={this.props.onChange}/>
+            <Range min={0} max={1000} suffix="Acres" name="lot" css={this.style.input} onChange={this.props.onChange}/>
 
-            <AutoComplete placeholder="Location" data={US_COUNTIES} settings={{
+            <AutoComplete placeholder="Location" data={US_COUNTIES} name="location" settings={{
                     keys: [
                         'name', 'state'
                     ],
                     threshold: 0.2,
                     distance: 3
-                }} css={this.style.input}/>
+                }} css={this.style.input} onChange={this.props.onChange}/>
 
             <div css={{
                     display: 'flex',
@@ -43,7 +43,7 @@ export default class Filter extends React.Component {
                     }}>Bedrooms</h4>
                 <SelectEnum name="bedrooms" select={'left'} css={{
                         color: '#666'
-                    }}>
+                    }} onChange={this.props.onChange}>
                     <option value={1} defaultChecked={true}>1 +</option>
                     <option value={2}>2 +</option>
                     <option value={3}>3 +</option>
@@ -63,75 +63,13 @@ export default class Filter extends React.Component {
                     }}>Bathrooms</h4>
                 <SelectEnum name="bathrooms" css={{
                         color: '#666'
-                    }}>
+                    }} onChange={this.props.onChange}>
                     <option value={1} defaultChecked={true}>1 +</option>
                     <option value={2}>2 +</option>
                     <option value={3}>3 +</option>
                     <option value={4}>4 +</option>
                 </SelectEnum>
             </div>
-
-            {/* <div className="filters features">
-                    <span
-
-                      style={{
-
-                        fontSize: '13.5px',
-                        fontWeight: '400',
-                        display: 'block',
-                        marginBottom: '16px',
-                        marginTop: '10px',
-
-                    }} {...this.props}
-
-                       className="title">Features</span>
-                    <label htmlFor="features">
-                        <span
-
-                          style={{
-
-                            fontSize: '13px',
-                            fontWeight: '200',
-                            display: 'block',
-                            marginBottom: '16px',
-                            marginTop: '10px'
-                        }} {...this.props} className="title">Features</span>
-
-                    <label htmlFor="features">
-
-                        <span style={{
-                                fontSize: '13px',
-                                fontWeight: '200',
-                                display: 'block',
-                                width: '30%',
-                                padding: '10px 0'
-                            }} {...this.props}>Garage</span>
-
-                        <input style={{
-                                fontSize: '13px',
-                                fontWeight: '200',
-                                display: 'block',
-                                width: '30%',
-                                padding: '10px 0',
-                                float: 'right'
-                            }} {...this.props} name="Garage" value="Garage" type="checkbox"/>
-
-                    </label>
-
-                    <label htmlFor="features">
-                        <span>Swimming Pool</span>
-                        <input name="Swimming_Pool" value="Swimming_Pool" type="checkbox"/>
-                    </label>
-                    <label htmlFor="features">
-                        <span>Fireplace</span>
-                        <input name="Fireplace" value="Fireplace" type="checkbox"/>
-                    </label>
-                    <label htmlFor="features">
-                        <span>Guest House</span>
-                        <input name="Guest_House" value="Guest_House" type="checkbox"/>
-                    </label>
-                </div> */
-            }
 
         </div>);
     }
