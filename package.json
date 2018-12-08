@@ -78,6 +78,7 @@
         "react-helmet": "^5.2.0",
         "react-inlinesvg": "^0.8.2",
         "react-leaflet": "^2.1.2",
+        "react-modal": "^3.6.1",
         "react-router-dom": "^4.3.1",
         "typeface-cabin": "0.0.54",
         "typeface-roboto": "0.0.54"
