@@ -4,7 +4,7 @@ import { jsx } from '@emotion/core';
 import { Subscribe } from 'react-contextual';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import cookies from 'cookies';
+import cookies from 'js-cookie';
 
 import { Account } from '../contexts';
 
@@ -26,7 +26,7 @@ class Logout extends React.PureComponent {
             // Call login action on global account state
             await this.props.account.logout();
 
-            cookies.set('has-token', 0, {maxAge: 0, overwrite: true});
+            cookies.remove('has-token');
 
             // If we got this far then the login was a success, lets inform the user
             this.setState({

@@ -93,7 +93,7 @@ if (hasToken) {
         store.state.setState(res.data);
     }).catch(function() {
         console.error.apply(console, arguments);
-        cookies.set('has-token', 0, {maxAge: 0, overwrite: true});
+        cookies.remove('has-token');
     });
 }
 
