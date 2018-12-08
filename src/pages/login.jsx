@@ -6,6 +6,7 @@ import {Subscribe} from 'react-contextual';
 import {jsx} from '@emotion/core';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
+import cookies from 'cookies';
 
 import {Account} from '../contexts';
 import {Form} from '../components';
@@ -31,6 +32,8 @@ class Login extends React.PureComponent {
         try {
             // Call login action on global account state
             await this.props.account.login(formdata);
+
+            cookies.set('has-token', 1, {maxAge: 604800000});
 
             // If we got this far then the login was a success, lets inform the user
             this.setState({

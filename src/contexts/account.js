@@ -91,7 +91,10 @@ if (hasToken) {
     console.debug('attempting to validate previous token');
     api.get('/users/status').then(res => {
         store.state.setState(res.data);
-    }).catch(console.error);
+    }).catch(function() {
+        console.error.apply(console, arguments);
+        cookies.set('has-token', 0, {maxAge: 0, overwrite: true});
+    });
 }
 
 export default store;
