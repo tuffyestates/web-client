@@ -117,12 +117,12 @@ module.exports = (env, argv) => {
                 rel: 'prefetch',
                 include: 'allAssets',
                 // Only prefetch images (prefetching scripts is handled by webapck's import())
-                fileWhitelist: [/(jpe?g|png|svg|gif)$/]
+                fileWhitelist: [/\.(jpe?g|png|svg|gif)$/]
             })
         ] : [
             new webpack.EnvironmentPlugin({
-                STATIC_PATH: `http://localhost:11638/static`,
-                API_PATH: `http://localhost:11638/api`
+                STATIC_PATH: `https://localhost:11638/static`,
+                API_PATH: `https://localhost:11638/api/v1`
             })
         ]),
         devtool: argv.mode === 'production' ? false : 'cheap-module-eval-source-map',

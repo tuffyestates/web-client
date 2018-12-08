@@ -2,7 +2,7 @@ import React from 'react';
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 
-import Colors from '../../colors';
+// import Colors from '../../colors';
 import {AutoComplete, Range, SelectEnum} from '../../components';
 import US_COUNTIES from '../../assets/data/usCounties.json';
 
@@ -41,7 +41,7 @@ export default class Filter extends React.Component {
                         margin: '0 1.5em',
                         flex: 1
                     }}>Bedrooms</h4>
-                <SelectEnum name="bedrooms" select={'left'} css={{
+                <SelectEnum name="min-bedrooms" select={'left'} css={{
                         color: '#666'
                     }} onChange={this.props.onChange}>
                     <option value={1} defaultChecked={true}>1 +</option>
@@ -61,7 +61,7 @@ export default class Filter extends React.Component {
                         margin: '0 1.5em',
                         flex: 1
                     }}>Bathrooms</h4>
-                <SelectEnum name="bathrooms" css={{
+                <SelectEnum name="min-bathrooms" css={{
                         color: '#666'
                     }} onChange={this.props.onChange}>
                     <option value={1} defaultChecked={true}>1 +</option>

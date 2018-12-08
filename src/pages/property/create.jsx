@@ -28,7 +28,7 @@ export default class CreateProperty extends React.Component {
         this.setState({loading: true, message: undefined});
         try {
             const formdata = new FormData(e.currentTarget);
-            const response = await api.post(`/property`, formdata);
+            const response = await api.post(`/properties`, formdata);
             // if (response.data.error) {
             //
             // }

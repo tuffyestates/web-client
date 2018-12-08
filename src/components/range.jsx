@@ -23,9 +23,9 @@ export default class Range extends React.PureComponent {
                 }
             }} className={className}>
 
-            <Form.Input css={{flex: 1}} type="number" pattern="\d" inputMode="numeric" {...passthrough} name={`${name}-lower`} placeholder={numberFormatter.format(this.props.min)} /> {children}
+            <Form.Input css={{flex: 1}} type="number" pattern="\d" inputMode="numeric" {...passthrough} name={`${name}-min`} placeholder={numberFormatter.format(this.props.min)} /> {children}
 
-            <Form.Input css={{flex: 1}} type="number" pattern="\d" inputMode="numeric" {...passthrough} name={`${name}-upper`} placeholder={numberFormatter.format(this.props.max)} />
+            <Form.Input css={{flex: 1}} type="number" pattern="\d" inputMode="numeric" {...passthrough} name={`${name}-max`} placeholder={numberFormatter.format(this.props.max)} />
 
         </div>);
     }

@@ -11,14 +11,8 @@ import Header from './header';
 import {Features, Specifications, Map,} from './details';
 
 export default class Property extends React.Component {
-    style = {
-        header: {
-            borderBottom: `1.5px solid ${Colors.lightOrange}`,
-            fontWeight: 300,
-        }
-    };
-    static getDerivedStateFromProps(props, state) {
-        return {property: merge({
+    state = {
+        property: {
             _id: '',
             address: '',
             price: '',
@@ -34,7 +28,16 @@ export default class Property extends React.Component {
                 lng: ''
             },
             features: {}
-        }, props.property)};
+        }
+    }
+    style = {
+        header: {
+            borderBottom: `1.5px solid ${Colors.lightOrange}`,
+            fontWeight: 300,
+        }
+    };
+    static getDerivedStateFromProps(props, state) {
+        return {property: merge(state.property, props.property)};
     }
     render() {
         const editable = this.props.mode === 'edit' || this.props.mode === 'create';

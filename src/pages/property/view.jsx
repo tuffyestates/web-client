@@ -19,7 +19,7 @@ export default class ViewProperty extends React.Component {
     };
     async componentDidMount() {
         try {
-            const response = await api.get(`/property/${this.props.match.params.id}`);
+            const response = await api.get(`/properties/${this.props.match.params.id}`);
             // if (response.data.error) {
             //
             // }
