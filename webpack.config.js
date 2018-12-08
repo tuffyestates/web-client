@@ -104,7 +104,7 @@ module.exports = (env, argv) => {
             }),
             new webpack.EnvironmentPlugin({
                 STATIC_PATH: `https://tuffyestates.sparling.us:1163${process.env.BRANCH === 'dev' ? '7': '8'}/static`,
-                API_PATH: `https://tuffyestates.sparling.us:1163${process.env.BRANCH === 'dev' ? '7': '8'}/api`
+                API_PATH: `https://tuffyestates.sparling.us:1163${process.env.BRANCH === 'dev' ? '7': '8'}/api/v1`
             }),
             new DynamicCdnWebpackPlugin(),
             new CompressionPlugin({
