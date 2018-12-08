@@ -8,6 +8,7 @@ import Colors from '../colors';
 
 export default class SelectEnum extends React.PureComponent {
     render() {
+        const {name, onChange} = this.props;
         const options = React.Children.map(this.props.children, child => {
             const {children, className, ...passthrough} = child.props;
             const id = shortid.generate();
@@ -19,7 +20,7 @@ export default class SelectEnum extends React.PureComponent {
                     },
                 }} className={className} key={child.props.value}>
 
-                <input {...passthrough} style={{
+                <input {...passthrough} id={id} name={name} onChange={onChange} style={{
                         display: 'none',
                     }} type="radio"/>
                 <label htmlFor={id} css={{
