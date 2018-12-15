@@ -27,7 +27,6 @@ export default class Listings extends React.Component {
 
     async loadData(offset) {
         const options = {
-            limit: 9,
             offset,
             ...this.props.filters,
         };

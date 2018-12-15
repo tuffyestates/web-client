@@ -9,4 +9,5 @@ export {default as InfiniteScroll} from "./infiniteScroll";
 export {default as FallbackImage} from "./fallbackImage";
 export {default as AutoComplete} from "./autocomplete";
 export {default as ProgressiveImage} from "./progressiveImage";
+export {default as ImageGrid} from "./imageGrid";
 export * as Editable from "./editable";
