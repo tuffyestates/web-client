@@ -1,8 +1,6 @@
 import React from 'react';
 import {NavLink as RouterLink} from 'react-router-dom';
 import {Subscribe} from 'react-contextual';
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 
 import Colors from '../colors';
 import {Account} from '../contexts';

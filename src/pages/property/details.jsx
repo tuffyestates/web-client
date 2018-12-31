@@ -3,8 +3,6 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faHammer, faExpand, faCompress, faVectorSquare, faBed, faBath} from '@fortawesome/free-solid-svg-icons';
 import {Map as Leaflet, TileLayer, Marker} from 'react-leaflet';
 import leaflet from 'leaflet';
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 import Fullscreen from "react-full-screen";
 
 import {Editable, Form, SelectEnum} from '../../components';

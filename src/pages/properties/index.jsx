@@ -1,8 +1,8 @@
 import React from 'react';
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 import {Link} from 'react-router-dom';
 import set from 'lodash.set';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faHome, faPlus} from '@fortawesome/free-solid-svg-icons';
 
 import {debounce} from '../../utils';
 import {Primary} from '../../components/button';
@@ -34,11 +34,6 @@ export default class Container extends React.PureComponent {
                     flexDirection: 'column',
                     justifyContent: 'stretch',
                 }}>
-                <Link to="/properties/create">
-                    <Primary css={{
-                            width: '100%'
-                        }}>Post a Listing</Primary>
-                </Link>
                 <Filter css={{
                         fontFamily: 'cabin',
                         fontWeight: '200',
@@ -52,6 +47,35 @@ export default class Container extends React.PureComponent {
                         e.persist();
                         this.onFilterChange(e);
                     }}/>
+                <Link to="/properties/create">
+                    <Primary css={{
+                            width: '100%',
+                            position: 'relative',
+                            paddingTop: '2em',
+                            paddingBottom: '2em',
+                            ':hover': {
+                                boxShadow: "0 0px 5px -3px rgb(0, 0, 0) inset"
+                            }
+                        }}>
+                        <span className="fa-stack" css={{
+                                position: 'absolute',
+                                top: '50%',
+                                fontSize: '1.3em',
+                                right: '10%',
+                                transform: 'translateY(-50%)',
+                            }}>
+                            <FontAwesomeIcon icon={faHome} className="fa-stack-2x" style={{
+                                    color: '#ffffff'
+                                }}/>
+                            <FontAwesomeIcon icon={faPlus} className="fa-stack-1x" style={{
+                                    filter: `drop-shadow(-1.5px -1.5px 0px ${Colors.orange}) drop-shadow(-1.5px 1.5px 0px ${Colors.orange})`,
+                                    marginRight: '-0.19em',
+                                    marginBottom: '-0.25em',
+                                    color: `white`,
+                                }}/>
+                        </span>
+                        Post a Listing</Primary>
+                </Link>
             </div>
             <div css={{
                     flex: 1,

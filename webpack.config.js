@@ -121,12 +121,14 @@ module.exports = (env, argv) => {
             })
         ] : [
             new webpack.EnvironmentPlugin({
-                STATIC_PATH: `https://localhost:11638/static`,
-                API_PATH: `https://localhost:11638/api/v1`
+                STATIC_PATH: `https://estates.localhost:11638/static`,
+                API_PATH: `https://estates.localhost:11638/api/v1`
             })
         ]),
         devtool: argv.mode === 'production' ? false : 'cheap-module-eval-source-map',
         devServer: {
+            host: "estates.localhost",
+            https: true,
             historyApiFallback: true
         }
     }

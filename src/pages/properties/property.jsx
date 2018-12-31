@@ -1,7 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 
 // import Colors from '../../colors';
 import {FallbackImage} from '../../components';

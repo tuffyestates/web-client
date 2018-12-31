@@ -1,61 +1,50 @@
 import React from 'react';
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 import PropTypes from 'prop-types';
 
 /**
  * Load new data only when the user has scrolled to the bottom of the container.
  */
 export default class InfiniteScroll extends React.PureComponent {
-    state = {
-        content: [],
-
-        // False is set to true when no new data was returned on a loadMore call. That way we don't keep calling.
-        done: false
-    };
+    loadingMore = false;
     constructor(props) {
         super(props);
         this.container = React.createRef();
     }
     async componentDidMount() {
-        // Add new content to current content
-        const content = this.state.content.concat(await this.props.loadMore(this.state.content.length));
-        this.setState({content});
+        await this.props.loadMore()
 
         // Listen for scroll events
-        this.container.current.addEventListener('scroll', this.handleScroll.bind(this), {passive: true});
+        this.container.current.addEventListener('scroll', this.handleScroll, {passive: true});
     }
     componentWillUnmount() {
-        this.container.current.removeEventListener('scroll', this.handleScroll.bind(this), {passive: true});
+        this.container.current.removeEventListener('scroll', this.handleScroll, {passive: true});
     }
-    handleScroll = throttle(async(e) => {
-        // If we have already loaded everything that exists
-        if (this.state.done)
+    handleScroll = throttle(async (e) => {
+        if (this.loadingMore)
             return;
 
         const container = e.target;
 
         // Time to see if the scroll is within our target
-        if (container.scrollTop + container.clientHeight > container.scrollHeight - this.props.offset) {
-            let done = false;
+        if (container.scrollTop + container.clientHeight >= container.scrollHeight - this.props.offset) {
+            this.loadingMore = true;
 
             // Container has been scrolled into a position where we should load new content
-            const newContent = await this.props.loadMore(this.state.content.length);
-
-            // No new content, don't try to load more content again
-            if (newContent.length === 0)
-                done = true;
-
-            // Add new content to old content
-            const content = this.state.content.concat(newContent);
-            this.setState({content, done});
+            await this.props.loadMore();
+            this.loadingMore = false;
         }
     });
     render() {
+        const {
+            loadMore: _,
+            children,
+            ...passThroughProps
+        } = this.props;
         // onWheel={this.handleScroll.bind(this)}
-        return (<div className={this.props.className} ref={this.container}>
-            {this.state.content}
-            {this.props.children}
+        return (<div css={{
+                overflow: 'auto'
+            }} {...passThroughProps} ref={this.container}>
+            {children}
         </div>);
     }
     static propTypes = {
@@ -64,31 +53,38 @@ export default class InfiniteScroll extends React.PureComponent {
          */
         loadMore: PropTypes.instanceOf(Function).isRequired,
         /**
-         * Location of scroll in which loadMore is called
+         * Offset from bottom of scroll when more should be loaded
          */
-        offset: PropTypes.number
+        offset: PropTypes.number,
     };
     static defaultProps = {
-        offset: 300
+        offset: 10
     };
     static docProps = {
-        loadMore: () => []
+        children: Array.from({
+            length: 100
+        }, (e, idx) => <div key={idx}>{idx}</div>),
+        loadMore: () => undefined,
+        css: {
+            height: 200
+        },
     };
 }
 
 // https://gist.github.com/beaucharman/e46b8e4d03ef30480d7f4db5a78498ca
 function throttle(callback, wait = 200, context = this) {
-    let timeout = null, callbackArgs = null;
+    let timeout = null,
+        callbackArgs = null;
 
     const later = () => {
         callback.apply(context, callbackArgs);
         timeout = null;
     };
 
-    return function() {
+    return function throttled() {
         if (!timeout) {
             callbackArgs = arguments;
             timeout = setTimeout(later, wait);
         }
-    }
+    };
 }

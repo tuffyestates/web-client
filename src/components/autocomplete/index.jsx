@@ -1,9 +1,9 @@
 import React from 'react';
 import Colors from '../../colors';
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 import PropTypes from 'prop-types';
 import Search from './search.worker.js';
+
+export const DONE = Symbol('DONE');
 
 export default class AutoComplete extends React.PureComponent {
     state = {
@@ -15,7 +15,7 @@ export default class AutoComplete extends React.PureComponent {
         this.input = React.createRef();
     }
     onSearchResults = (event) => this.setState({
-        results: event.data.slice(0, this.props.maxNumResults)
+        results: event.data.slice(0, this.props.maxnumresults)
     });
     static getDerivedStateFromProps(props, state) {
         const searcher = state.searcher || new Search();
@@ -100,7 +100,7 @@ export default class AutoComplete extends React.PureComponent {
         /**
          * Maximum number of results to display.
          */
-        maxNumResults: PropTypes.number,
+        maxnumresults: PropTypes.number,
         /**
          * Data to be matched against. Passed to fuse.
          */
@@ -111,7 +111,7 @@ export default class AutoComplete extends React.PureComponent {
         settings: PropTypes.object
     };
     static defaultProps = {
-        maxNumResults: 5
+        maxnumresults: 5
     };
     static docProps = {
         settings: {

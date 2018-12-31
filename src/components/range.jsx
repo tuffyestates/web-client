@@ -1,7 +1,5 @@
 import React from 'react';
 import Colors from '../colors';
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 import PropTypes from 'prop-types';
 
 import {Form} from './';
@@ -15,11 +13,11 @@ export default class Range extends React.PureComponent {
                 display: 'flex',
                 alignItems: 'center',
                 'input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button' : {
-                    '-webkitAppearance': 'none',
+                    'WebkitAppearance': 'none',
                     margin: 0
                 },
                 'input[type="number"]' : {
-                    '-mozAppearance': 'textfield'
+                    'MozAppearance': 'textfield'
                 }
             }} className={className}>
 

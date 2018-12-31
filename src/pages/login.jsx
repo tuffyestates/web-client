@@ -2,8 +2,6 @@ import React from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faUser, faLock} from '@fortawesome/free-solid-svg-icons';
 import {Subscribe} from 'react-contextual';
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 import cookies from 'js-cookie';
@@ -58,9 +56,9 @@ class Login extends React.PureComponent {
                 marginBottom: '1em',
                 height: 'calc(100% - 1em)',
                 overflow: 'hidden',
-                backgroundImage: `url(${require('../assets/images/jakob-owens-720574-unsplash.jpg?size=2000')})`,
+                backgroundImage: `url(${require('../assets/images/lerone-pieters-1255794-unsplash.jpg?size=2000')})`,
                 backgroundSize: 'cover',
-                backgroundPosition: 'center',
+                backgroundPosition: 'center 70%',
                 backgroundBlendMode: 'overlay',
                 backgroundColor: '#0000002a'
             }}>

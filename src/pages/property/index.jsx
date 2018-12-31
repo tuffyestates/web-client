@@ -1,6 +1,4 @@
 import React from 'react';
-/** @jsx jsx */
-import { jsx } from '@emotion/core';
 import PropTypes from 'prop-types';
 import merge from 'deepmerge';
 import Modal from 'react-modal';

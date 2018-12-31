@@ -1,6 +1,4 @@
 import React from 'react';
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 
 // import Colors from '../../colors';
 import {AutoComplete, Range, SelectEnum} from '../../components';

@@ -1,6 +1,4 @@
 import React from 'react';
-/** @jsx jsx */
-import { jsx } from '@emotion/core';
 import { Subscribe } from 'react-contextual';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';

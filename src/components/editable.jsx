@@ -1,45 +1,18 @@
 import React from 'react';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 import PropTypes from 'prop-types';
 
 import {Form} from './';
-import Colors from '../colors';
-
-// const editIcon = (<FontAwesomeIcon css={{
-//         fontSize: '0.5em',
-//         marginRight: '0.5em',
-//         display: this.props.editable
-//             ? 'block'
-//             : 'none'
-//     }} icon={['far', 'edit']}/>);
 
 export class Input extends React.PureComponent {
     render() {
-        const passThroughProps = {
-            autoFocus: this.props.autoFocus,
-            name: this.props.name,
-            value: this.props.value,
-            defaultValue: this.props.defaultValue,
-            placeholder: this.props.placeholder,
-            disabled: this.props.disabled || !this.props.editable,
-            type: this.props.type,
-            readOnly: this.props.readOnly || !this.props.editable,
-            onChange: this.props.onChange,
-            required: this.props.required,
-            className: this.props.className,
-            prefix: this.props.prefix,
-            suffix: this.props.suffix,
-            message: this.props.message,
-            suffixStyle: this.props.suffixStyle
-        }
-        return (<Form.Input {...passThroughProps} inputStyle={Object.assign({
+        const {editableLineColor, inputStyle, className, ...passthrough} = this.props;
+
+        return (<Form.Input {...passthrough} inputStyle={Object.assign({
                 backgroundColor: 'transparent'
-            }, this.props.inputStyle)} css={{
+            }, inputStyle)} className={className} css={{
                 border: 'none',
-                borderBottom: `1px solid ${this.props.editable && !this.props.value
-                    ? this.props.editableLineColor
+                borderBottom: `1px solid ${passthrough.editable && !passthrough.value
+                    ? editableLineColor
                     : 'transparent'}`
             }}/>);
     }
@@ -66,32 +39,20 @@ export class Input extends React.PureComponent {
 
 export class Textarea extends React.PureComponent {
     render() {
-        const passThroughProps = {
-            autoFocus: this.props.autoFocus,
-            name: this.props.name,
-            value: this.props.value,
-            defaultValue: this.props.defaultValue,
-            placeholder: this.props.placeholder,
-            required: this.props.required,
-            disabled: this.props.disabled || !this.props.editable,
-            type: this.props.type,
-            readOnly: this.props.readOnly || !this.props.editable,
-            onChange: this.props.onChange
-        }
+        const {className,textareaStyle, ...passthrough} = this.props;
         return (<div css={{
                 display: 'inline-flex',
                 alignItems: 'center'
-            }} className={this.props.className}>
+            }} className={className}>
 
-            <Form.Textarea {...passThroughProps} textareaStyle={Object.assign({
+            <Form.Textarea {...passthrough} textareaStyle={Object.assign({
                     backgroundColor: 'transparent',
-                }, this.props.textareaStyle)} css={{
+                }, textareaStyle)} css={{
                     flex: 1,
                     border: 'none',
-                    borderBottom: `1px solid ${this.props.editable && !this.props.value
+                    borderBottom: `1px solid ${passthrough.editable && !passthrough.value
                         ? '#ffffff'
-                        : 'transparent'}`,
-
+                        : 'transparent'}`
                 }}/>
 
         </div>);

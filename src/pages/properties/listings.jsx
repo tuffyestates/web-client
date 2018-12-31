@@ -1,6 +1,4 @@
 import React from 'react';
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 import queryString from 'query-string';
 
 // import Colors from '../../colors';
@@ -10,24 +8,22 @@ import Property from './property';
 
 export default class Listings extends React.Component {
     state = {
-        infiniteScrollKey: Math.random()
+        listingsOffset: 0,
+        listings: []
     };
-    static getDerivedStateFromProps(props, state) {
-        // This will cause the infinite scroll to reload
-        return {infiniteScrollKey: Math.random()};
-    }
 
-    async loadHomes(offset) {
-        const listings = await this.loadData(offset);
-        return listings.reduce((arr, house, idx) => {
-            arr.push(<Property key={offset + idx} address={house.address} price={house.price} id={house._id}/>)
+    async loadHomes() {
+        const data = await this.loadData(this.state.listingsOffset);
+        const newListings = data.reduce((arr, house, idx) => {
+            arr.push(<Property key={this.state.listingsOffset + idx} address={house.address} price={house.price} id={house._id}/>)
             return arr;
         }, []);
+        this.setState({listingsOffset: this.state.listingsOffset + newListings, listings: this.state.listings.concat(newListings)})
     }
 
-    async loadData(offset) {
+    async loadData() {
         const options = {
-            offset,
+            offset: this.state.listingsOffset,
             ...this.props.filters,
         };
         try {
@@ -40,7 +36,7 @@ export default class Listings extends React.Component {
     }
 
     render() {
-        return <InfiniteScroll key={this.state.infiniteScrollKey} css={{
+        return <InfiniteScroll.default css={{
                 display: 'flex',
                 flexWrap: 'wrap',
                 flex: 1,
@@ -48,6 +44,8 @@ export default class Listings extends React.Component {
                 justifyContent: 'center',
                 padding: '1em',
                 overflowY: 'auto',
-            }} loadMore={this.loadHomes.bind(this)}/>;
+            }} loadMore={this.loadHomes.bind(this)}>
+            {this.state.listings}
+        </InfiniteScroll.default>;
     }
 }

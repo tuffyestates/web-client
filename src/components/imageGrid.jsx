@@ -1,13 +1,11 @@
 import React from 'react';
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 import PropTypes from 'prop-types';
 
 import Colors from '../colors';
 
 export default class Grid extends React.PureComponent {
     render() {
-        const children = this.props.srcs.reduce(src => {
+        const children = this.props.srcs.map(src => {
             if (src.endsWith('.mp4')) {
                 return (<video key={src} src={src}/>);
             }
@@ -20,9 +18,11 @@ export default class Grid extends React.PureComponent {
         </div>);
     }
     static propTypes = {
-        srcs: PropTypes.object
+        srcs: PropTypes.array
     };
-    static defaultProps = {};
+    static defaultProps = {
+        srcs: []
+    };
     static docProps = {
         children: "Hello!"
     };

@@ -1,8 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
-/** @jsx jsx */
-import { jsx } from '@emotion/core';
 
 import { ProgressiveImage, Editable } from '../../components';
 

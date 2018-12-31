@@ -1,7 +1,4 @@
 import React from 'react';
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
-import Set from 'lodash.set';
 
 import Colors from '../../colors';
 import api from '../../api';

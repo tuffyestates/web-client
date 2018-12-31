@@ -1,19 +1,27 @@
 import React from 'react';
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 import PropTypes from 'prop-types';
 import autosize from 'autosize';
 
 export class Input extends React.PureComponent {
     render() {
-        let {message, prefix, suffix, messageStyle, suffixStyle, className, inputStyle, children, ...passthrough} = this.props;
+        let {
+            message,
+            prefix,
+            suffix,
+            messageStyle,
+            suffixStyle,
+            className,
+            inputStyle,
+            children,
+            ...passthrough
+        } = this.props;
         if (message) {
             message = (<div css={{
                     border: '1px solid lightgrey',
                     backgroundColor: '#efefef',
                     padding: '0.3em 1.2em',
                     fontSize: '0.9em',
-                    ...messageStyle
+                    ...messageStyle,
                 }}>{message}</div>);
         }
         if (prefix) {
@@ -24,7 +32,7 @@ export class Input extends React.PureComponent {
                     alignItems: 'center',
                     padding: '0 1em',
                     color: '#888',
-                    borderRight: '1px solid #C1C1C1'
+                    borderRight: '1px solid #C1C1C1',
                 }}>
                 {prefix}
             </span>);
@@ -37,35 +45,32 @@ export class Input extends React.PureComponent {
                     alignItems: 'center',
                     padding: '0 1em',
                     color: '#888',
-                    borderLeft: '1px solid #C1C1C1'
+                    borderLeft: '1px solid #C1C1C1',
                 }, suffixStyle)}>
                 {suffix}
             </span>);
         }
-
-        return (<div css={[
-                {
-                    minWidth: 0,
-                    border: '1px solid #C1C1C1',
-                    borderBottom: message
-                        ? 'none'
-                        : '1px solid #C1C1C1'
-                },
-                className
-            ]}>
+        console.log(className)
+        return (<div className={className} css={{
+                minWidth: 0,
+                border: '1px solid #C1C1C1',
+                borderBottom: message
+                    ? 'none'
+                    : '1px solid #C1C1C1',
+            }}>
             <div css={{
                     display: 'flex'
                 }}>
                 {prefix}
-                <input {...passthrough} css={Object.assign({
+                <input {...passthrough} css={[{
                         flex: 1,
                         padding: '0.5em 0.8em',
                         border: 'none',
                         minWidth: 0,
-                        '::placeholder': {
+                        '::placeholder' : {
                             color: '#A8A8A8'
-                        }
-                    }, inputStyle)}/> {suffix}
+                        },
+                    }, inputStyle]}/> {suffix}
             </div>
             {message}
             {children}
@@ -75,7 +80,7 @@ export class Input extends React.PureComponent {
         error: {
             borderColor: '#CB3837',
             backgroundColor: '#FEF2F2',
-            color: '#CB3837'
+            color: '#CB3837',
         }
     };
     static propTypes = {
@@ -86,21 +91,21 @@ export class Input extends React.PureComponent {
         /**
          * A message displayed below the input
          */
-        message: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+        message: PropTypes.oneOfType([PropTypes.string, PropTypes.element,]),
         /**
          * Information displayed before the input
          */
-        prefix: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+        prefix: PropTypes.oneOfType([PropTypes.string, PropTypes.element,]),
         /**
          * Information displayed after the input
          */
-        suffix: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+        suffix: PropTypes.oneOfType([PropTypes.string, PropTypes.element,]),
     };
     static defaultProps = {};
     static docProps = {
         message: "You've been selected to become a unicorn!",
         prefix: "Mr.",
-        suffix: "Jr."
+        suffix: "Jr.",
     };
 }
 export class Textarea extends React.PureComponent {
@@ -115,7 +120,14 @@ export class Textarea extends React.PureComponent {
         autosize.destroy(this.textarea.current);
     }
     render() {
-        let {message, messageStyle, className, textareaStyle, children, ...passthrough} = this.props;
+        let {
+            message,
+            messageStyle,
+            className,
+            textareaStyle,
+            children,
+            ...passthrough
+        } = this.props;
 
         if (message) {
             message = (<div css={{
@@ -123,21 +135,19 @@ export class Textarea extends React.PureComponent {
                     backgroundColor: '#efefef',
                     padding: '0.3em 1.2em',
                     fontSize: '0.9em',
-                    ...messageStyle
+                    ...messageStyle,
                 }}>{message}</div>);
         }
 
-        return (<div css={[
+        return (<div className={className} css={
                 {
                     minWidth: 0,
                     border: '1px solid #C1C1C1',
                     borderBottom: message
                         ? 'none'
-                        : '1px solid #C1C1C1'
-                },
-                className
-            ]}>
-            <textarea ref={this.textarea} {...passthrough} css={Object.assign({
+                        : '1px solid #C1C1C1',
+                }}>
+            <textarea ref={this.textarea} {...passthrough} css={[{
                     display: 'block',
                     width: '100%',
                     boxSizing: 'border-box',
@@ -146,8 +156,8 @@ export class Textarea extends React.PureComponent {
                     resize: 'none',
                     '::placeholder': {
                         color: '#A8A8A8'
-                    }
-                }, textareaStyle)}/> {message}
+                    },
+                }, textareaStyle]}/> {message}
             {children}
         </div>);
     }
@@ -155,7 +165,7 @@ export class Textarea extends React.PureComponent {
         error: {
             borderColor: '#CB3837',
             backgroundColor: '#FEF2F2',
-            color: '#CB3837'
+            color: '#CB3837',
         }
     };
     static propTypes = {
@@ -166,15 +176,14 @@ export class Textarea extends React.PureComponent {
         /**
          * A message displayed below the input
          */
-        message: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+        message: PropTypes.oneOfType([PropTypes.string, PropTypes.element,])
     };
     static defaultProps = {};
     static docProps = {
         placeholder: "Ello gov'na!",
-        message: "You've been selected to become a unicorn!",
+        message: "You've been selected to become a unicorn!"
     };
 }
-
 
 import shortid from 'shortid';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -187,7 +196,11 @@ export class Checkbox extends React.PureComponent {
         checked: this.props.defaultChecked || this.props.checked
     }
     render() {
-        const {className, children, ...passthrough} = this.props;
+        const {
+            className,
+            children,
+            ...passthrough
+        } = this.props;
         const id = shortid.generate();
 
         return (<div className={className} css={{
@@ -203,7 +216,7 @@ export class Checkbox extends React.PureComponent {
                     display: 'inline-flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
                 }} htmlFor={id}>
                 <div css={{
                         border: `2px solid ${Colors.blue}`,
@@ -212,10 +225,10 @@ export class Checkbox extends React.PureComponent {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        marginRight: '0.3em'
+                        marginRight: '0.3em',
                     }}><FontAwesomeIcon className="checkmark" icon={faCheck} style={{
                 color: Colors.orange,
-                visibility: 'hidden'
+                visibility: 'hidden',
             }}/></div>{children}</label>
         </div>);
     }
