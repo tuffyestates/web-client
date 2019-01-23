@@ -62,7 +62,7 @@ export default class SelectEnum extends React.PureComponent {
         children: [
             /* eslint-disable react/jsx-key */
             <option value={1}>Option 1</option>,
-            <option value={2}>Option 2</option>,
+            <option defaultChecked={true} value={2}>Option 2</option>,
             <option value={3}>Option 3</option>
             /* eslint-enable react/jsx-key */
         ]

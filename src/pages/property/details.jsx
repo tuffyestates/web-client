@@ -22,41 +22,40 @@ class Select extends React.PureComponent {
     }
 }
 
-class Entry extends React.PureComponent {
+class Detail extends React.PureComponent {
     render() {
-        return (<div css={{
+        return (<React.Fragment css={{
                 minWidth: 100,
-                width: '50%',
-                display: 'flex',
-                alignItems: 'center'
             }}>
-            <FontAwesomeIcon style={{
+            <FontAwesomeIcon className="fa-fw" style={{
                     padding: '0 0.5em',
-                    width: 20
                 }} icon={this.props.icon}/>
             <Editable.Input required={true} value={this.props.value} name={this.props.name} suffix={this.props.suffix} suffixStyle={{
                     backgroundColor: 'transparent',
-                    border: 'none'
+                    border: 'none',
+                    flex: 0,
                 }} onChange={this.props.onChange} editableLineColor="#bbb" css={{
+                    margin: '0 0.4em',
                     flex: 1,
-                    margin: '0 0.4em'
+                    minWidth: 60
                 }} editable={this.props.editable} placeholder={this.props.placeholder}/>
-        </div>);
+            <small css={{color: 'grey', textAlign: 'right'}}>{this.props.placeholder}</small>
+        </React.Fragment>);
     }
 }
 
 export class Specifications extends React.PureComponent {
     render() {
         return (<div css={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                maxWidth: '100%'
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2, 32px auto 1fr)',
+                alignItems: 'center',
             }}>
-            <Entry value={this.props.property.specification.built} icon={faHammer} name="specification.built" placeholder="Year Built" editable={this.props.editable} onChange={this.props.onChange}/>
-            <Entry value={this.props.property.specification.size} icon={faExpand} name="specification.size" placeholder="Square Feet" editable={this.props.editable} onChange={this.props.onChange}/>
-            <Entry value={this.props.property.specification.lot} icon={faVectorSquare} name="specification.lot" placeholder="Acres" editable={this.props.editable} onChange={this.props.onChange}/>
-            <Entry value={this.props.property.specification.bedrooms} icon={faBed} name="specification.bedrooms" placeholder="bedrooms" editable={this.props.editable} onChange={this.props.onChange}/>
-            <Entry value={this.props.property.specification.bathrooms} icon={faBath} name="specification.bathrooms" placeholder="bathrooms" editable={this.props.editable} onChange={this.props.onChange}/>
+            <Detail value={this.props.property.specification.built} icon={faHammer} name="specification.built" placeholder="Year Built" editable={this.props.editable} onChange={this.props.onChange}/>
+            <Detail value={this.props.property.specification.size} icon={faExpand} name="specification.size" placeholder="SqFt" editable={this.props.editable} onChange={this.props.onChange}/>
+            <Detail value={this.props.property.specification.lot} icon={faVectorSquare} name="specification.lot" placeholder="Acres" editable={this.props.editable} onChange={this.props.onChange}/>
+            <Detail value={this.props.property.specification.bedrooms} icon={faBed} name="specification.bedrooms" placeholder="Bedrooms" editable={this.props.editable} onChange={this.props.onChange}/>
+            <Detail value={this.props.property.specification.bathrooms} icon={faBath} name="specification.bathrooms" placeholder="Bathrooms" editable={this.props.editable} onChange={this.props.onChange}/>
         </div>);
     }
 }
@@ -69,6 +68,8 @@ export class Map extends React.PureComponent {
         const center = this.props.position || [0, 0,];
         return (<Fullscreen enabled={this.state.isFullScreen} onChange={isFullScreen => this.setState({isFullScreen})}>
             <Leaflet css={{
+                    position: 'relative',
+                    zIndex: 0,
                     '.leaflet-marker-icon' : {
                         filter: 'drop-shadow(rgba(0, 0, 0, 0.45) 0.3em 0.9em 0.7em)'
                     }

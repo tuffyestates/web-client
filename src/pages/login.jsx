@@ -84,7 +84,6 @@ class Login extends React.PureComponent {
                         boxSizing: 'border-box',
                         textAlign: 'center'
                     }}>Login</h1>
-                {get(this.props, 'location.state.from') ? (<small>You must login to access {this.props.location.state.from.pathname}</small>) : null}
                 <div css={{
                         display: 'flex',
                         justifyContent: 'center',
@@ -98,6 +97,7 @@ class Login extends React.PureComponent {
                     <Form.Input css={{
                             marginBottom: '2em'
                         }} prefix={(<FontAwesomeIcon icon={faLock}/>)} placeholder="Password" type="password" name="password" message={this.state.message}/>
+                    {get(this.props, 'location.state.from') ? (<small style={{color: '#f44336', marginBottom: '1em'}}>You must login to access {this.props.location.state.from.pathname}</small>) : null}
                 </div>
                 <Primary css={{
                         width: '100%'

@@ -50,7 +50,6 @@ export class Input extends React.PureComponent {
                 {suffix}
             </span>);
         }
-        console.log(className)
         return (<div className={className} css={{
                 minWidth: 0,
                 border: '1px solid #C1C1C1',

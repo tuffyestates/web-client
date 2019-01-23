@@ -1,5 +1,6 @@
 import React from 'react';
-// import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faRedo} from '@fortawesome/free-solid-svg-icons';
 
 // Load a bunch of code processing libraries
 import SyntaxHighlighter, {registerLanguage} from "react-syntax-highlighter/dist/prism-light";
@@ -7,11 +8,13 @@ import language from 'react-syntax-highlighter/dist/languages/prism/jsx';
 import theme from 'react-syntax-highlighter/dist/styles/prism/vs';
 registerLanguage('jsx', language);
 import {HashLink} from 'react-router-hash-link';
+import babylon from 'prettier/parser-babylon';
+import prettier from 'prettier/standalone';
 
 import Colors from '../../colors';
 import {Form} from '../../components';
+import {Primary} from '../../components/button';
 import {debounce} from '../../utils';
-
 const Components = require.context('../../components/', true, /\.jsx$/);
 
 class Component extends React.PureComponent {
@@ -56,11 +59,11 @@ class Component extends React.PureComponent {
             return (<React.Fragment key={propName}>
                 <Form.Input css={{
                         marginBottom: '1em'
-                    }} prefix={propName} disabled={propType.startsWith('instanceOf')} suffix={propType} message={prop.description} placeholder={placeholder} defaultValue={JSON.stringify(this.state.props[propName])} onChange={onChange}/>
+                    }} prefix={propName} disabled={propType.startsWith('instanceOf')} suffix={propType} message={prop.description} placeholder={placeholder} defaultValue={JSON.stringify(this.state.props[propName])} onChange={e => {e.persist(); onChange(e)}}/>
             </React.Fragment>);
         });
 
-        const example = <this.props.component {...this.state.props}/>;
+        const example = <this.props.component key={this.state.key} {...this.state.props}/>;
         return (<div id={this.props.component.name} css={{
                 marginBottom: '4em',
                 fontSize: '1.1em',
@@ -100,13 +103,16 @@ class Component extends React.PureComponent {
                         border: '1px solid lightgrey',
                         borderBottom: 'none',
                         overflow: 'auto',
-                    }}>{`<${details.displayName}${propsToString(this.state.props)}/>`}</SyntaxHighlighter>
+                    }}>{prettier.format(`<${details.displayName}${propsToString(this.state.props)}/>`, {parser: 'babylon', plugins: [babylon]})}</SyntaxHighlighter>
                 <div css={{
                         backgroundColor: '#efefef',
                         border: '1px solid lightgrey',
                         padding: '1em',
                         position: 'relative',
                     }}>{example}</div>
+                <div style={{textAlign: 'right'}}>
+                    <Primary css={{fontSize: '0.6em', backgroundColor: '#cfcfcf'}} onClick={() => this.setState({key: Math.random()})}><FontAwesomeIcon icon={faRedo} /></Primary>
+                </div>
             </div>
         </div>);
     }

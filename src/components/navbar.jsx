@@ -24,7 +24,8 @@ class Link extends React.Component {
 
             }} activeStyle={{
                 backgroundColor: Colors.orange,
-                color: '#fafafa'
+                color: '#fafafa',
+                filter: 'drop-shadow(1px 1px 1px black)'
             }} {...this.props}>
             {this.props.children}
         </RouterLink>);
@@ -59,7 +60,6 @@ export default class Navbar extends React.Component {
                     textDecoration: 'none',
                     transition: 'all .4s ease-in-out',
                     backgroundColor: Colors.orange,
-                    clipPath: 'polygon(25% 0, 100% 0%, 75% 100%, 0 100%)',
 
                     '&:hover' : {
                         backgroundColor: Colors.blue,

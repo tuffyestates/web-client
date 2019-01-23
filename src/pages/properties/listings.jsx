@@ -12,13 +12,19 @@ export default class Listings extends React.Component {
         listings: []
     };
 
-    async loadHomes() {
-        const data = await this.loadData(this.state.listingsOffset);
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.filters !== prevProps.filters) {
+            this.loadHomes(true);
+        }
+    }
+
+    async loadHomes(reset = false) {
+        const data = await this.loadData(reset ? 0 : this.state.listingsOffset);
         const newListings = data.reduce((arr, house, idx) => {
-            arr.push(<Property key={this.state.listingsOffset + idx} address={house.address} price={house.price} id={house._id}/>)
+            arr.push(<Property key={reset ? 0 : this.state.listingsOffset + idx} address={house.address} price={house.price} id={house._id}/>)
             return arr;
         }, []);
-        this.setState({listingsOffset: this.state.listingsOffset + newListings, listings: this.state.listings.concat(newListings)})
+        this.setState({listingsOffset: reset ? 0 : this.state.listingsOffset + newListings.length, listings: reset ? newListings : this.state.listings.concat(newListings)});
     }
 
     async loadData() {
