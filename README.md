@@ -12,7 +12,7 @@ cd user-client
 npm install
 npm start
 ```
-Then the development environment should be accessible at [localhost:8080](http://localhost:8080).
+Then the development environment should be accessible at [estates.localhost:8080](http://estates.localhost:8080).
 
 ## Compiling for Production
 This will clone the [master](https://gitlab.com/tuffyestates/user-client) branch.

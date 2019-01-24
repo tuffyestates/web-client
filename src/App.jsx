@@ -7,7 +7,6 @@ import {Provider} from 'react-contextual';
 
 import * as Pages from './pages';
 import {Navbar, Footer, LoadingAnimation,} from './components';
-import Colors from './colors';
 import {Account} from './contexts';
 
 const LoadingScreen = (<div style={{
