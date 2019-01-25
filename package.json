@@ -6,7 +6,8 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "webpack-dev-server --mode development --hot",
-        "build": "webpack --mode production"
+        "build": "webpack --mode production",
+        "deploy": "firebase deploy --token $FIREBASE_TOKEN --non-interactive"
     },
     "repository": {
         "type": "git",

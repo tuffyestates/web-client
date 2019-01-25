@@ -9,7 +9,14 @@ pipeline {
     stage('Build') {
       steps {
         sh 'npm run build'
-        archiveArtifacts(artifacts: 'build', onlyIfSuccessful: true)
+        archiveArtifacts(artifacts: 'build/**/*', onlyIfSuccessful: true)
+      }
+    }
+    stage('Deploy') {
+      steps {
+        withCredentials([string(credentialsId: 'firebase-tuffy_estates', variable: 'FIREBASE_TOKEN')]) {
+          sh 'npm run deploy'
+        }
       }
     }
   }
