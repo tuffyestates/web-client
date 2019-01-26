@@ -13,6 +13,9 @@ pipeline {
       }
     }
     stage('Deploy') {
+      when {
+        branch 'master'
+      }
       steps {
         withCredentials([string(credentialsId: 'firebase-tuffy_estates', variable: 'FIREBASE_TOKEN')]) {
           sh 'npm run deploy'
