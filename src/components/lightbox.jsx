@@ -5,15 +5,9 @@ export default class Lightbox extends React.PureComponent {
     constructor(props) {
         super(props);
     }
-    componentWillReceiveProps(nextProps) {
-        if (!nextProps.open) {
-            document.body.classList.remove("iw-lightbox-body-open");
-        }
-    }
     componentDidUpdate() {
         let _self = this;
         if (this.props.open) {
-            document.body.classList.add("iw-lightbox-body-open");
             window.addEventListener("keydown", this.didUserHitEsc.bind(_self), {
                 passive: true
             });
