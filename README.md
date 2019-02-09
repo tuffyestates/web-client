@@ -7,7 +7,7 @@
 ## Developing
 This will clone the [dev](https://gitlab.com/tuffyestates/user-client/tree/dev) branch.
 ```
-git clone git@gitlab.com:tuffyestates/user-client.git -b dev
+git clone git@github.com:tuffyestates/web-client.git -b dev
 cd user-client
 npm install
 npm start

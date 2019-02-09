@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -128,7 +129,12 @@ module.exports = (env, argv) => {
         devtool: argv.mode === 'production' ? false : 'cheap-module-eval-source-map',
         devServer: {
             host: "estates.localhost",
-            https: true,
+            https: argv.mode === "development" ? {
+                key: fs.readFileSync(
+                    "./test/ssl/estates.localhost-key.pem"
+                ),
+                cert: fs.readFileSync("./test/ssl/estates.localhost-cert.pem")
+            } : undefined,
             historyApiFallback: true
         }
     }
