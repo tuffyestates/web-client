@@ -55,4 +55,8 @@ Now you make make changes and push those changes to github as you wish.
 
 So that other developers may track what work you are doing on implementing a change, you may create a pull request prefixed with `WIP: ` before you are ready to merge back into the `develop` branch.
 
-You may create a pull request at: https://github.com/tuffyestates/web-client/compare
+You may create a pull request at: https://github.com/tuffyestates/web-client/compare.
+
+For example I may name my pull request `WIP: Add ability to login with email`. From then on all changes will be recorded in this pull request. Other aspects of the pull request such as comments, requests for changes, and reviewers will be listed in this pull request.
+
+Once you are ready to merge these changes into the `develop` branch you may edit the pull request's title to remove the `WIP: ` prefix.
