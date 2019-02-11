@@ -1,6 +1,6 @@
 import {
     createStore
-} from 'react-contextual';
+} from '@fallingsnow/react-contextual';
 import api from '../api';
 import cookies from 'js-cookie';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faUser, faLock} from '@fortawesome/free-solid-svg-icons';
-import {Subscribe} from 'react-contextual';
+import {Subscribe} from '@fallingsnow/react-contextual';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 import cookies from 'js-cookie';

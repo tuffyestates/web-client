@@ -1,5 +1,5 @@
 import React from 'react';
-import { Subscribe } from 'react-contextual';
+import { Subscribe } from '@fallingsnow/react-contextual';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import cookies from 'js-cookie';

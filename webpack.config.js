@@ -1,10 +1,8 @@
 const path = require('path');
-const fs = require('fs');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const webpack = require('webpack');
-const DynamicCdnWebpackPlugin = require('dynamic-cdn-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const zopfli = require('@gfx/zopfli');
 const PreloadWebpackPlugin = require('preload-webpack-plugin');
@@ -107,7 +105,6 @@ module.exports = (env, argv) => {
                 STATIC_PATH: `https://tuffyestates.sparling.us:1163${process.env.BRANCH === 'dev' ? '7': '8'}/static`,
                 API_PATH: `https://tuffyestates.sparling.us:1163${process.env.BRANCH === 'dev' ? '7': '8'}/api/v1`
             }),
-            new DynamicCdnWebpackPlugin(),
             new CompressionPlugin({
                 compressionOptions: {
                     numiterations: 15
@@ -128,13 +125,9 @@ module.exports = (env, argv) => {
         ]),
         devtool: argv.mode === 'production' ? false : 'cheap-module-eval-source-map',
         devServer: {
-            host: "estates.localhost",
-            https: argv.mode === "development" ? {
-                key: fs.readFileSync(
-                    "./test/ssl/estates.localhost-key.pem"
-                ),
-                cert: fs.readFileSync("./test/ssl/estates.localhost-cert.pem")
-            } : undefined,
+            disableHostCheck: true,
+            host: "0.0.0.0",
+            https: argv.mode === "development" ? true : undefined,
             historyApiFallback: true
         }
     }

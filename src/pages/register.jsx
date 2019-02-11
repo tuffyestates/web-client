@@ -5,7 +5,7 @@ import Colors from '../colors';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faUser, faLock} from '@fortawesome/free-solid-svg-icons';
 import {Link} from 'react-router-dom';
-import {Subscribe} from 'react-contextual';
+import {Subscribe} from '@fallingsnow/react-contextual';
 import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 

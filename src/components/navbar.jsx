@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavLink as RouterLink} from 'react-router-dom';
-import {Subscribe} from 'react-contextual';
+import {Subscribe} from '@fallingsnow/react-contextual';
 
 import Colors from '../colors';
 import {Account} from '../contexts';

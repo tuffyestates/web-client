@@ -5,21 +5,21 @@
 [Nightly](https://dev--tuffyestates.netlify.com)
 
 ## Developing
-This will clone the [dev](https://gitlab.com/tuffyestates/user-client/tree/dev) branch.
+This will clone the [dev](https://github.com/tuffyestates/web-client/tree/dev) branch.
 ```
-git clone git@github.com:tuffyestates/web-client.git -b dev
-cd user-client
-npm install
-npm start
+$ git clone git@github.com:tuffyestates/web-client.git -b develop    # Download the source
+$ cd web-client    # Change to the newly downloaded web-client directory
 ```
-Then the development environment should be accessible at [estates.localhost:8080](http://estates.localhost:8080).
 
-## Compiling for Production
-This will clone the [master](https://gitlab.com/tuffyestates/user-client) branch.
+Next you will need to start the docker containers.
+
+##### Unix
 ```
-git clone git@gitlab.com:tuffyestates/user-client.git
-cd user-client
-npm install
-npm build
-cd build
+$ ./run.sh    # Start the docker containers
 ```
+
+##### Windows
+```
+$ run.bat    # Start the docker containers
+```
+Then the development environment should be accessible at [estates.localhost:8080](https://estates.localhost:8080).

@@ -3,7 +3,7 @@ import {hot} from 'react-hot-loader';
 import {Helmet} from "react-helmet";
 import {BrowserRouter as Router, Route, Switch, Redirect,} from 'react-router-dom';
 import cookies from 'js-cookie';
-import {Provider} from 'react-contextual';
+import {Provider} from '@fallingsnow/react-contextual';
 
 import * as Pages from './pages';
 import {Navbar, Footer, LoadingAnimation,} from './components';
