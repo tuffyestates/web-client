@@ -16,6 +16,10 @@ Next you will need to start the docker containers.
 ##### Unix
 ```sh
 $ ./run.sh    # Start the docker containers
+Creating network "web-client_default" with the default driver
+Creating web-client_app_1 ... done
+Attaching to web-client_app_1
+...
 ```
 
 ##### Windows
@@ -53,6 +57,12 @@ Now you make make changes and push those changes to github as you wish.
 
 ### Merging back into develop
 
+In order for a branch to show up on git, it needs to be published.
+
+```sh
+$ git push -u origin feature/email-login
+```
+
 So that other developers may track what work you are doing on implementing a change, you may create a pull request prefixed with `WIP: ` before you are ready to merge back into the `develop` branch.
 
 You may create a pull request at: https://github.com/tuffyestates/web-client/compare.
@@ -60,3 +70,11 @@ You may create a pull request at: https://github.com/tuffyestates/web-client/com
 For example I may name my pull request `WIP: Add ability to login with email`. From then on all changes will be recorded in this pull request. Other aspects of the pull request such as comments, requests for changes, and reviewers will be listed in this pull request.
 
 Once you are ready to merge these changes into the `develop` branch you may edit the pull request's title to remove the `WIP: ` prefix.
+
+### Reviewing & merging a pull request
+
+Reviewing a merge request is fairly straight forward. Once you have been assigned to review a merge request you may look over the changes to ensure they are consistent with the expected outcome.
+
+**Reviewers should not approve a merge request until the `WIP: ` title prefix has been removed**
+
+Once a reviewer have approved the pull request and the merge is free of conflicts, it can be merged into the `develop` branch.
