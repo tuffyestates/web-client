@@ -96,6 +96,8 @@ export default class Property extends React.Component {
                         require('!file-loader!../../assets/images/alexandre-godreau-1138045-unsplash.jpg'),
                         require('!file-loader!../../assets/images/alexandre-godreau-1138045-unsplash.jpg'),
                         require('!file-loader!../../assets/images/alexandre-godreau-1138045-unsplash.jpg')]} />
+
+                    <div css={{backgroundColor: 'grey', width: '10em', height: '20em', color: 'white', textAlign: 'center'}}>+</div>
                     </div>
                 </div>
                 <div>

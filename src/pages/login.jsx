@@ -56,7 +56,7 @@ class Login extends React.PureComponent {
                 marginBottom: '1em',
                 height: 'calc(100% - 1em)',
                 overflow: 'hidden',
-                backgroundImage: `url(${require('../assets/images/lerone-pieters-1255794-unsplash.jpg?size=2000')})`,
+                backgroundImage: `url(${require('../assets/images/alex-jodoin-246078-unsplash.jpg?size=2000')})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center 70%',
                 backgroundBlendMode: 'overlay',
