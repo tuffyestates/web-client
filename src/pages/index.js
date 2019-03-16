@@ -1,5 +1,6 @@
 import {lazy} from "react";
 export {default as Home} from "./home";
+export {default as Blog} from "./blog";
 export const Properties = lazy(() => import(/* webpackChunkName: "rest", webpackPrefetch: true */"./properties"));
 export const Register = lazy(() => import(/* webpackChunkName: "rest", webpackPrefetch: true */"./register"));
 export const Login = lazy(() => import(/* webpackChunkName: "rest", webpackPrefetch: true */"./login"));
