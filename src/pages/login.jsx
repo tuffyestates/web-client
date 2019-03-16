@@ -93,7 +93,7 @@ class Login extends React.PureComponent {
                     }}>
                     <Form.Input css={{
                             marginBottom: '1em'
-                        }} prefix={(<FontAwesomeIcon icon={faUser}/>)} placeholder="Username" name="username" message={this.state.error} autoFocus={true}/>
+                        }} prefix={(<FontAwesomeIcon icon={faUser}/>)} placeholder="Email" name="email" message={this.state.error} autoFocus={true}/>
                     <Form.Input css={{
                             marginBottom: '2em'
                         }} prefix={(<FontAwesomeIcon icon={faLock}/>)} placeholder="Password" type="password" name="password" message={this.state.message}/> {
