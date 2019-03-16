@@ -85,6 +85,9 @@ export default class Navbar extends React.Component {
           <Link exact to="/">
             Home
           </Link>
+          <Link exact to="/blog">
+            Blog
+          </Link>
           <Link to="/properties">Listings</Link>
 
           {developmentLinks}

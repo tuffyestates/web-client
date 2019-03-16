@@ -66,6 +66,7 @@ const App = () => (<Provider store={Account}>
                         <Route path="/properties/:id" component={Pages.Property}/>
                         <Route path="/properties" component={Pages.Properties}/>
                         <Route path="/register" component={Pages.Register}/>
+                        <Route path="/blog" component={Pages.Blog}/>
                         <Route path="/login" component={Pages.Login}/>
                         <Route path="/api" component={Pages.API}/>
                         <Route path="/docs" component={Pages.Docs}/>
