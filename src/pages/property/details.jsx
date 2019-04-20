@@ -24,9 +24,7 @@ class Select extends React.PureComponent {
 
 class Detail extends React.PureComponent {
     render() {
-        return (<React.Fragment css={{
-                minWidth: 100,
-            }}>
+        return (<React.Fragment>
             <FontAwesomeIcon className="fa-fw" style={{
                     padding: '0 0.5em',
                 }} icon={this.props.icon}/>

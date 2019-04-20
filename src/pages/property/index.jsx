@@ -88,35 +88,15 @@ export default class Property extends React.Component {
                                 paddingRight: 0
                             }}/>
                     </div>
-                    <div>
-                        <h3 css={this.style.header}>Images</h3>
-                        <ImageGrid srcs={[require('!file-loader!../../assets/images/alexandre-godreau-1138045-unsplash.jpg'),
-                        require('!file-loader!../../assets/images/alexandre-godreau-1138045-unsplash.jpg'),
-                        require('!file-loader!../../assets/images/alexandre-godreau-1138045-unsplash.jpg'),
-                        require('!file-loader!../../assets/images/alexandre-godreau-1138045-unsplash.jpg'),
-                        require('!file-loader!../../assets/images/alexandre-godreau-1138045-unsplash.jpg'),
-                        require('!file-loader!../../assets/images/alexandre-godreau-1138045-unsplash.jpg')]} />
-
-                    <div css={{backgroundColor: 'grey', width: '10em', height: '20em', color: 'white', textAlign: 'center'}}>+</div>
-                    </div>
                 </div>
                 <div>
                     <h3 css={this.style.header}>Specifications</h3>
                     <Specifications editable={editable} property={this.state.property} onChange={this.props.onChange}/>
                 </div>
                 <div>
-                    <h3 css={this.style.header}>Features</h3>
-                    <Features editable={editable} property={this.state.property} onChange={this.props.onChange}/>
-                </div>
-                <div>
                     <h3 css={this.style.header}>Map</h3>
                     <Map position={[this.state.property.location.lat, this.state.property.location.lng]}/>
                 </div>
-                <Primary css={{
-                        marginTop: '1em'
-                    }} disabled={editable}>
-                    Contact Owner
-                </Primary>
             </div>
         </React.Fragment>);
     }
