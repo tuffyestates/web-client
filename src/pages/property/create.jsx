@@ -24,8 +24,12 @@ export default class CreateProperty extends React.Component {
     onSubmit = async (e) => {
         e.preventDefault();
         this.setState({loading: true, message: undefined});
+        console.debug("Submitting listing!");
         try {
             const formdata = new FormData(e.currentTarget);
+            for (const a of formdata) {
+                console.debug(a)
+            }
             const response = await api.post(`/properties`, formdata);
             // if (response.data.error) {
             //
@@ -38,12 +42,15 @@ export default class CreateProperty extends React.Component {
         this.setState({loading: false});
     }
     render() {
-        return (<form onSubmit={this.onSubmit}>
+        return (<form onSubmit={this.onSubmit} onError={console.error}>
             <Property mode="create" property={this.state.property} onChange={this.onChange}/>
-            <div css={{maxWidth: 1080, margin: '0 auto'}}><Primary disabled={this.state.loading} css={{
+            <div css={{maxWidth: 1080, margin: '0 auto'}}>
+                <Primary disabled={this.state.loading} type="submit" css={{
                     gridColumnEnd: 'span 2',
-                    width: '100%'
-                }}>Post Listing</Primary></div>
+                    width: '100%',
+                    marginBottom: '1em'
+                }}>Post Listing</Primary>
+            </div>
             {this.state.message}
         </form>);
     }
