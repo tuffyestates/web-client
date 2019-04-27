@@ -27,7 +27,7 @@ export default class ImageHeader extends React.PureComponent {
     render() {
         // Define path for thumbnail (Really low resolution of the actual image)
         const thumbnailImageSrc = this.props.property._id ?
-            this.props.previewImage || `${process.env.STATIC_PATH}/property/image/${this.props.property._id}-thumbnail.jpg` :
+            this.props.previewImage || `${process.env.STATIC_PATH}/property/image/${this.props.property._id}-80.jpg` :
             undefined;
 
         // Define path for actual image

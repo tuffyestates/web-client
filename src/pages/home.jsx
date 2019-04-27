@@ -2,13 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faHandHoldingUsd, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { css } from '@emotion/core';
 
 import Colors from '../colors';
 
-class Jumbotron extends React.PureComponent {
+class Jumbotron extends React.Component {
+    elementWidthPrecent = '33.3333';
     style = {
-        container: {
-            width: 'calc(56.25% + 30px)',
+        container: css({
+            width: `calc(${this.elementWidthPrecent}% + 20px)`,
             position: 'absolute',
             height: '100%',
             top: 0,
@@ -24,7 +26,7 @@ class Jumbotron extends React.PureComponent {
             '&:hover': {
                 transform: 'translateX(0) !important'
             }
-        },
+        }),
         headerBig: {
             fontSize: '5em',
             margin: '0',
@@ -42,30 +44,46 @@ class Jumbotron extends React.PureComponent {
             position: 'relative',
             overflow: 'hidden'
         }}>
-            <Link to='/properties/create' css={{
-                ...this.style.container,
-                left: -5,
+            <Link to='/properties/create' css={[this.style.container, {
+                left: 0,
                 transform: 'translateX(-20px)',
-                clipPath: 'polygon(0 0, 100% 0%, 75% 100%, 0% 100%)',
+                clipPath: 'polygon(0 0, 100% 0%, calc(100% - 12em) 100%, 0% 100%)',
                 background: `linear-gradient(rgba(0, 55, 107, 0.8), rgba(0, 55, 107, 0.8)), url(${require('../assets/images/jesse-roberts-146556-unsplash.jpg?size=2000')})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center'
-            }}>
+            }]}>
                 <h1 css={{
                     ...this.style.headerBig,
                     marginLeft: '0.1em'
                 }}>Sell</h1>
                 <h4 css={this.style.headerSmall}>Your Home</h4>
             </Link>
-            <Link to='/properties' css={{
-                ...this.style.container,
-                right: -5,
+            <Link to='/properties' css={[this.style.container,{
+                width: `calc(${this.elementWidthPrecent}% + 12em)`,
+                left: `calc(${this.elementWidthPrecent}% - 6em)`,
+                clipPath: 'polygon(12em 0, 100% 0%, calc(100% - 12em) 100%, 0% 100%)',
+                background: `linear-gradient(rgba(123, 188, 118, 0.8), rgba(123, 188, 118, 0.8)), url(${require('../assets/images/scott-webb-167099-unsplash.jpg?size=2000')})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                ':hover': {
+                  transform: 'translateX(-20px) !important',
+                  width: `calc(${this.elementWidthPrecent}% + 12em + 40px)`
+                }
+            }]}>
+                <h1 css={{
+                    ...this.style.headerBig,
+                    marginLeft: '0.1em'
+                }}>Swap</h1>
+                <h4 css={this.style.headerSmall}>Your Home</h4>
+            </Link>
+            <Link to='/properties' css={[this.style.container,{
+                right: 0,
                 transform: 'translateX(20px)',
-                clipPath: 'polygon(25% 0, 100% 0%, 100% 100%, 0 100%)',
+                clipPath: 'polygon(12em 0, 100% 0%, 100% 100%, 0 100%)',
                 background: `linear-gradient(rgba(255, 104, 0, 0.8), rgba(255, 104, 0, 0.8)), url(${require('../assets/images/rowan-heuvel-51244-unsplash.jpg?size=2000')})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center'
-            }}>
+            }]}>
                 <h1 css={{
                     ...this.style.headerBig,
                     marginLeft: '0.1em'

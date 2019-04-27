@@ -46,7 +46,7 @@ export class Specifications extends React.PureComponent {
     render() {
         return (<div css={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(2, 32px auto 1fr)',
+                gridTemplateColumns: 'repeat(1, 32px auto 1fr)',
                 alignItems: 'center',
             }}>
             <Detail value={this.props.property.specification.built} icon={faHammer} name="specification.built" placeholder="Year Built" editable={this.props.editable} onChange={this.props.onChange}/>
@@ -93,23 +93,6 @@ export class Map extends React.PureComponent {
                 <Marker icon={leafletIcon} position={center}/>
             </Leaflet>
         </Fullscreen>);
-    }
-}
-
-export class Features extends React.PureComponent {
-    state = {};
-    static getDerivedStateFromProps(props, state) {
-        let features = Object.keys(props.property.features).map(key => {
-            return <Form.Checkbox key={key}>key</Form.Checkbox>
-        });
-        return {features};
-    }
-    render() {
-        return (<div css={{
-                display: 'flex'
-            }}>
-            {this.state.features}
-        </div>);
     }
 }
 

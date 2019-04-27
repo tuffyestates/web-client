@@ -32,7 +32,7 @@ export default class Property extends React.PureComponent {
             <div css={{
                     position: 'relative'
                 }}>
-                <FallbackImage src={`${process.env.STATIC_PATH}/property/image/${this.props.id}.jpg`} css={{
+                <FallbackImage src={`${process.env.STATIC_PATH}/property/image/${this.props.id}-500.jpg`} css={{
                         objectFit: 'cover',
                         width: '100%',
                         height: 250,
