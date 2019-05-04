@@ -2,7 +2,6 @@ import React, {Suspense} from 'react';
 import {hot} from 'react-hot-loader';
 import {Helmet} from "react-helmet";
 import {BrowserRouter as Router, Route, Switch, Redirect,} from 'react-router-dom';
-import cookies from 'js-cookie';
 import {Provider} from '@fallingsnow/react-contextual';
 
 import * as Pages from './pages';
