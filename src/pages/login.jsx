@@ -4,7 +4,6 @@ import {faUser, faLock} from "@fortawesome/free-solid-svg-icons";
 import {Subscribe} from "@fallingsnow/react-contextual";
 import PropTypes from "prop-types";
 import {withRouter} from "react-router-dom";
-import cookies from "js-cookie";
 
 import {Account} from "../contexts";
 import {Form} from "../components";
@@ -30,8 +29,7 @@ class Login extends React.PureComponent {
         try {
             // Call login action on global account state
             await this.props.account.login(formdata);
-
-            cookies.set("has-token", 1, {expires: 7});
+            window.authenticated = true;
 
             // If we got this far then the login was a success, lets inform the user
             this.setState({

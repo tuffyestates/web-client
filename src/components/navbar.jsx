@@ -93,9 +93,9 @@ export default class Navbar extends React.Component {
           {developmentLinks}
           <Subscribe to={Account}>
             {store =>
-              store.subjectName ? (
+              store.email ? (
                 <Link exact css={{ textTransform: "uppercase" }} to="/logout">
-                  {store.subjectName}
+                  {store.email.split('@')[0]}
                 </Link>
               ) : (
                 <React.Fragment>

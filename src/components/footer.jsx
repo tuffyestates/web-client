@@ -14,7 +14,7 @@ export default class Footer extends React.PureComponent {
                 // bottom: 0
             }}>
             <div>Tuffy Estates | All Rights Reserved</div>
-            <div>CPSC 362 | 2018</div>
+            <div>CPSC 462 | 2018</div>
         </div>);
     }
 }

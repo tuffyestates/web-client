@@ -4,12 +4,13 @@ import merge from 'deepmerge';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTimes, faSpinner, faCheck} from '@fortawesome/free-solid-svg-icons';
 
+import api from '../../api';
 import Colors from '../../colors';
 import {Editable, LoadingAnimation, Lightbox, Form} from '../../components';
-import {ImageGrid} from '../../components';
 import {Primary} from '../../components/button';
 import Header from './header';
 import {Features, Specifications, Map} from './details';
+import SwapLightbox from './swapLightbox';
 
 export default class Property extends React.Component {
 
@@ -43,6 +44,20 @@ export default class Property extends React.Component {
         return {
             property: merge(state.property, props.property)
         };
+    }
+    async submitSwapRequest(e) {
+      e.preventDefault();
+      console.debug("Submitting swap request...");
+      try {
+          const formdata = new FormData(e.currentTarget);
+          for (const a of formdata) {
+              console.debug(a)
+          }
+          const response = await api.post(`/properties/swap`, formdata);
+          console.debug(response)
+      } catch (err) {
+          console.error(err);
+      }
     }
 
     render() {
@@ -94,23 +109,10 @@ export default class Property extends React.Component {
                 <div>
                     <h3 css={this.style.header}>Map</h3>
                     <Map position={[this.state.property.location.lat, this.state.property.location.lng]}/>
-                    <Primary css={{width: '100%', marginTop: '1em'}} onClick={() => this.setState({swapModalVisible: !this.state.swapModalVisible})}>Swap</Primary>
+                    <Primary css={{width: '100%', marginTop: '1em'}} disabled={!this.state.property._id} onClick={() => this.setState({swapModalVisible: !this.state.swapModalVisible})}>Swap</Primary>
                 </div>
             </div>
-            <Lightbox open={this.state.swapModalVisible} onRequestClose={() => this.setState({swapModalVisible: false})}>
-              <form css={{backgroundColor: 'white', padding: '2em', minWidth: '50vw'}} onSubmit={this.submitSwapRequest}>
-                <h2>Swap your home</h2>
-                <select>
-                  <option>$100 - 123 Fake Address St., Fullerton, California</option>
-                </select>
-                <h3>for</h3>
-                <h4><span css={{color: '#333'}}>${this.state.property.price}</span> - {this.state.property.address}</h4>
-                <div css={{display: 'flex', justifyContent: 'space-between'}}>
-                  <Primary type="button" css={{backgroundColor: 'grey'}} onClick={() => this.setState({swapModalVisible: false})}>Cancel</Primary>
-                  <Primary type="submit" onClick={() => this.setState({swapModalVisible: false})}>Submit Offer</Primary>
-                </div>
-              </form>
-            </Lightbox>
+            <SwapLightbox property={this.state.property} open={this.state.swapModalVisible} onRequestClose={() => this.setState({swapModalVisible: false})} onSubmit={this.submitSwapRequest}/>
         </React.Fragment>);
     }
     static propTypes = {

@@ -1,7 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {Subscribe} from "@fallingsnow/react-contextual";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faUser, faLock} from "@fortawesome/free-solid-svg-icons";
 
 // import Colors from '../../colors';
+import Colors from "../../colors";
+import {Account} from "../../contexts";
 import {FallbackImage} from '../../components';
 
 export default class Property extends React.PureComponent {
@@ -11,9 +16,10 @@ export default class Property extends React.PureComponent {
         minimumFractionDigits: 0,
     });
     render() {
-        return (<Link css={{
+        return (<Subscribe to={Account}>
+            {account => <Link css={{
                 boxShadow: '0 3px 5px -1px rgba(0,0,0,.2),0 6px 10px 0 rgba(0,0,0,.14),0 1px 18px 0 rgba(0,0,0,.12)',
-                margin: '1em',
+                display: 'block',
                 flex: 1,
                 minWidth: 400,
                 maxWidth: 500,
@@ -27,6 +33,7 @@ export default class Property extends React.PureComponent {
             }} to={{
                 pathname: `/properties/${this.props.id}`
             }} {...this.props}>
+
 
             {/* Image Container */}
             <div css={{
@@ -46,8 +53,9 @@ export default class Property extends React.PureComponent {
                         padding: `0.6em 0.5em`,
                         color: 'white',
                         textShadow: '1px 1px 1px black',
-                        textAlign: 'right',
-                    }}>{this.priceFormatter.format(this.props.price)}</div>
+                        display: 'flex',
+                        justifyContent: 'space-between'
+                    }}>{account.id === this.props.owner ? <FontAwesomeIcon icon={faUser}/> : <span/>}{this.priceFormatter.format(this.props.price)}</div>
                 <div css={{
                         position: 'absolute',
                         bottom: 0,
@@ -58,6 +66,7 @@ export default class Property extends React.PureComponent {
                         textShadow: '1px 1px 1px black',
                     }}>{this.props.address}</div>
             </div>
-        </Link>);
+        </Link>}
+      </Subscribe>);
     }
 }

@@ -20,7 +20,7 @@ function PrivateRoute({
     component: Component,
     ...rest
 }) {
-    return (<Route {...rest} render={props => cookies.get('has-token')
+    return (<Route {...rest} render={props => window.authenticated
             ? (<Component computedMatch={rest.computedMatch} socket={rest.socket} {...props}/>)
             : (<Redirect to={{
                     pathname: "/login",

@@ -1,6 +1,5 @@
 import { createStore } from "@fallingsnow/react-contextual";
 import api from "../api";
-import cookies from "js-cookie";
 
 // This is the global account store's default state
 const store = createStore({
@@ -85,18 +84,23 @@ const store = createStore({
 });
 
 // Check if the user is already authenticated
-const hasToken = cookies.get("has-token");
-if (hasToken) {
-  console.debug("attempting to validate previous token");
-  api
-    .get("/users/status")
-    .then(res => {
-      store.state.setState(res.data);
-    })
-    .catch(function() {
-      console.error.apply(console, arguments);
-      cookies.remove("has-token");
-    });
+console.debug("attempting to validate previous token");
+api
+  .get("/users/status")
+  .then(res => {
+    setState(res.data, () => console.debug(store.state));
+  })
+  .catch(console.warn);
+
+function setState(state, cb) {
+  if (store.state.setState) {
+    window.authenticated = true;
+    return store.state.setState(state, cb);
+  } else {
+    Object.assign(store.state, state);
+    window.authenticated = false;
+  }
+  cb && cb(store.state);
 }
 
 export default store;

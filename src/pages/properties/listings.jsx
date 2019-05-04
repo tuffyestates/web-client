@@ -21,7 +21,7 @@ export default class Listings extends React.Component {
     async loadHomes(reset = false) {
         const data = await this.loadData(reset ? 0 : this.state.listingsOffset);
         const newListings = data.reduce((arr, house, idx) => {
-            arr.push(<Property key={reset ? 0 : this.state.listingsOffset + idx} address={house.address} price={house.price} id={house._id}/>)
+            arr.push(<Property key={reset ? 0 : this.state.listingsOffset + idx} address={house.address} price={house.price} id={house._id} owner={house.owner} css={{margin: '1em'}}/>)
             return arr;
         }, []);
         this.setState({listingsOffset: reset ? 0 : this.state.listingsOffset + newListings.length, listings: reset ? newListings : this.state.listings.concat(newListings)});
