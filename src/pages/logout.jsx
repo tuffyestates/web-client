@@ -2,7 +2,6 @@ import React from 'react';
 import { Subscribe } from '@fallingsnow/react-contextual';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import cookies from 'js-cookie';
 
 import { Account } from '../contexts';
 
@@ -23,8 +22,7 @@ class Logout extends React.PureComponent {
         try {
             // Call login action on global account state
             await this.props.account.logout();
-
-            cookies.remove('has-token');
+            window.authenticated = false;
 
             // If we got this far then the login was a success, lets inform the user
             this.setState({
