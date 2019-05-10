@@ -76,7 +76,8 @@ export default class Swap extends React.Component {
         </div>
         {property.owner === selectedProperty.owner ? <div css={{padding: '1em', color: 'white', backgroundColor: Colors.red}}>You can not trade properties that have the same owner.</div> : null}
 
-        <input hidden name="homeId" value={selectedProperty._id} />
+        <input hidden name="homeFrom" value={selectedProperty._id} />
+        <input hidden name="homeFor" value={property._id} />
       </form>
     </Lightbox>);
   }

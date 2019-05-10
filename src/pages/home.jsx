@@ -129,13 +129,15 @@ export default class Home extends React.Component {
                     height: 450,
                     maxHeight: '80vh'
                 }} />
+              <div css={{backgroundColor: Colors.blue, color: 'white'}}>
+                <p css={{maxWidth: 1080, margin: '0 auto', padding: '2em 0'}}>Tuffy Estate’s is revolutionizing the way you buy and sell your home. Traditional home buyers only allow cash or credit options. Tuffy Estates implements a state-of-the-art swapping mechanism. This gives the buyer and seller the flexibility to trade their homes and add additional assets. Our mission is to provide an easy to use service at a low cost.</p>
+              </div>
                 <div css={{
                     fontFamily: 'Cabin',
                     fontSize: 18,
                     color: Colors.blue,
                     letterSpacing: 1,
                     display: 'flex',
-                    height: 100,
                     justifyContent: 'space-around',
                     margin: '2em auto',
                     maxWidth: 1080,
