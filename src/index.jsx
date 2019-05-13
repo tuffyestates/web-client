@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
+import "typeface-roboto";
+import "typeface-cabin";
+
 let root = document.createElement("div");
 root.id = 'root';
 
@@ -13,4 +16,4 @@ document.documentElement.style.height = '100%';
 document.documentElement.style.lineHeight = 'initial';
 
 document.body.prepend(root);
-ReactDOM.render(<App />, root);
+ReactDOM.render(<App/>, root);

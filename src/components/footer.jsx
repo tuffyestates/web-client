@@ -1,11 +1,11 @@
 import React from 'react';
 import Colors from '../colors';
 
-export default class Footer extends React.Component {
+export default class Footer extends React.PureComponent {
     render() {
-        return (<div style={{
+        return (<div css={{
                 display: 'flex',
-                backgroundColor: Colors.darkblue,
+                backgroundColor: Colors.blue,
                 color: 'white',
                 padding: '0.5em',
                 justifyContent: 'space-between',
@@ -14,7 +14,7 @@ export default class Footer extends React.Component {
                 // bottom: 0
             }}>
             <div>Tuffy Estates | All Rights Reserved</div>
-            <div>CPSC 362 | 2018</div>
+            <div>CPSC 462 | 2019</div>
         </div>);
     }
 }

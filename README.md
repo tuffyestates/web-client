@@ -1,19 +1,80 @@
 # Tuffy Estates Web Client
 
-## Developing
-This will clone the [dev](https://gitlab.com/tuffyestates/user-client/tree/dev) branch.
-```
-git clone git@github.com:tuffyestates/user-client.git -b dev
-cd web-client
-./run.sh
-```
-Then the development environment should be accessible at [localhost:8080](http://localhost:8080).
+## Live Builds (Demos)
+[Stable](https://tuffyestates.netlify.com)
+[Nightly](https://dev--tuffyestates.netlify.com)
 
-## Compiling for Production
-This will clone the [master](https://gitlab.com/tuffyestates/user-client) branch.
+## Setup Development Environment
+This will clone the [develop](https://github.com/tuffyestates/web-client/tree/develop) branch.
+```sh
+$ git clone git@github.com:tuffyestates/web-client.git -b develop    # Download the source
+$ cd web-client    # Change to the newly downloaded web-client directory
 ```
-git clone git@gitlab.com:tuffyestates/user-client.git
-cd user-client
-npm build
-cd build
+
+Next you will need to start the docker containers.
+
+##### Unix
+```sh
+$ ./run.sh    # Start the docker containers
+Creating network "web-client_default" with the default driver
+Creating web-client_app_1 ... done
+Attaching to web-client_app_1
+...
 ```
+
+##### Windows
+```sh
+$ run.bat    # Start the docker containers
+```
+
+Then the development environment should be accessible at [https://estates.localhost:8080](https://estates.localhost:8080).
+
+## Developing
+
+Before developing, you should always branch off of the `develop` to ensure your changes aren't impeded by other developers' changes. To create a new branch off of `develop`, first make sure you are on the `develop` branch.
+
+```sh
+$ git status
+On branch develop
+...
+```
+
+Next ensure you are using the most up to date develop branch using a `git pull`.
+
+```sh
+$ git pull
+Already up to date.
+```
+
+Finally you can branch off using `git checkout -b <branch>`. Be sure to replace `<branch>` with something relevant to changes you will be making. For example, if I am going to add a feature where users can login with their emails as well as their usernames, I might use the following command.
+
+```sh
+$ git checkout -b feature/email-login
+Switched to a new branch 'feature/email-login'
+```
+
+Now you make make changes and push those changes to github as you wish.
+
+### Merging back into develop
+
+In order for a branch to show up on git, it needs to be published.
+
+```sh
+$ git push -u origin feature/email-login
+```
+
+So that other developers may track what work you are doing on implementing a change, you may create a pull request prefixed with `WIP: ` before you are ready to merge back into the `develop` branch.
+
+You may create a pull request at: https://github.com/tuffyestates/web-client/compare.
+
+For example I may name my pull request `WIP: Add ability to login with email`. From then on all changes will be recorded in this pull request. Other aspects of the pull request such as comments, requests for changes, and reviewers will be listed in this pull request.
+
+Once you are ready to merge these changes into the `develop` branch you may edit the pull request's title to remove the `WIP: ` prefix.
+
+### Reviewing & merging a pull request
+
+Reviewing a merge request is fairly straight forward. Once you have been assigned to review a merge request you may look over the changes to ensure they are consistent with the expected outcome.
+
+**Reviewers should not approve a merge request until the `WIP: ` title prefix has been removed**
+
+Once a reviewer have approved the pull request and the merge is free of conflicts, it can be merged into the `develop` branch.

@@ -1,54 +1,153 @@
-const path = require('path');
-const Package = require('./package.json');
+const path = require("path");
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
+const webpack = require("webpack");
+const CompressionPlugin = require("compression-webpack-plugin");
+const zopfli = require("@gfx/zopfli");
+const PreloadWebpackPlugin = require("preload-webpack-plugin");
+
+const Package = require("./package.json");
 
 module.exports = (env, argv) => {
-    return {
-        entry: ['normalize.css',
-            // 'babel-polyfill',
-            path.resolve(__dirname, Package.main)
-        ],
-        module: {
-            rules: [{
-                    test: /\.jsx?$/,
-                    exclude: /node_modules/,
-                    loader: "babel-loader"
-                },
+  return {
+    entry: {
+      main: ["normalize.css", path.resolve(__dirname, Package.main)]
+    },
+    optimization: {
+      splitChunks: {
+        chunks: "all"
+      }
+    },
+    module: {
+      rules: [
+        {
+          test: /\.jsx?$/,
+          exclude: /node_modules/,
+          loader: "babel-loader"
+        },
 
-                // Needed to load normalize.css
-                {
-                    test: /\.css$/,
-                    use: [{
-                        loader: 'style-loader'
-                    }, {
-                        loader: 'css-loader'
-                    }]
-                }
-            ]
+        // Needed to load normalize.css
+        {
+          test: /\.css$/,
+          use: [
+            {
+              loader: "style-loader"
+            },
+            {
+              loader: "css-loader"
+            }
+          ]
         },
-        output: {
-            path: path.resolve(__dirname, 'build'),
-            publicPath: '/',
-            filename: '[name].[hash].js',
-            chunkFilename: "[hash].js"
+
+        // Load images & make them responsive
+        {
+          test: /\.(jpe?g|png)$/i,
+          loader: "responsive-loader",
+          options: {
+            name: "[hash]-[width].[ext]",
+            outputPath: "images"
+          }
         },
-        resolve: {
-            extensions: ['.js', '.jsx', '.json'],
+
+        {
+          test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+          use: [
+            {
+              loader: "file-loader",
+              options: {
+                name: "[name].[ext]",
+                outputPath: "fonts/"
+              }
+            }
+          ]
         },
-        plugins: [
-            new HtmlWebpackPlugin(),
-            new webpack.EnvironmentPlugin({
-                DOMAIN_BASE: "https://gitlab.com/tuffyestates/user-client/raw/new/test"
-            })
-        ].concat(argv.mode === 'production' ? [new BundleAnalyzerPlugin({
-            analyzerMode: 'static'
-        })] : []),
-        devtool: 'cheap-module-eval-source-map',
-        devServer: {
-            historyApiFallback: true
+
+        // Load SVG placeholder image
+        {
+          test: /\.(svg|gif)$/i,
+          use: [
+            {
+              loader: "url-loader",
+              options: {
+                limit: 8192
+              }
+            }
+          ]
+        },
+
+        // Load worker files
+        {
+          rules: [
+            {
+              test: /\.worker\.js$/,
+              use: {
+                loader: "worker-loader"
+              }
+            }
+          ]
         }
+      ]
+    },
+    output: {
+      path: path.resolve(__dirname, "build"),
+      publicPath: "/",
+      filename: "[name].[hash].js",
+      chunkFilename: "[name].[hash].js",
+
+      // https://github.com/webpack/webpack/issues/6525
+      globalObject: "this"
+    },
+    resolve: {
+      extensions: [".js", ".jsx", ".json"]
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        title: "Tuffy Estates"
+      })
+    ].concat(
+      argv.mode === "production"
+        ? [
+            new BundleAnalyzerPlugin({
+              analyzerMode: "static",
+              openAnalyzer: false
+            }),
+            new webpack.EnvironmentPlugin({
+              STATIC_PATH: `https://tuffyestates.sparling.us:1163${
+                process.env.BRANCH === "dev" ? "7" : "8"
+              }/static`,
+              API_PATH: `https://tuffyestates.sparling.us:1163${
+                process.env.BRANCH === "dev" ? "7" : "8"
+              }/api/v1`
+            }),
+            new CompressionPlugin({
+              compressionOptions: {
+                numiterations: 15
+              },
+              algorithm: zopfli.gzip
+            }),
+            new PreloadWebpackPlugin({
+              rel: "prefetch",
+              include: "allAssets",
+              // Only prefetch images (prefetching scripts is handled by webapck's import())
+              fileWhitelist: [/\.(jpe?g|png|svg|gif)$/]
+            })
+          ]
+        : [
+            new webpack.EnvironmentPlugin({
+              STATIC_PATH: `https://localhost:11638/static`,
+              API_PATH: `https://localhost:11638/api/v1`
+            })
+          ]
+    ),
+    devtool:
+      argv.mode === "production" ? false : "cheap-module-eval-source-map",
+    devServer: {
+      disableHostCheck: true,
+      host: "0.0.0.0",
+      https: argv.mode === "development" ? true : undefined,
+      historyApiFallback: true
     }
+  };
 };
